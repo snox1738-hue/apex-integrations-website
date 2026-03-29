@@ -427,19 +427,25 @@ body {
 /* Triangle inner circ=180 */
 .trace--tri-inner  { stroke-dasharray: 71 19 71 19; stroke-dashoffset: -30; animation: ti2 20s linear infinite; }
 /* ── APX Letter Styles ── */
-/* A: single outer path, total=385.1, 4 repeats of 96.3 */
+/* A: outer=385.1 (4 repeats of 96.3), inner=315.0 (4 repeats of 78.7) */
 .trace--a-outer { stroke-dasharray: 81.8 14.4; animation: aOuterFlow 20s linear infinite; }
+.trace--a-inner { stroke-dasharray: 68.2 12.0; animation: aInnerFlow 24s linear infinite; }
 
 /* P: outer=292.8 (3 repeats), inner=248.1 (3 repeats) */
 .trace--p-outer { stroke-dasharray: 83.0 14.6; animation: pOuterFlow 20s linear infinite; }
 .trace--p-inner { stroke-dasharray: 70.3 12.4; animation: pInnerFlow 24s linear infinite; }
 
-/* X: static for now — step 2 adds animation */
+/* X: outer=504.5 (5 repeats of 100.9), inner=438.6 (5 repeats of 87.7) */
+.trace--x-outer { stroke-dasharray: 85.8 15.1; animation: xOuterFlow 20s linear infinite; }
+.trace--x-inner { stroke-dasharray: 74.5 13.2; animation: xInnerFlow 24s linear infinite; }
 
 /* Seamless keyframes — offset by exactly one repeat unit */
 @keyframes aOuterFlow { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -96.2; } }
+@keyframes aInnerFlow { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 80.2; } }
 @keyframes pOuterFlow { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -97.6; } }
 @keyframes pInnerFlow { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 82.7; } }
+@keyframes xOuterFlow { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -100.9; } }
+@keyframes xInnerFlow { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 87.7; } }
 
 
 /* True rotation — never bounces, always same direction */

@@ -77,8 +77,11 @@
                     <stop offset="100%" stop-color="rgba(255,200,0,0.1)"/>
                   </linearGradient>
                 </defs>
-                <!-- Outer A — original single path -->
                 <path d="M18,105 L60,12 L102,105 L82,105 L60,38 L38,105 Z" stroke="url(#g1)" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--a-outer"/>
+                <!-- Center line through left leg -->
+                <line x1="28" y1="105" x2="60" y2="25" stroke="url(#g1)" stroke-width="3" stroke-linecap="round" class="trace trace--a-inner"/>
+                <!-- Center line through right leg -->
+                <line x1="92" y1="105" x2="60" y2="25" stroke="url(#g1)" stroke-width="3" stroke-linecap="round" class="trace trace--a-inner"/>
               </svg>
             </div>
             <h3 class="card__title">AI Voice Receptionist</h3>
@@ -118,9 +121,9 @@
                   </linearGradient>
                 </defs>
                 <!-- Block X — outer outline -->
-                <path d="M14,8 L44,8 L60,38 L76,8 L106,8 L72,60 L106,112 L76,112 L60,82 L44,112 L14,112 L48,60 Z" stroke="url(#g3)" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace"/>
+                <path d="M14,8 L44,8 L60,38 L76,8 L106,8 L72,60 L106,112 L76,112 L60,82 L44,112 L14,112 L48,60 Z" stroke="url(#g3)" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--x-outer"/>
                 <!-- Block X — inner outline (7px parallel inset) -->
-                <path d="M26.9,15 L39.8,15 L60,52.9 L80.2,15 L93.1,15 L63.6,60 L93.1,105 L80.2,105 L60,67.1 L39.8,105 L26.9,105 L56.4,60 Z" stroke="url(#g3)" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace"/>
+                <path d="M26.9,15 L39.8,15 L60,52.9 L80.2,15 L93.1,15 L63.6,60 L93.1,105 L80.2,105 L60,67.1 L39.8,105 L26.9,105 L56.4,60 Z" stroke="url(#g3)" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--x-inner"/>
               </svg>
             </div>
             <h3 class="card__title">Lead Generation</h3>
