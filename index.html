@@ -163,13 +163,12 @@
                   <stop offset="100%" stop-color="rgba(255,200,0,0.1)"/>
                 </linearGradient>
               </defs>
-              <circle cx="100" cy="100" r="75" stroke="url(#gv1)" stroke-width="3" fill="none" class="trace trace--co-a"/>
-              <circle cx="100" cy="100" r="75" stroke="url(#gv1)" stroke-width="3" fill="none" class="trace trace--co-b"/>
-              <circle cx="100" cy="100" r="75" stroke="url(#gv1)" stroke-width="3" fill="none" class="trace trace--co-c"/>
-              <circle cx="100" cy="100" r="55" stroke="url(#gv1)" stroke-width="3" fill="none" class="trace trace--ci-a"/>
-              <circle cx="100" cy="100" r="55" stroke="url(#gv1)" stroke-width="3" fill="none" class="trace trace--ci-b"/>
-              <circle cx="100" cy="100" r="55" stroke="url(#gv1)" stroke-width="3" fill="none" class="trace trace--ci-c"/>
-              <circle cx="100" cy="100" r="35" stroke="url(#gv1)" stroke-width="2" fill="none" class="trace trace--co-a" style="animation-duration:25s"/>
+              <!-- Outer A -->
+              <path d="M30,175 L100,20 L170,175 L137,175 L100,63 L63,175 Z" stroke="url(#gv1)" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--a-outer"/>
+              <!-- Center line through left leg -->
+              <line x1="47" y1="175" x2="100" y2="42" stroke="url(#gv1)" stroke-width="3" stroke-linecap="round" class="trace trace--a-inner"/>
+              <!-- Center line through right leg -->
+              <line x1="153" y1="175" x2="100" y2="42" stroke="url(#gv1)" stroke-width="3" stroke-linecap="round" class="trace trace--a-inner"/>
             </svg>
           </div>
           <p class="service-detail__back" data-section="services">&larr; ALL SERVICES</p>
@@ -229,9 +228,10 @@
                   <stop offset="100%" stop-color="rgba(255,200,0,0.1)"/>
                 </linearGradient>
               </defs>
-              <path d="M100,15 L185,165 L15,165 Z" stroke="url(#gw1)" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="butt" class="trace trace--tri-outer"/>
-              <path d="M100,55 L155,145 L45,145 Z" stroke="url(#gw1)" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="butt" class="trace trace--tri-inner"/>
-              <path d="M100,85 L130,130 L70,130 Z" stroke="url(#gw1)" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="butt" class="trace trace--tri-outer" style="animation-duration:28s"/>
+              <!-- Outer P -->
+              <path d="M53,180 L53,20 L117,20 C167,20 167,108 117,108 L77,108 L77,180 Z" stroke="url(#gw1)" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--p-outer"/>
+              <!-- Inner P -->
+              <path d="M63,170 L63,30 L113,30 C153,30 153,98 113,98 L87,98 L87,170 Z" stroke="url(#gw1)" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--p-inner"/>
             </svg>
           </div>
           <p class="service-detail__back" data-section="services">&larr; ALL SERVICES</p>
@@ -291,9 +291,10 @@
                   <stop offset="100%" stop-color="rgba(255,200,0,0.1)"/>
                 </linearGradient>
               </defs>
-              <path d="M100,18 L182,100 L100,182 L18,100 Z" stroke="url(#gl1)" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="butt" class="trace trace--dia-outer"/>
-              <path d="M100,50 L150,100 L100,150 L50,100 Z" stroke="url(#gl1)" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="butt" class="trace trace--dia-inner"/>
-              <path d="M100,72 L128,100 L100,128 L72,100 Z" stroke="url(#gl1)" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="butt" class="trace trace--dia-outer" style="animation-duration:28s"/>
+              <!-- Outer X -->
+              <path d="M23,13 L73,13 L100,63 L127,13 L177,13 L120,100 L177,187 L127,187 L100,137 L73,187 L23,187 L80,100 Z" stroke="url(#gl1)" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--x-outer"/>
+              <!-- Inner X -->
+              <path d="M45,25 L66,25 L100,88 L134,25 L155,25 L106,100 L155,175 L134,175 L100,112 L66,175 L45,175 L94,100 Z" stroke="url(#gl1)" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--x-inner"/>
             </svg>
           </div>
           <p class="service-detail__back" data-section="services">&larr; ALL SERVICES</p>
