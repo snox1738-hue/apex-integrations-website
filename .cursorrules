@@ -1,0 +1,5 @@
+# Dental Site
+
+Vanilla JS + Vite project.
+Fullscreen background video is `#bg-video` (position: fixed, z-index: 0).
+All page content should sit at z-index: 1 or above.
