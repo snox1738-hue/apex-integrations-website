@@ -11,145 +11,321 @@
 </head>
 <body>
   <video id="bg-video" muted loop playsinline autoplay></video>
-  <div class="shell">
-    <header class="top">
-      <a class="brand" href="/">APEX INTEGRATIONS</a>
-      <nav class="nav nav--center" aria-label="Primary">
-        <a class="nav__link" data-section="home" href="#">HOME</a>
-        <a class="nav__link" data-section="services" href="#">SERVICES</a>
-        <a class="nav__link" data-section="reviews" href="#">REVIEWS</a>
-      </nav>
-      <nav class="nav nav--end" aria-label="Secondary">
-        <a class="nav__link" data-section="pricing" href="#">PRICING</a>
-        <a class="nav__link" data-section="contact" href="#">CONTACT</a>
-      </nav>
-    </header>
-    <div class="divider"></div>
-    <main class="main">
-      <div class="hero">
-        <h1 class="headline">
-          WE&rsquo;RE A FULL-SERVICE<br />
-          AI AUTOMATION AGENCY<span style="letter-spacing:0;margin-left:-0.12em">.</span>
-        </h1>
-        <p class="subhead">
-          Where automation meets acceleration.
-        </p>
+
+  <!-- Fixed nav -->
+  <header class="top">
+    <a class="brand" href="#home">APEX INTEGRATIONS</a>
+    <nav class="nav nav--center" aria-label="Primary">
+      <a class="nav__link" href="#home">HOME</a>
+      <a class="nav__link" href="#services">SERVICES</a>
+      <a class="nav__link" href="#reviews">REVIEWS</a>
+    </nav>
+    <nav class="nav nav--end" aria-label="Secondary">
+      <a class="nav__link" href="#pricing">PRICING</a>
+      <a class="nav__link" href="#contact">CONTACT</a>
+    </nav>
+  </header>
+
+  <!-- Scrollable content -->
+  <div class="scroll-container">
+
+    <!-- HOME -->
+    <section id="home" class="section section--home">
+      <div class="section__inner">
+        <div class="hero">
+          <h1 class="headline">
+            WE&rsquo;RE A FULL-SERVICE<br />
+            AI AUTOMATION AGENCY<span style="letter-spacing:0;margin-left:-0.12em">.</span>
+          </h1>
+          <p class="subhead">
+            Where automation meets acceleration.
+          </p>
+        </div>
       </div>
-    </main>
-    <footer class="bottom">
-      <span class="bottom__spacer" aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </footer>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section section--services">
+      <div class="section__inner">
+        <div class="services-wrap">
+          <div class="services-header">
+            <h2 class="services-title">DISCOVER<br>OUR SERVICES</h2>
+          </div>
+          <div class="cards">
+            <div class="card" data-service="voice">
+              <div class="card__visual">
+                <svg viewBox="0 0 120 120" fill="none">
+                  <defs>
+                    <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="15" y1="60" x2="105" y2="60">
+                      <stop offset="0%" stop-color="rgba(255,200,0,0.1)"/>
+                      <stop offset="30%" stop-color="rgba(255,230,50,0.6)"/>
+                      <stop offset="50%" stop-color="rgba(255,255,150,1)"/>
+                      <stop offset="70%" stop-color="rgba(255,230,50,0.6)"/>
+                      <stop offset="100%" stop-color="rgba(255,200,0,0.1)"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M18,105 L60,12 L102,105 L82,105 L60,38 L38,105 Z" stroke="url(#g1)" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--a-outer"/>
+                  <line x1="28" y1="105" x2="60" y2="25" stroke="url(#g1)" stroke-width="3" stroke-linecap="round" class="trace trace--a-inner"/>
+                  <line x1="92" y1="105" x2="60" y2="25" stroke="url(#g1)" stroke-width="3" stroke-linecap="round" class="trace trace--a-inner"/>
+                </svg>
+              </div>
+              <h3 class="card__title">AI Voice Receptionist</h3>
+              <p class="card__desc">Never miss a call again. Our AI receptionist answers, books appointments, and recovers lost revenue around the clock.</p>
+            </div>
+            <div class="card" data-service="website">
+              <div class="card__visual">
+                <svg viewBox="0 0 120 120" fill="none">
+                  <defs>
+                    <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="10" y1="55" x2="110" y2="55">
+                      <stop offset="0%" stop-color="rgba(255,200,0,0.1)"/>
+                      <stop offset="30%" stop-color="rgba(255,230,50,0.6)"/>
+                      <stop offset="50%" stop-color="rgba(255,255,150,1)"/>
+                      <stop offset="70%" stop-color="rgba(255,230,50,0.6)"/>
+                      <stop offset="100%" stop-color="rgba(255,200,0,0.1)"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M32,108 L32,12 L70,12 C100,12 100,65 70,65 L46,65 L46,108 Z" stroke="url(#g2)" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--p-outer"/>
+                  <path d="M38,102 L38,18 L68,18 C92,18 92,59 68,59 L52,59 L52,102 Z" stroke="url(#g2)" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--p-inner"/>
+                </svg>
+              </div>
+              <h3 class="card__title">Website Creation</h3>
+              <p class="card__desc">Custom-built websites designed to convert visitors into customers. Fast, modern, and optimized for your business.</p>
+            </div>
+            <div class="card" data-service="leads">
+              <div class="card__visual">
+                <svg viewBox="0 0 120 120" fill="none">
+                  <defs>
+                    <linearGradient id="g3" gradientUnits="userSpaceOnUse" x1="14" y1="60" x2="106" y2="60">
+                      <stop offset="0%" stop-color="rgba(255,200,0,0.1)"/>
+                      <stop offset="30%" stop-color="rgba(255,230,50,0.6)"/>
+                      <stop offset="50%" stop-color="rgba(255,255,150,1)"/>
+                      <stop offset="70%" stop-color="rgba(255,230,50,0.6)"/>
+                      <stop offset="100%" stop-color="rgba(255,200,0,0.1)"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M14,8 L44,8 L60,38 L76,8 L106,8 L72,60 L106,112 L76,112 L60,82 L44,112 L14,112 L48,60 Z" stroke="url(#g3)" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--x-outer"/>
+                  <path d="M26.9,15 L39.8,15 L60,52.9 L80.2,15 L93.1,15 L63.6,60 L93.1,105 L80.2,105 L60,67.1 L39.8,105 L26.9,105 L56.4,60 Z" stroke="url(#g3)" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--x-inner"/>
+                </svg>
+              </div>
+              <h3 class="card__title">Lead Generation</h3>
+              <p class="card__desc">Qualified leads delivered straight to your pipeline. We find the prospects, you close the deals.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="reviews" class="section section--reviews">
+      <div class="section__inner">
+        <div class="reviews-wrap">
+          <div class="reviews-header">
+            <h2 class="reviews-title">WHAT OUR<br>CLIENTS SAY</h2>
+            <p class="reviews-subtitle">Results speak louder than promises.</p>
+          </div>
+          <div class="reviews-marquee">
+            <!-- Row 1 -->
+            <div class="reviews-row reviews-row--left">
+              <div class="reviews-row__track">
+                <div class="review" data-review="martinez">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"Great customer service. Very happy and satisfied with Apex. Definitely would use again."</p>
+                  <div class="review__author">
+                    <span class="review__name">Carlos Martinez</span>
+                    <span class="review__role">Sonoran Family Dental — Tucson, AZ</span>
+                  </div>
+                </div>
+                <div class="review" data-review="lawson">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"John helped me set everything up. Super nice guy, very patient. Made the whole process easy."</p>
+                  <div class="review__author">
+                    <span class="review__name">Emily Lawson</span>
+                    <span class="review__role">Lawson Dental Care — Tucson, AZ</span>
+                  </div>
+                </div>
+                <div class="review" data-review="park">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"Didn't think I needed a new website but decided to go for it. Glad I did. Getting way more calls now."</p>
+                  <div class="review__author">
+                    <span class="review__name">David Park</span>
+                    <span class="review__role">Park Dental Studio — Tucson, AZ</span>
+                  </div>
+                </div>
+                <!-- Duplicates -->
+                <div class="review" data-review="martinez">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"Great customer service. Very happy and satisfied with Apex. Definitely would use again."</p>
+                  <div class="review__author">
+                    <span class="review__name">Carlos Martinez</span>
+                    <span class="review__role">Sonoran Family Dental — Tucson, AZ</span>
+                  </div>
+                </div>
+                <div class="review" data-review="lawson">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"John helped me set everything up. Super nice guy, very patient. Made the whole process easy."</p>
+                  <div class="review__author">
+                    <span class="review__name">Emily Lawson</span>
+                    <span class="review__role">Lawson Dental Care — Tucson, AZ</span>
+                  </div>
+                </div>
+                <div class="review" data-review="park">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"Didn't think I needed a new website but decided to go for it. Glad I did. Getting way more calls now."</p>
+                  <div class="review__author">
+                    <span class="review__name">David Park</span>
+                    <span class="review__role">Park Dental Studio — Tucson, AZ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Row 2 -->
+            <div class="reviews-row reviews-row--right">
+              <div class="reviews-row__track">
+                <div class="review" data-review="okafor">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"Really happy with how everything turned out. Would definitely work with them again."</p>
+                  <div class="review__author">
+                    <span class="review__name">James Okafor</span>
+                    <span class="review__role">Desert Smile Dental — Phoenix, AZ</span>
+                  </div>
+                </div>
+                <div class="review" data-review="chen">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"Was skeptical at first but Sam really came through. The website looks amazing and we're already seeing results."</p>
+                  <div class="review__author">
+                    <span class="review__name">Maria Chen</span>
+                    <span class="review__role">Bright Dental Group — Scottsdale, AZ</span>
+                  </div>
+                </div>
+                <div class="review" data-review="reed">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"John walked me through everything. Really easy to talk to. Would recommend."</p>
+                  <div class="review__author">
+                    <span class="review__name">Marcus Reed</span>
+                    <span class="review__role">Reed Family Dentistry — Phoenix, AZ</span>
+                  </div>
+                </div>
+                <!-- Duplicates -->
+                <div class="review" data-review="okafor">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"Really happy with how everything turned out. Would definitely work with them again."</p>
+                  <div class="review__author">
+                    <span class="review__name">James Okafor</span>
+                    <span class="review__role">Desert Smile Dental — Phoenix, AZ</span>
+                  </div>
+                </div>
+                <div class="review" data-review="chen">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"Was skeptical at first but Sam really came through. The website looks amazing and we're already seeing results."</p>
+                  <div class="review__author">
+                    <span class="review__name">Maria Chen</span>
+                    <span class="review__role">Bright Dental Group — Scottsdale, AZ</span>
+                  </div>
+                </div>
+                <div class="review" data-review="reed">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"John walked me through everything. Really easy to talk to. Would recommend."</p>
+                  <div class="review__author">
+                    <span class="review__name">Marcus Reed</span>
+                    <span class="review__role">Reed Family Dentistry — Phoenix, AZ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Row 3 -->
+            <div class="reviews-row reviews-row--left">
+              <div class="reviews-row__track">
+                <div class="review" data-review="nguyen">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"Such a great investment for our practice. Sam is super nice and actually cares about getting it right. They're awesome. Give them a chance!"</p>
+                  <div class="review__author">
+                    <span class="review__name">Rachel Nguyen</span>
+                    <span class="review__role">Cactus Dental Care — Gilbert, AZ</span>
+                  </div>
+                </div>
+                <div class="review" data-review="torres">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"The voice receptionist thing is unreal. We don't miss calls anymore. Wish I got it sooner."</p>
+                  <div class="review__author">
+                    <span class="review__name">Michael Torres</span>
+                    <span class="review__role">Copper Creek Dental — Tucson, AZ</span>
+                  </div>
+                </div>
+                <div class="review" data-review="walsh">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"Sam's team did a great job on our site. Looks professional, loads fast, patients love it. 10/10."</p>
+                  <div class="review__author">
+                    <span class="review__name">Amanda Walsh</span>
+                    <span class="review__role">Walsh &amp; Partners — Flagstaff, AZ</span>
+                  </div>
+                </div>
+                <!-- Duplicates -->
+                <div class="review" data-review="nguyen">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"Such a great investment for our practice. Sam is super nice and actually cares about getting it right. They're awesome. Give them a chance!"</p>
+                  <div class="review__author">
+                    <span class="review__name">Rachel Nguyen</span>
+                    <span class="review__role">Cactus Dental Care — Gilbert, AZ</span>
+                  </div>
+                </div>
+                <div class="review" data-review="torres">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"The voice receptionist thing is unreal. We don't miss calls anymore. Wish I got it sooner."</p>
+                  <div class="review__author">
+                    <span class="review__name">Michael Torres</span>
+                    <span class="review__role">Copper Creek Dental — Tucson, AZ</span>
+                  </div>
+                </div>
+                <div class="review" data-review="walsh">
+                  <div class="review__stars">★ ★ ★ ★ ★</div>
+                  <p class="review__text">"Sam's team did a great job on our site. Looks professional, loads fast, patients love it. 10/10."</p>
+                  <div class="review__author">
+                    <span class="review__name">Amanda Walsh</span>
+                    <span class="review__role">Walsh &amp; Partners — Flagstaff, AZ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leave a Review button -->
+          <button class="leave-review-btn" id="leave-review-btn">LEAVE A REVIEW</button>
+        </div>
+
+        <!-- Review detail overlay -->
+        <div id="review-detail" class="review-detail" style="display:none">
+          <div class="review-detail__inner">
+            <p class="review-detail__back" id="review-detail-back">&larr; BACK TO REVIEWS</p>
+            <div class="review-detail__stars">★ ★ ★ ★ ★</div>
+            <h2 class="review-detail__name" id="review-detail-name"></h2>
+            <p class="review-detail__practice" id="review-detail-practice"></p>
+            <p class="review-detail__location" id="review-detail-location"></p>
+            <blockquote class="review-detail__quote" id="review-detail-quote"></blockquote>
+            <p class="review-detail__bio" id="review-detail-bio"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="section section--pricing">
+      <div class="section__inner">
+        <h2 class="section-title">PRICING</h2>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section section--contact">
+      <div class="section__inner">
+        <h2 class="section-title">CONTACT</h2>
+      </div>
+    </section>
+
   </div>
 
-  <!-- Services panel — slides up from bottom -->
-  <section id="services-panel" class="panel">
-    <div class="panel__inner">
-      <header class="top panel__nav">
-        <a class="brand" data-section="home" href="#">APEX INTEGRATIONS</a>
-        <nav class="nav nav--center" aria-label="Primary">
-          <a class="nav__link" data-section="home" href="#">HOME</a>
-          <a class="nav__link nav__link--active" data-section="services" href="#">SERVICES</a>
-          <a class="nav__link" data-section="reviews" href="#">REVIEWS</a>
-        </nav>
-        <nav class="nav nav--end" aria-label="Secondary">
-          <a class="nav__link" data-section="pricing" href="#">PRICING</a>
-          <a class="nav__link" data-section="contact" href="#">CONTACT</a>
-        </nav>
-      </header>
-
-      <div class="services-wrap">
-        <div class="services-header">
-          <h2 class="services-title">DISCOVER<br>OUR SERVICES</h2>
-
-        </div>
-        <div class="cards">
-          <div class="card" data-service="voice">
-            <div class="card__visual">
-              <svg viewBox="0 0 120 120" fill="none">
-                <defs>
-                  <linearGradient id="g1" gradientUnits="userSpaceOnUse" x1="15" y1="60" x2="105" y2="60">
-                    <stop offset="0%" stop-color="rgba(255,200,0,0.1)"/>
-                    <stop offset="30%" stop-color="rgba(255,230,50,0.6)"/>
-                    <stop offset="50%" stop-color="rgba(255,255,150,1)"/>
-                    <stop offset="70%" stop-color="rgba(255,230,50,0.6)"/>
-                    <stop offset="100%" stop-color="rgba(255,200,0,0.1)"/>
-                  </linearGradient>
-                </defs>
-                <path d="M18,105 L60,12 L102,105 L82,105 L60,38 L38,105 Z" stroke="url(#g1)" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--a-outer"/>
-                <!-- Center line through left leg -->
-                <line x1="28" y1="105" x2="60" y2="25" stroke="url(#g1)" stroke-width="3" stroke-linecap="round" class="trace trace--a-inner"/>
-                <!-- Center line through right leg -->
-                <line x1="92" y1="105" x2="60" y2="25" stroke="url(#g1)" stroke-width="3" stroke-linecap="round" class="trace trace--a-inner"/>
-              </svg>
-            </div>
-            <h3 class="card__title">AI Voice Receptionist</h3>
-            <p class="card__desc">Never miss a call again. Our AI receptionist answers, books appointments, and recovers lost revenue around the clock.</p>
-          </div>
-          <div class="card" data-service="website">
-            <div class="card__visual">
-              <svg viewBox="0 0 120 120" fill="none">
-                <defs>
-                  <linearGradient id="g2" gradientUnits="userSpaceOnUse" x1="10" y1="55" x2="110" y2="55">
-                    <stop offset="0%" stop-color="rgba(255,200,0,0.1)"/>
-                    <stop offset="30%" stop-color="rgba(255,230,50,0.6)"/>
-                    <stop offset="50%" stop-color="rgba(255,255,150,1)"/>
-                    <stop offset="70%" stop-color="rgba(255,230,50,0.6)"/>
-                    <stop offset="100%" stop-color="rgba(255,200,0,0.1)"/>
-                  </linearGradient>
-                </defs>
-                <!-- Outer P -->
-                <path d="M32,108 L32,12 L70,12 C100,12 100,65 70,65 L46,65 L46,108 Z" stroke="url(#g2)" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--p-outer"/>
-                <!-- Inner P -->
-                <path d="M38,102 L38,18 L68,18 C92,18 92,59 68,59 L52,59 L52,102 Z" stroke="url(#g2)" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--p-inner"/>
-              </svg>
-            </div>
-            <h3 class="card__title">Website Creation</h3>
-            <p class="card__desc">Custom-built websites designed to convert visitors into customers. Fast, modern, and optimized for your business.</p>
-          </div>
-          <div class="card" data-service="leads">
-            <div class="card__visual">
-              <svg viewBox="0 0 120 120" fill="none">
-                <defs>
-                  <linearGradient id="g3" gradientUnits="userSpaceOnUse" x1="14" y1="60" x2="106" y2="60">
-                    <stop offset="0%" stop-color="rgba(255,200,0,0.1)"/>
-                    <stop offset="30%" stop-color="rgba(255,230,50,0.6)"/>
-                    <stop offset="50%" stop-color="rgba(255,255,150,1)"/>
-                    <stop offset="70%" stop-color="rgba(255,230,50,0.6)"/>
-                    <stop offset="100%" stop-color="rgba(255,200,0,0.1)"/>
-                  </linearGradient>
-                </defs>
-                <!-- Block X — outer outline -->
-                <path d="M14,8 L44,8 L60,38 L76,8 L106,8 L72,60 L106,112 L76,112 L60,82 L44,112 L14,112 L48,60 Z" stroke="url(#g3)" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--x-outer"/>
-                <!-- Block X — inner outline (7px parallel inset) -->
-                <path d="M26.9,15 L39.8,15 L60,52.9 L80.2,15 L93.1,15 L63.6,60 L93.1,105 L80.2,105 L60,67.1 L39.8,105 L26.9,105 L56.4,60 Z" stroke="url(#g3)" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--x-inner"/>
-              </svg>
-            </div>
-            <h3 class="card__title">Lead Generation</h3>
-            <p class="card__desc">Qualified leads delivered straight to your pipeline. We find the prospects, you close the deals.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AI Voice Receptionist detail panel -->
+  <!-- Service detail overlays (still slide-up when clicking a card) -->
   <section id="voice-panel" class="panel service-panel">
     <div class="panel__inner">
-      <header class="top panel__nav">
-        <a class="brand" data-section="services" href="#">APEX INTEGRATIONS</a>
-        <nav class="nav nav--center" aria-label="Primary">
-          <a class="nav__link" data-section="home" href="#">HOME</a>
-          <a class="nav__link" data-section="services" href="#">SERVICES</a>
-          <a class="nav__link" data-section="reviews" href="#">REVIEWS</a>
-        </nav>
-        <nav class="nav nav--end" aria-label="Secondary">
-          <a class="nav__link" data-section="pricing" href="#">PRICING</a>
-          <a class="nav__link" data-section="contact" href="#">CONTACT</a>
-        </nav>
-      </header>
-
       <div class="service-detail">
         <div class="service-detail__left">
           <div class="service-detail__shape">
@@ -163,21 +339,16 @@
                   <stop offset="100%" stop-color="rgba(255,200,0,0.1)"/>
                 </linearGradient>
               </defs>
-              <!-- Outer A -->
               <path d="M30,175 L100,20 L170,175 L137,175 L100,63 L63,175 Z" stroke="url(#gv1)" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--a-outer"/>
-              <!-- Center line through left leg -->
               <line x1="47" y1="175" x2="100" y2="42" stroke="url(#gv1)" stroke-width="3" stroke-linecap="round" class="trace trace--a-inner"/>
-              <!-- Center line through right leg -->
               <line x1="153" y1="175" x2="100" y2="42" stroke="url(#gv1)" stroke-width="3" stroke-linecap="round" class="trace trace--a-inner"/>
             </svg>
           </div>
-          <p class="service-detail__back" data-section="services">&larr; ALL SERVICES</p>
+          <p class="service-detail__back panel__back">&larr; ALL SERVICES</p>
         </div>
-
         <div class="service-detail__right">
           <h1 class="service-detail__title">AI VOICE<br>RECEPTIONIST</h1>
           <p class="service-detail__tagline">Your front desk, reimagined.</p>
-          
           <div class="service-detail__features">
             <div class="service-feature">
               <h3 class="service-feature__title">24/7 CALL HANDLING</h3>
@@ -192,29 +363,14 @@
               <p class="service-feature__desc">Missed calls cost you thousands. Our system follows up automatically, converting abandoned inquiries into booked revenue.</p>
             </div>
           </div>
-
-          <a href="/contact.html" class="service-detail__cta">GET STARTED</a>
+          <a href="#contact" class="service-detail__cta panel__back">GET STARTED</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Website Creation detail panel -->
   <section id="website-panel" class="panel service-panel">
     <div class="panel__inner">
-      <header class="top panel__nav">
-        <a class="brand" data-section="services" href="#">APEX INTEGRATIONS</a>
-        <nav class="nav nav--center" aria-label="Primary">
-          <a class="nav__link" data-section="home" href="#">HOME</a>
-          <a class="nav__link" data-section="services" href="#">SERVICES</a>
-          <a class="nav__link" data-section="reviews" href="#">REVIEWS</a>
-        </nav>
-        <nav class="nav nav--end" aria-label="Secondary">
-          <a class="nav__link" data-section="pricing" href="#">PRICING</a>
-          <a class="nav__link" data-section="contact" href="#">CONTACT</a>
-        </nav>
-      </header>
-
       <div class="service-detail">
         <div class="service-detail__left">
           <div class="service-detail__shape">
@@ -228,19 +384,15 @@
                   <stop offset="100%" stop-color="rgba(255,200,0,0.1)"/>
                 </linearGradient>
               </defs>
-              <!-- Outer P -->
               <path d="M53,180 L53,20 L117,20 C167,20 167,108 117,108 L77,108 L77,180 Z" stroke="url(#gw1)" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--p-outer"/>
-              <!-- Inner P -->
               <path d="M63,170 L63,30 L113,30 C153,30 153,98 113,98 L87,98 L87,170 Z" stroke="url(#gw1)" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--p-inner"/>
             </svg>
           </div>
-          <p class="service-detail__back" data-section="services">&larr; ALL SERVICES</p>
+          <p class="service-detail__back panel__back">&larr; ALL SERVICES</p>
         </div>
-
         <div class="service-detail__right">
           <h1 class="service-detail__title">WEBSITE<br>CREATION</h1>
           <p class="service-detail__tagline">Your digital storefront, engineered to convert.</p>
-          
           <div class="service-detail__features">
             <div class="service-feature">
               <h3 class="service-feature__title">CUSTOM DESIGN</h3>
@@ -255,29 +407,14 @@
               <p class="service-feature__desc">Speed kills the competition. Sub-second load times, mobile-first responsive design, and SEO built into the foundation.</p>
             </div>
           </div>
-
-          <a data-section="contact" href="#" class="service-detail__cta">GET STARTED</a>
+          <a href="#contact" class="service-detail__cta panel__back">GET STARTED</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Lead Generation detail panel -->
   <section id="leads-panel" class="panel service-panel">
     <div class="panel__inner">
-      <header class="top panel__nav">
-        <a class="brand" data-section="services" href="#">APEX INTEGRATIONS</a>
-        <nav class="nav nav--center" aria-label="Primary">
-          <a class="nav__link" data-section="home" href="#">HOME</a>
-          <a class="nav__link" data-section="services" href="#">SERVICES</a>
-          <a class="nav__link" data-section="reviews" href="#">REVIEWS</a>
-        </nav>
-        <nav class="nav nav--end" aria-label="Secondary">
-          <a class="nav__link" data-section="pricing" href="#">PRICING</a>
-          <a class="nav__link" data-section="contact" href="#">CONTACT</a>
-        </nav>
-      </header>
-
       <div class="service-detail">
         <div class="service-detail__left">
           <div class="service-detail__shape">
@@ -291,19 +428,15 @@
                   <stop offset="100%" stop-color="rgba(255,200,0,0.1)"/>
                 </linearGradient>
               </defs>
-              <!-- Outer X -->
               <path d="M23,13 L73,13 L100,63 L127,13 L177,13 L120,100 L177,187 L127,187 L100,137 L73,187 L23,187 L80,100 Z" stroke="url(#gl1)" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--x-outer"/>
-              <!-- Inner X -->
               <path d="M45,25 L66,25 L100,88 L134,25 L155,25 L106,100 L155,175 L134,175 L100,112 L66,175 L45,175 L94,100 Z" stroke="url(#gl1)" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" class="trace trace--x-inner"/>
             </svg>
           </div>
-          <p class="service-detail__back" data-section="services">&larr; ALL SERVICES</p>
+          <p class="service-detail__back panel__back">&larr; ALL SERVICES</p>
         </div>
-
         <div class="service-detail__right">
           <h1 class="service-detail__title">LEAD<br>GENERATION</h1>
           <p class="service-detail__tagline">Your pipeline, permanently full.</p>
-          
           <div class="service-detail__features">
             <div class="service-feature">
               <h3 class="service-feature__title">TARGETED PROSPECTING</h3>
@@ -318,66 +451,37 @@
               <p class="service-feature__desc">One city or fifty. Ten leads a day or a thousand. The system scales with your ambition — no additional headcount required.</p>
             </div>
           </div>
-
-          <a data-section="contact" href="#" class="service-detail__cta">GET STARTED</a>
+          <a href="#contact" class="service-detail__cta panel__back">GET STARTED</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Reviews panel -->
-  <section id="reviews-panel" class="panel">
-    <div class="panel__inner">
-      <header class="top panel__nav">
-        <a class="brand" data-section="home" href="#">APEX INTEGRATIONS</a>
-        <nav class="nav nav--center" aria-label="Primary">
-          <a class="nav__link" data-section="home" href="#">HOME</a>
-          <a class="nav__link" data-section="services" href="#">SERVICES</a>
-          <a class="nav__link nav__link--active" data-section="reviews" href="#">REVIEWS</a>
-        </nav>
-        <nav class="nav nav--end" aria-label="Secondary">
-          <a class="nav__link" data-section="pricing" href="#">PRICING</a>
-          <a class="nav__link" data-section="contact" href="#">CONTACT</a>
-        </nav>
-      </header>
+  <!-- Leave a Review overlay -->
+  <div id="review-form-overlay" class="review-form-overlay" style="display:none">
+    <div class="review-form-overlay__inner">
+      <p class="review-form-overlay__back" id="review-form-back">&larr; BACK</p>
+      <h2 class="review-form-overlay__title">LEAVE A REVIEW</h2>
+      <p class="review-form-overlay__subtitle">Share your experience working with Apex Integrations.</p>
+      <form class="review-form" id="review-form">
+        <input type="text" class="review-form__input" name="name" placeholder="Full Name (e.g. John Roberts)" required />
+        <input type="text" class="review-form__input" name="practice" placeholder="Practice Name" required />
+        <input type="text" class="review-form__input" name="location" placeholder="Full Address (e.g. 123 Main St, Tucson, AZ 85701)" required />
+        <div class="review-form__stars-input">
+          <span class="review-form__label">Rating</span>
+          <div class="review-form__stars-select" id="star-select">
+            <span class="star-btn" data-star="1">★</span>
+            <span class="star-btn" data-star="2">★</span>
+            <span class="star-btn" data-star="3">★</span>
+            <span class="star-btn" data-star="4">★</span>
+            <span class="star-btn" data-star="5">★</span>
+          </div>
+        </div>
+        <textarea class="review-form__textarea" name="review" placeholder="Tell us about your experience..." rows="5" required></textarea>
+        <button type="submit" class="review-form__submit">SUBMIT REVIEW</button>
+      </form>
     </div>
-  </section>
-
-  <!-- Pricing panel -->
-  <section id="pricing-panel" class="panel">
-    <div class="panel__inner">
-      <header class="top panel__nav">
-        <a class="brand" data-section="home" href="#">APEX INTEGRATIONS</a>
-        <nav class="nav nav--center" aria-label="Primary">
-          <a class="nav__link" data-section="home" href="#">HOME</a>
-          <a class="nav__link" data-section="services" href="#">SERVICES</a>
-          <a class="nav__link" data-section="reviews" href="#">REVIEWS</a>
-        </nav>
-        <nav class="nav nav--end" aria-label="Secondary">
-          <a class="nav__link nav__link--active" data-section="pricing" href="#">PRICING</a>
-          <a class="nav__link" data-section="contact" href="#">CONTACT</a>
-        </nav>
-      </header>
-    </div>
-  </section>
-
-  <!-- Contact panel -->
-  <section id="contact-panel" class="panel">
-    <div class="panel__inner">
-      <header class="top panel__nav">
-        <a class="brand" data-section="home" href="#">APEX INTEGRATIONS</a>
-        <nav class="nav nav--center" aria-label="Primary">
-          <a class="nav__link" data-section="home" href="#">HOME</a>
-          <a class="nav__link" data-section="services" href="#">SERVICES</a>
-          <a class="nav__link" data-section="reviews" href="#">REVIEWS</a>
-        </nav>
-        <nav class="nav nav--end" aria-label="Secondary">
-          <a class="nav__link" data-section="pricing" href="#">PRICING</a>
-          <a class="nav__link nav__link--active" data-section="contact" href="#">CONTACT</a>
-        </nav>
-      </header>
-    </div>
-  </section>
+  </div>
 
   <script type="module" src="/src/main.js"></script>
 </body>
