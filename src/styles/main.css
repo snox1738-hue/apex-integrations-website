@@ -394,14 +394,10 @@ body {
 
 .reviews-row--left .reviews-row__track {
   animation: marqueeLeft 80s linear infinite;
-  will-change: transform;
-  transform: translateZ(0);
 }
 
 .reviews-row--right .reviews-row__track {
   animation: marqueeRight 80s linear infinite;
-  will-change: transform;
-  transform: translateZ(0);
 }
 
 /* Pause on hover */
@@ -1200,6 +1196,7 @@ body {
   stroke-linejoin: round !important;
   stroke-linecap: round !important;
   will-change: auto;
+  filter: drop-shadow(0 0 6px rgba(255, 250, 200, 0.8)) drop-shadow(0 0 20px rgba(255, 235, 150, 0.5));
 }
 
 /* A */
