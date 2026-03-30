@@ -1199,12 +1199,7 @@ body {
   stroke-width: 2 !important;
   stroke-linejoin: round !important;
   stroke-linecap: round !important;
-  will-change: stroke-dashoffset;
-  filter: 
-    drop-shadow(0 0 4px rgba(255, 255, 255, 1))
-    drop-shadow(0 0 10px rgba(255, 250, 220, 0.9))
-    drop-shadow(0 0 25px rgba(255, 235, 170, 0.6))
-    drop-shadow(0 0 50px rgba(255, 215, 110, 0.3));
+  will-change: auto;
 }
 
 /* A */
