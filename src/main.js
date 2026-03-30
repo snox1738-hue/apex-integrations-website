@@ -2,6 +2,7 @@ import './styles/main.css'
 import { submitReview, loadReviews } from './firebase.js'
 import introSrc from './assets/clock_latest.mp4'
 import loopSrc from './assets/clock_loop.mp4'
+import posterSrc from './assets/clock_poster.jpg'
 
 const video = document.getElementById('bg-video')
 if (video) {
@@ -15,6 +16,7 @@ if (video) {
 
   video.src = introSrc
   video.loop = false
+  video.poster = posterSrc
   video.play().catch(() => {})
 
   // iOS needs a user gesture to start video — retry on first touch
