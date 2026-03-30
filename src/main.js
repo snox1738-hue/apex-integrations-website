@@ -1,4 +1,5 @@
 import './styles/main.css'
+import { submitReview, loadReviews } from './firebase.js'
 import introSrc from './assets/clock_latest.mp4'
 import loopSrc from './assets/clock_loop.mp4'
 
@@ -148,9 +149,9 @@ function updateActiveNav() {
 // ─── Cart system ───
 const cart = []
 const products = {
-  voice: { name: 'AI Voice Receptionist', desc: 'Automated call handling & booking', upfront: 0, monthly: 299, available: true },
-  website: { name: 'Website Creation', desc: 'Custom-built conversion website', upfront: 999, monthly: 249, available: true },
-  leads: { name: 'Lead Generation', desc: 'Meta ads management & strategy', upfront: 0, monthly: 999, available: true }
+  voice: { name: 'AI Voice Receptionist', desc: 'Automated call handling & booking', upfront: 0, monthly: 299, available: true, paymentLink: 'https://buy.stripe.com/eVq6oA6Xm9JM8EmdII73G03' },
+  website: { name: 'Website Creation', desc: 'Custom-built conversion website', upfront: 750, monthly: 249, available: true, paymentLink: 'https://buy.stripe.com/00wbIU95u5tw6we20073G02' },
+  leads: { name: 'Lead Generation', desc: 'Meta ads management & strategy', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/eVq14g0yYcVYf2KbAA73G04' }
 }
 
 const cartItemsEl = document.getElementById('cart-items')
@@ -533,10 +534,10 @@ if (starSelect) {
   })
 }
 
-// Review form submit
+// Review form submit — saves to Firebase
 const reviewForm = document.getElementById('review-form')
 if (reviewForm) {
-  reviewForm.addEventListener('submit', (e) => {
+  reviewForm.addEventListener('submit', async (e) => {
     e.preventDefault()
     const formData = new FormData(reviewForm)
     const data = {
@@ -544,15 +545,76 @@ if (reviewForm) {
       practice: formData.get('practice'),
       location: formData.get('location'),
       review: formData.get('review'),
-      stars: selectedStars
+      stars: selectedStars || 5
     }
-    console.log('Review submitted:', data)
-    reviewForm.reset()
-    selectedStars = 0
-    if (starSelect) starSelect.querySelectorAll('.star-btn').forEach(s => s.classList.remove('active'))
-    alert('Thank you for your review!')
+    
+    const submitBtn = reviewForm.querySelector('.review-form__submit')
+    if (submitBtn) { submitBtn.textContent = 'SUBMITTING...'; submitBtn.disabled = true }
+    
+    const result = await submitReview(data)
+    
+    if (result.success) {
+      reviewForm.reset()
+      selectedStars = 0
+      if (starSelect) starSelect.querySelectorAll('.star-btn').forEach(s => s.classList.remove('active'))
+      if (submitBtn) { submitBtn.textContent = 'THANK YOU!'; setTimeout(() => { submitBtn.textContent = 'SUBMIT REVIEW'; submitBtn.disabled = false }, 2000) }
+      // Reload reviews to show the new one
+      renderFirebaseReviews()
+    } else {
+      if (submitBtn) { submitBtn.textContent = 'ERROR — TRY AGAIN'; submitBtn.disabled = false }
+    }
   })
 }
+
+// Load and render reviews from Firebase — distribute evenly across 3 rows
+async function renderFirebaseReviews() {
+  const reviews = await loadReviews()
+  if (reviews.length === 0) return
+  
+  // Get all 3 row tracks
+  const tracks = document.querySelectorAll('.reviews-row__track')
+  if (tracks.length === 0) return
+  
+  // Round-robin: review 0 → row 0, review 1 → row 1, review 2 → row 2, review 3 → row 0, etc.
+  reviews.forEach((r, i) => {
+    const trackIdx = i % tracks.length
+    const track = tracks[trackIdx]
+    
+    // Skip if already rendered
+    if (track.querySelector(`[data-firebase-id="${r.id}"]`)) return
+    
+    const card = document.createElement('div')
+    card.className = 'review'
+    card.setAttribute('data-firebase-id', r.id)
+    card.innerHTML = `
+      <div class="review__stars">${'★'.repeat(r.stars || 5)}${'☆'.repeat(5 - (r.stars || 5))}</div>
+      <p class="review__text">"${r.review}"</p>
+      <div class="review__author">
+        <span class="review__name">${r.name}</span>
+        <span class="review__role">${r.practice}${r.location ? ' — ' + r.location : ''}</span>
+      </div>
+    `
+    
+    // Insert before the duplicate section (duplicates are for seamless loop)
+    // Find the first duplicate by checking for repeated data-review attributes
+    const originals = track.querySelectorAll('.review:not([data-firebase-id])')
+    const halfway = Math.ceil(originals.length / 2)
+    if (originals[halfway]) {
+      track.insertBefore(card, originals[halfway])
+    } else {
+      track.appendChild(card)
+    }
+    
+    // Also add a duplicate for the seamless scroll loop
+    const dupe = card.cloneNode(true)
+    dupe.removeAttribute('data-firebase-id')
+    dupe.setAttribute('data-firebase-dupe', r.id)
+    track.appendChild(dupe)
+  })
+}
+
+// Load Firebase reviews on page load
+renderFirebaseReviews()
 
 // Leave a Review overlay
 const reviewFormOverlay = document.getElementById('review-form-overlay')
@@ -655,3 +717,26 @@ document.addEventListener('click', (e) => {
     }
   }
 })
+
+// ─── Checkout — open Stripe payment links ───
+const checkoutBtn = document.getElementById('cart-checkout')
+if (checkoutBtn) {
+  checkoutBtn.addEventListener('click', () => {
+    if (cart.length === 0) return
+    // If one item in cart, go directly to its payment link
+    if (cart.length === 1) {
+      const p = products[cart[0]]
+      if (p && p.paymentLink) {
+        window.open(p.paymentLink, '_blank')
+      }
+      return
+    }
+    // Multiple items — open each payment link in a new tab
+    cart.forEach(id => {
+      const p = products[id]
+      if (p && p.paymentLink) {
+        window.open(p.paymentLink, '_blank')
+      }
+    })
+  })
+}
