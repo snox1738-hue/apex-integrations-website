@@ -100,6 +100,16 @@ body {
   opacity: 1;
 }
 
+.nav__link--icon {
+  display: flex;
+  align-items: center;
+}
+
+.nav__link--icon svg {
+  width: clamp(14px, 1.1vw, 18px);
+  height: clamp(14px, 1.1vw, 18px);
+}
+
 /* ─── Section divider line ─── */
 .section__divider {
   position: absolute;
@@ -126,30 +136,40 @@ body {
   to { transform: scaleX(1); }
 }
 
-/* ─── Scrollable sections ─── */
+/* ─── Stacked panel sections ─── */
 .scroll-container {
   position: relative;
   z-index: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
+  width: 100%;
   height: 100vh;
-  overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.scroll-container::-webkit-scrollbar {
-  display: none;
+  overflow: hidden;
 }
 
 .section {
+  position: fixed;
+  inset: 0;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  background: #c3c5b7;
   will-change: transform;
-  transform: translateZ(0);
+  transform: translateY(100%);
+  transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.section--home {
+  transform: translateY(0);
+  z-index: 1;
+  background: transparent;
+}
+.section--services { z-index: 2; }
+.section--reviews { z-index: 3; }
+.section--pricing { z-index: 4; }
+.section--contact { z-index: 5; }
+
+.section--visible {
+  transform: translateY(0);
 }
 
 .section__inner {
@@ -222,7 +242,7 @@ body {
   line-height: 1.15;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #1a1a1a;
+  color: #fff;
   margin: 0;
 }
 
@@ -258,9 +278,8 @@ body {
   border-radius: 8px;
   margin-bottom: clamp(8px, 1vh, 12px);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  padding-top: 5%;
   overflow: visible;
 }
 
@@ -319,7 +338,7 @@ body {
   line-height: 1.15;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #1a1a1a;
+  color: #fff;
   margin: 0 0 clamp(8px, 1vh, 14px);
 }
 
@@ -861,6 +880,60 @@ body {
   line-height: 1.7;
   color: rgba(26, 26, 26, 0.45);
   margin: 0;
+}
+
+/* ─── Pricing panel ─── */
+.pricing-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(100vh - var(--nav-height));
+}
+
+.pricing-title {
+  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+/* ─── Service entrance animations ─── */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(60px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section--services .services-title,
+.section--services .card {
+  opacity: 0;
+}
+
+.section--services.section--active .services-title { animation: riseIn 0.7s ease-out 0.2s forwards; }
+.section--services.section--active .card:nth-child(1) { animation: riseIn 0.7s ease-out 0.6s forwards; }
+.section--services.section--active .card:nth-child(2) { animation: riseIn 0.7s ease-out 1.0s forwards; }
+.section--services.section--active .card:nth-child(3) { animation: riseIn 0.7s ease-out 1.4s forwards; }
+
+/* Reviews entrance animations */
+.section--reviews .reviews-title,
+.section--reviews .reviews-marquee {
+  opacity: 0;
+}
+
+.section--reviews.section--active .reviews-title { animation: riseIn 0.7s ease-out 0.2s forwards; }
+.section--reviews.section--active .reviews-marquee { animation: riseIn 0.7s ease-out 0.7s forwards; }
+
+/* Review hover glow */
+.review {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.review:hover {
+  border-color: rgba(255, 250, 220, 0.5);
+  box-shadow: 0 0 8px 1px rgba(255, 250, 220, 0.4), 0 0 20px 2px rgba(255, 240, 180, 0.2);
 }
 
 /* ─── SVG trace animations ─── */

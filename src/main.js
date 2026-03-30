@@ -57,60 +57,39 @@ if (video) {
   window.addEventListener('resize', scaleAll)
 }
 
-// Smooth scroll with custom duration
-function smoothScrollTo(container, targetY, duration = 1200) {
-  const startY = container.scrollTop
-  const diff = targetY - startY
-  let startTime = null
-
-  function step(time) {
-    if (!startTime) startTime = time
-    const progress = Math.min((time - startTime) / duration, 1)
-    // ease-in-out cubic
-    const ease = progress < 0.5
-      ? 4 * progress * progress * progress
-      : 1 - Math.pow(-2 * progress + 2, 3) / 2
-    container.scrollTop = startY + diff * ease
-    if (progress < 1) requestAnimationFrame(step)
-  }
-  requestAnimationFrame(step)
-}
-
-document.querySelectorAll('.top .nav__link, .top .brand').forEach(link => {
-  link.addEventListener('click', (e) => {
-    const href = link.getAttribute('href')
-    if (href && href.startsWith('#')) {
-      e.preventDefault()
-      const target = document.querySelector(href)
-      if (target) {
-        const idx = sections.indexOf(target)
-        if (idx !== -1) goToSection(idx)
-      }
-    }
-  })
-})
-
-// Controlled page-by-page scroll
-const scrollContainer = document.querySelector('.scroll-container')
+// Panel-based navigation
 const sections = Array.from(document.querySelectorAll('.section'))
 const navLinks = document.querySelectorAll('.top .nav__link')
+const leaveReviewBtnEl = document.getElementById('leave-review-btn')
 
 let currentIndex = 0
 let isScrolling = false
 
 function goToSection(index) {
   if (index < 0 || index >= sections.length || isScrolling) return
+  if (index === currentIndex) return
   isScrolling = true
   currentIndex = index
+
+  // Stack panels: all sections up to current slide up, rest slide down
+  sections.forEach((s, i) => {
+    if (i === 0) return
+    if (i <= currentIndex) {
+      s.classList.add('section--visible')
+    } else {
+      s.classList.remove('section--visible')
+    }
+  })
+
+  // Entrance animations — trigger immediately so content animates during slide
+  sections.forEach(s => s.classList.remove('section--active'))
+  void sections[currentIndex].offsetWidth
+  sections[currentIndex].classList.add('section--active')
+
   updateActiveNav()
-  // Reset all dividers immediately
   resetAllDividers()
-  smoothScrollTo(scrollContainer, sections[index].offsetTop, 1200)
-  // Draw the line AFTER the scroll finishes
-  setTimeout(() => {
-    animateDivider(index)
-  }, 1250)
-  setTimeout(() => { isScrolling = false }, 2700)
+  setTimeout(() => { animateDivider(index) }, 1250)
+  setTimeout(() => { isScrolling = false }, 1400)
 }
 
 function resetAllDividers() {
@@ -127,15 +106,11 @@ function animateDivider(index) {
   const section = sections[index]
   const divider = section.querySelector('.section__divider')
   if (!divider) return
-
-  // Force reflow then animate fresh
   divider.style.transform = 'scaleX(0)'
   void divider.offsetWidth
   divider.style.transform = ''
   divider.classList.add('section__divider--animate')
 }
-
-const leaveReviewBtnEl = document.getElementById('leave-review-btn')
 
 function updateActiveNav() {
   const activeId = sections[currentIndex].id
@@ -147,30 +122,62 @@ function updateActiveNav() {
       link.classList.remove('nav__link--active')
     }
   })
-  // Show leave-review button only on reviews section
   if (leaveReviewBtnEl) {
     leaveReviewBtnEl.classList.toggle('visible', activeId === 'reviews')
   }
 }
 
-// Wheel scroll — one section at a time, locked until done
-scrollContainer.addEventListener('wheel', (e) => {
+// Pricing panel
+const pricingPanel = document.getElementById('pricing-panel')
+
+function openPricing() {
+  if (pricingPanel) pricingPanel.classList.add('panel--open')
+}
+
+function closePricing() {
+  if (pricingPanel) pricingPanel.classList.remove('panel--open')
+}
+
+const pricingBack = document.querySelector('.pricing-back')
+if (pricingBack) {
+  pricingBack.addEventListener('click', () => closePricing())
+}
+
+// Nav clicks
+document.querySelectorAll('.top .nav__link, .top .brand').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href')
+    if (href && href.startsWith('#')) {
+      e.preventDefault()
+      if (href === '#pricing') {
+        openPricing()
+        return
+      }
+      closePricing()
+      const target = document.querySelector(href)
+      if (target) {
+        const idx = sections.indexOf(target)
+        if (idx !== -1) goToSection(idx)
+      }
+    }
+  })
+})
+
+// Wheel — one section at a time
+document.addEventListener('wheel', (e) => {
   e.preventDefault()
   if (isScrolling) return
-  if (e.deltaY > 0) {
-    goToSection(currentIndex + 1)
-  } else if (e.deltaY < 0) {
-    goToSection(currentIndex - 1)
-  }
+  if (e.deltaY > 0) goToSection(currentIndex + 1)
+  else if (e.deltaY < 0) goToSection(currentIndex - 1)
 }, { passive: false })
 
 // Touch support
 let touchStartY = 0
-scrollContainer.addEventListener('touchstart', (e) => {
+document.addEventListener('touchstart', (e) => {
   touchStartY = e.touches[0].clientY
 }, { passive: true })
 
-scrollContainer.addEventListener('touchend', (e) => {
+document.addEventListener('touchend', (e) => {
   if (isScrolling) return
   const diff = touchStartY - e.changedTouches[0].clientY
   if (diff > 50) goToSection(currentIndex + 1)
@@ -338,6 +345,7 @@ document.addEventListener('keydown', (e) => {
 })
 
 updateActiveNav()
+sections[0].classList.add('section--active')
 
 // Service card click → open detail panel
 const panels = {
