@@ -16,6 +16,14 @@ if (video) {
   video.loop = false
   video.play().catch(() => {})
 
+  // iOS needs a user gesture to start video — retry on first touch
+  function tryPlayOnTouch() {
+    video.play().catch(() => {})
+    loopEl.play().catch(() => {})
+    document.removeEventListener('touchstart', tryPlayOnTouch)
+  }
+  document.addEventListener('touchstart', tryPlayOnTouch, { passive: true })
+
   video.addEventListener('ended', () => {
     loopEl.currentTime = 0
     loopEl.play().catch(() => {})
@@ -389,14 +397,23 @@ document.addEventListener('wheel', (e) => {
   else if (e.deltaY < 0) goToSection(currentIndex - 1)
 }, { passive: false })
 
-// Touch support
+// Touch support — swipe to change sections
 let touchStartY = 0
+let touchMoving = false
 document.addEventListener('touchstart', (e) => {
   touchStartY = e.touches[0].clientY
+  touchMoving = false
 }, { passive: true })
 
+document.addEventListener('touchmove', (e) => {
+  touchMoving = true
+  // Only prevent default on the scroll container to stop bounce, not on overlays/panels/buttons
+  const isScrollArea = e.target.closest('.scroll-container') && !e.target.closest('.panel') && !e.target.closest('.info-overlay') && !e.target.closest('.review-detail') && !e.target.closest('.pricing-panel') && !e.target.closest('.review-form-overlay')
+  if (isScrollArea) e.preventDefault()
+}, { passive: false })
+
 document.addEventListener('touchend', (e) => {
-  if (isScrolling) return
+  if (isScrolling || !touchMoving) return  // ignore taps (no movement)
   const diff = touchStartY - e.changedTouches[0].clientY
   if (diff > 50) goToSection(currentIndex + 1)
   else if (diff < -50) goToSection(currentIndex - 1)

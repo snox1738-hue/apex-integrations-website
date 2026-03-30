@@ -2,6 +2,8 @@
   box-sizing: border-box;
 }
 
+.swipe-hint { display: none; }
+
 /* Prevent ANY flash on load — body is invisible until JS confirms ready */
 body.loading .scroll-container,
 body.loading .top {
@@ -1648,5 +1650,466 @@ body {
   }
   .service-detail__cta {
     align-self: center;
+  }
+}
+
+/* ══════════════════════════════════════════
+   MOBILE LAYOUT — 768px and below
+   Desktop is completely untouched above this.
+   ══════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ─── Keep panel system — prevent touch bounce ─── */
+  .scroll-container {
+    overflow: hidden;
+    touch-action: none;
+  }
+
+  /* ─── Performance: strip everything heavy ─── */
+
+  /* Video stays visible on mobile — needed for homepage animation */
+
+  /* Kill box-shadows on sections */
+  .section--services,
+  .section--reviews,
+  .section--pricing,
+  .section--contact {
+    box-shadow: none !important;
+  }
+
+  /* Kill will-change on sections — forces layer creation which eats memory */
+  .section {
+    will-change: auto !important;
+  }
+
+  /* Simpler transition — no bezier, just ease-out */
+  .sections-ready .section {
+    transition: transform 0.8s ease-out !important;
+  }
+
+  /* Kill all SVG trace animations */
+  .card__visual svg * {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+
+  /* Kill review marquee animation */
+  .review-track {
+    animation: none !important;
+  }
+
+  /* Simplify card hover effects */
+  .card {
+    transition: none !important;
+  }
+
+  /* ─── Nav bar ─── */
+  .top {
+    grid-template-columns: auto 1fr auto;
+    padding: 12px 16px;
+    gap: 8px;
+    background: transparent;
+    align-items: center;
+  }
+
+  .brand {
+    justify-self: start;
+    font-size: 8px;
+  }
+
+  .nav--center {
+    justify-self: end;
+    gap: 1.2rem;
+  }
+
+  .nav--end {
+    display: flex;
+    justify-self: end;
+    gap: 0.8rem;
+  }
+
+  .nav__link {
+    font-size: 7.5px;
+    letter-spacing: 0.12em;
+  }
+
+  .nav--center {
+    gap: 0.8rem;
+  }
+
+  --nav-height: 52px;
+
+  /* ─── Video background ─── */
+  #bg-video,
+  #bg-video + video {
+    position: fixed !important;
+  }
+
+  /* ─── Home section ─── */
+  .section--home .section__inner {
+    padding-top: 52px;
+    min-height: calc(100vh - 52px);
+    min-height: calc(100dvh - 52px);
+  }
+
+  .hero {
+    max-width: 100%;
+    padding: 0 4px;
+  }
+
+  .headline {
+    font-size: clamp(1.1rem, 5.5vw, 1.6rem);
+    letter-spacing: 0.08em;
+  }
+
+  .subhead {
+    font-size: clamp(0.55rem, 2.5vw, 0.7rem);
+    max-width: 90%;
+  }
+
+  /* ─── Services section ─── */
+  .section__inner {
+    padding: 52px 24px 0;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .services-wrap {
+    min-height: calc(100vh - 52px);
+    min-height: calc(100dvh - 52px);
+    padding-bottom: 30px;
+  }
+
+  .services-header {
+    padding: 8px 0;
+  }
+
+  .services-title {
+    font-size: clamp(0.8rem, 4vw, 1.1rem);
+  }
+
+  .services-sub {
+    font-size: clamp(0.45rem, 2vw, 0.55rem);
+    display: none;
+  }
+
+  .services-header {
+    padding: 4px 0;
+    margin-bottom: 0;
+  }
+
+  .cards {
+    grid-template-columns: 1fr !important;
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .card {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 10px 10px 14px;
+    border-radius: 14px;
+    flex-direction: column;
+  }
+
+  .card__visual {
+    aspect-ratio: 5 / 3;
+    max-height: 120px;
+    overflow: hidden;
+  }
+
+  .card__visual svg {
+    width: 62%;
+    height: auto;
+    max-height: 110px;
+    filter: none !important;
+  }
+
+  /* Kill ALL glow/shadow/filter effects on mobile */
+  svg,
+  svg *,
+  .card__visual svg,
+  .card__visual svg *,
+  .service-detail__shape svg,
+  .service-detail__shape svg *,
+  .review__stars,
+  .review-detail__stars,
+  .star-btn.active,
+  .star-btn:hover {
+    filter: none !important;
+    -webkit-filter: none !important;
+  }
+
+  .card,
+  .card:hover,
+  .nav__link::after,
+  .nav__link:hover::after,
+  .nav__link--active::after,
+  .review-form__submit:hover,
+  .contact-form__submit:hover {
+    box-shadow: none !important;
+  }
+
+  .card__title {
+    font-size: 0.75rem;
+    margin: 0 0 4px;
+  }
+
+  .card__desc {
+    font-size: 0.55rem;
+    line-height: 1.4;
+  }
+
+  .card__label {
+    font-size: 10px;
+    padding: 8px 12px;
+  }
+
+  /* ─── Service detail panels (keep as overlays on mobile) ─── */
+  .panel {
+    position: fixed;
+    z-index: 200 !important;
+  }
+
+  .service-detail {
+    grid-template-columns: 1fr;
+    padding: 60px 20px 40px;
+    gap: 24px;
+  }
+
+  .service-detail__right {
+    padding-right: 0;
+  }
+
+  /* ─── Reviews section ─── */
+  .reviews-wrap {
+    min-height: calc(100vh - 52px);
+    min-height: calc(100dvh - 52px);
+    padding-bottom: 20px;
+  }
+
+  .reviews-header {
+    margin-bottom: 12px;
+  }
+
+  .reviews-title {
+    font-size: clamp(1.1rem, 5vw, 1.5rem);
+  }
+
+  .reviews-subtitle {
+    font-size: clamp(0.45rem, 2vw, 0.55rem);
+  }
+
+  /* Switch from horizontal marquee to vertical grid */
+  .reviews-marquee {
+    flex-direction: column;
+    gap: 8px;
+    overflow: visible;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .review-track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    animation: none !important;
+    width: 100%;
+  }
+
+  .review-card {
+    min-width: unset;
+    max-width: unset;
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    gap: 2px;
+    min-height: 0;
+  }
+
+  .review-card__quote {
+    font-size: 6.5px;
+    line-height: 1.25;
+  }
+
+  .review-card__name {
+    font-size: 6px;
+  }
+
+  .review-card__practice {
+    font-size: 5.5px;
+  }
+
+  .review__stars {
+    font-size: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── Contact section ─── */
+  .contact-wrap {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Reorder: Let's Talk first, Square middle, Form bottom */
+  .contact-right { order: 1; }
+  .contact-center { order: 2; display: flex !important; }
+  .contact-left { order: 3; }
+
+  .contact-left {
+    align-items: center;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .contact-right {
+    align-items: center;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .contact-title {
+    font-size: clamp(0.85rem, 4vw, 1.1rem);
+    margin-bottom: 4px;
+  }
+
+  .contact-subtitle {
+    font-size: clamp(0.5rem, 2.2vw, 0.6rem);
+    margin-bottom: 6px;
+  }
+
+  .contact-center svg {
+    width: 90px;
+    height: 90px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .contact-form textarea {
+    rows: 3;
+    min-height: 60px;
+  }
+
+  .contact-form {
+    gap: 8px;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .contact-form__submit {
+    font-size: 11px;
+    padding: 12px 24px;
+    align-self: center;
+  }
+
+  .contact-schedule {
+    align-self: center;
+    font-size: 10px;
+    padding: 10px 22px;
+  }
+
+  .contact-info {
+    display: none;
+  }
+
+  /* ─── Info overlay (service details) ─── */
+  .info-overlay__inner {
+    padding: 60px 20px 40px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .info-overlay__title {
+    font-size: clamp(1rem, 4.5vw, 1.3rem);
+  }
+
+  .info-section__title {
+    font-size: 11px;
+  }
+
+  .info-section__text {
+    font-size: 12px;
+  }
+
+  /* ─── Pricing panel ─── */
+  .pricing-inner {
+    padding: 60px 20px 40px;
+  }
+
+  /* ─── Section dividers ─── */
+  .section__divider {
+    top: 52px;
+    left: 20px;
+    right: 20px;
+  }
+
+  /* ─── Logo ─── */
+  .logo-fixed {
+    width: clamp(40px, 10vw, 60px) !important;
+    bottom: 16px !important;
+    right: 16px !important;
+  }
+
+  /* ─── Swipe hint indicator (mobile only, hidden on desktop via default display:none) ─── */
+  .swipe-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .swipe-hint__hand {
+    width: 20px;
+    height: 20px;
+    animation: swipeGesture 2s ease-in-out infinite;
+    animation-delay: 3s;
+    opacity: 0;
+  }
+
+  .swipe-hint__line {
+    display: none;
+  }
+
+  .swipe-hint--down {
+    bottom: 10px;
+  }
+
+  .swipe-hint--down .swipe-hint__hand {
+    animation: swipeDown 2s ease-in-out infinite;
+    animation-delay: 3s;
+  }
+
+  @keyframes swipeDown {
+    0% { transform: translateY(-6px) scaleY(-1) rotate(-15deg); opacity: 0; }
+    10% { transform: translateY(-6px) scaleY(-1) rotate(-15deg); opacity: 0.6; }
+    45% { transform: translateY(8px) scaleY(-1) rotate(-15deg); opacity: 0.6; }
+    55% { transform: translateY(10px) scaleY(-1) rotate(-15deg); opacity: 0; }
+    100% { transform: translateY(-6px) rotate(15deg) scaleY(-1); opacity: 0; }
+  }
+
+  @keyframes swipeGesture {
+    0% { transform: translateY(6px) rotate(-15deg); opacity: 0; }
+    10% { transform: translateY(6px) rotate(-15deg); opacity: 0.6; }
+    45% { transform: translateY(-8px) rotate(-15deg); opacity: 0.6; }
+    55% { transform: translateY(-10px) rotate(-15deg); opacity: 0; }
+    100% { transform: translateY(6px) rotate(-15deg); opacity: 0; }
   }
 }
