@@ -46,6 +46,7 @@
 
     <!-- SERVICES -->
     <section id="services" class="section section--services">
+      <div class="section__divider"></div>
       <div class="section__inner">
         <div class="services-wrap">
           <div class="services-header">
@@ -117,6 +118,7 @@
 
     <!-- REVIEWS -->
     <section id="reviews" class="section section--reviews">
+      <div class="section__divider"></div>
       <div class="section__inner">
         <div class="reviews-wrap">
           <div class="reviews-header">
@@ -309,6 +311,7 @@
 
     <!-- PRICING -->
     <section id="pricing" class="section section--pricing">
+      <div class="section__divider"></div>
       <div class="section__inner">
         <h2 class="section-title">PRICING</h2>
       </div>
@@ -316,8 +319,43 @@
 
     <!-- CONTACT -->
     <section id="contact" class="section section--contact">
+      <div class="section__divider"></div>
       <div class="section__inner">
-        <h2 class="section-title">CONTACT</h2>
+        <div class="contact-wrap">
+          <div class="contact-left">
+            <h2 class="contact-title">SEND A MESSAGE</h2>
+            <form class="contact-form" id="contact-form">
+              <input type="text" class="contact-form__input" name="name" placeholder="Name" required />
+              <input type="email" class="contact-form__input" name="email" placeholder="Email" required />
+              <input type="tel" class="contact-form__input" name="phone" placeholder="Phone (optional)" />
+              <textarea class="contact-form__textarea" name="message" placeholder="How can we help?" rows="5" required></textarea>
+              <button type="submit" class="contact-form__submit">SEND MESSAGE</button>
+            </form>
+          </div>
+          <div class="contact-center">
+            <svg class="contact-shape" viewBox="0 0 200 200" fill="none">
+              <defs>
+                <linearGradient id="gc1" gradientUnits="userSpaceOnUse" x1="20" y1="100" x2="180" y2="100">
+                  <stop offset="0%" stop-color="rgba(255,200,0,0.1)"/>
+                  <stop offset="30%" stop-color="rgba(255,230,50,0.6)"/>
+                  <stop offset="50%" stop-color="rgba(255,255,150,1)"/>
+                  <stop offset="70%" stop-color="rgba(255,230,50,0.6)"/>
+                  <stop offset="100%" stop-color="rgba(255,200,0,0.1)"/>
+                </linearGradient>
+              </defs>
+              <rect x="15" y="15" width="170" height="170" stroke="url(#gc1)" stroke-width="2.5" fill="none" stroke-linejoin="round" class="trace trace--sq-outer"/>
+              <rect x="45" y="45" width="110" height="110" stroke="url(#gc1)" stroke-width="2.5" fill="none" stroke-linejoin="round" class="trace trace--sq-inner"/>
+            </svg>
+          </div>
+          <div class="contact-right">
+            <h2 class="contact-title">LET'S TALK</h2>
+            <p class="contact-subtitle">Ready to grow your practice? Book a free discovery call or send us a message. No pressure, no commitments.</p>
+            <a href="https://calendly.com/contact-apexintlaunch/30min" target="_blank" class="contact-schedule" id="schedule-btn">SCHEDULE A CALL</a>
+            <div class="contact-info">
+              <p class="contact-info__item">contact@apexintlaunch.com</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 

@@ -100,6 +100,32 @@ body {
   opacity: 1;
 }
 
+/* ─── Section divider line ─── */
+.section__divider {
+  position: absolute;
+  top: var(--nav-height);
+  left: var(--pad-x);
+  right: var(--pad-x);
+  height: 1px;
+  background: rgba(0, 0, 0, 0.15);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: none;
+}
+
+.section__divider--visible {
+  transform: scaleX(1);
+}
+
+.section__divider--animate {
+  animation: drawLine 1.2s ease-out forwards;
+}
+
+@keyframes drawLine {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 /* ─── Scrollable sections ─── */
 .scroll-container {
   position: relative;
@@ -430,6 +456,186 @@ body {
 .leave-review-btn:hover {
   background: rgba(0, 0, 0, 0.05);
   box-shadow: 0 0 8px 2px rgba(255, 250, 220, 0.6), 0 0 16px 4px rgba(255, 240, 180, 0.3);
+}
+
+/* ─── Contact Section ─── */
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: clamp(30px, 4vw, 60px);
+  align-items: start;
+  min-height: calc(100vh - var(--nav-height));
+  padding-top: calc(50vh - 200px);
+}
+
+.contact-left {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2vh, 24px);
+  padding-right: clamp(20px, 3vw, 50px);
+}
+
+.contact-title {
+  font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+  font-weight: 200;
+  line-height: 1.1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin: 0;
+  max-width: 380px;
+  text-align: center;
+}
+
+.contact-subtitle {
+  font-size: clamp(0.7rem, 0.8vw, 0.88rem);
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgba(26, 26, 26, 0.45);
+  margin: 0;
+  max-width: 28rem;
+}
+
+.contact-schedule {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: clamp(9px, 0.7vw, 11px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #1a1a1a;
+  text-decoration: none;
+  padding: clamp(14px, 1.8vh, 20px) clamp(32px, 3.5vw, 50px);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  margin-top: clamp(8px, 1vh, 16px);
+}
+
+.contact-schedule:hover {
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 8px 2px rgba(255, 250, 220, 0.6), 0 0 16px 4px rgba(255, 240, 180, 0.3);
+}
+
+.contact-info {
+  margin-top: clamp(12px, 1.5vh, 20px);
+}
+
+.contact-info__item {
+  font-size: clamp(0.6rem, 0.7vw, 0.75rem);
+  color: rgba(26, 26, 26, 0.35);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.contact-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-shape {
+  width: clamp(160px, 18vw, 260px);
+  height: auto;
+  transform: rotate(45deg);
+}
+
+/* Square trace — flowing dash animation */
+/* Outer rect 170x170 perimeter = 680, 4 segments of 170 */
+/* Inner rect 110x110 perimeter = 440, 4 segments of 110 */
+.trace--sq-outer {
+  stroke-dasharray: 140 30;
+  animation: sqOuterFlow 20s linear infinite;
+  will-change: stroke-dashoffset;
+}
+.trace--sq-inner {
+  stroke-dasharray: 90 20;
+  animation: sqInnerFlow 24s linear infinite;
+  will-change: stroke-dashoffset;
+}
+
+@keyframes sqOuterFlow { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -170; } }
+@keyframes sqInnerFlow { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 110; } }
+
+.contact-right {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2vh, 24px);
+  margin-left: auto;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1vh, 14px);
+  width: 100%;
+  max-width: 380px;
+}
+
+.contact-form__input,
+.contact-form__textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: clamp(8px, 1vh, 12px) clamp(12px, 1.2vw, 16px);
+  font-family: inherit;
+  font-size: clamp(0.65rem, 0.75vw, 0.82rem);
+  color: #1a1a1a;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-form__input::placeholder,
+.contact-form__textarea::placeholder {
+  color: rgba(26, 26, 26, 0.3);
+}
+
+.contact-form__input:focus,
+.contact-form__textarea:focus {
+  border-color: rgba(255, 230, 100, 0.6);
+  box-shadow: 0 0 6px rgba(255, 240, 150, 0.3);
+}
+
+.contact-form__textarea {
+  resize: none;
+}
+
+.contact-form__submit {
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: clamp(12px, 1.5vh, 18px) clamp(28px, 3vw, 44px);
+  font-family: inherit;
+  font-size: clamp(9px, 0.7vw, 11px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-form__submit:hover {
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 8px 2px rgba(255, 250, 220, 0.6), 0 0 16px 4px rgba(255, 240, 180, 0.3);
+}
+
+@media (max-width: 900px) {
+  .contact-wrap {
+    grid-template-columns: 1fr;
+    gap: clamp(40px, 5vh, 60px);
+    text-align: center;
+  }
+  .contact-center {
+    display: none;
+  }
+  .contact-left {
+    align-items: center;
+  }
+  .contact-schedule {
+    align-self: center;
+  }
+  .contact-form__submit {
+    align-self: center;
+  }
 }
 
 /* ─── Review Form Overlay ─── */

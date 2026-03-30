@@ -103,8 +103,36 @@ function goToSection(index) {
   isScrolling = true
   currentIndex = index
   updateActiveNav()
+  // Reset all dividers immediately
+  resetAllDividers()
   smoothScrollTo(scrollContainer, sections[index].offsetTop, 1200)
-  setTimeout(() => { isScrolling = false }, 1400)
+  // Draw the line AFTER the scroll finishes
+  setTimeout(() => {
+    animateDivider(index)
+  }, 1250)
+  setTimeout(() => { isScrolling = false }, 2700)
+}
+
+function resetAllDividers() {
+  sections.forEach(s => {
+    const d = s.querySelector('.section__divider')
+    if (d) {
+      d.classList.remove('section__divider--animate')
+      d.style.transform = 'scaleX(0)'
+    }
+  })
+}
+
+function animateDivider(index) {
+  const section = sections[index]
+  const divider = section.querySelector('.section__divider')
+  if (!divider) return
+
+  // Force reflow then animate fresh
+  divider.style.transform = 'scaleX(0)'
+  void divider.offsetWidth
+  divider.style.transform = ''
+  divider.classList.add('section__divider--animate')
 }
 
 const leaveReviewBtnEl = document.getElementById('leave-review-btn')
