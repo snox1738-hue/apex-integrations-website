@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore, collection, addDoc, getDocs, orderBy, query, serverTimestamp } from 'firebase/firestore'
+import { initializeFirestore, memoryLocalCache, collection, addDoc, getDocs, orderBy, query, serverTimestamp } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyA48d0Nz7tRHADnH3fMtzSG7i2ZL2vF-yo",
@@ -11,19 +11,31 @@ const firebaseConfig = {
 }
 
 const app = initializeApp(firebaseConfig)
-const db = getFirestore(app)
+// Use memory-only cache — no IndexedDB persistence (prevents addDoc from hanging)
+const db = initializeFirestore(app, { localCache: memoryLocalCache() })
+
+// Helper: race a promise against a timeout
+function withTimeout(promise, ms) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error('Firestore timeout')), ms))
+  ])
+}
 
 // Submit a new review
 export async function submitReview({ name, practice, location, review, stars }) {
   try {
-    await addDoc(collection(db, 'reviews'), {
-      name,
-      practice,
-      location,
-      review,
-      stars,
-      createdAt: serverTimestamp()
-    })
+    await withTimeout(
+      addDoc(collection(db, 'reviews'), {
+        name,
+        practice,
+        location,
+        review,
+        stars,
+        createdAt: serverTimestamp()
+      }),
+      10000
+    )
     return { success: true }
   } catch (error) {
     console.error('Error submitting review:', error)
@@ -35,7 +47,7 @@ export async function submitReview({ name, practice, location, review, stars }) 
 export async function loadReviews() {
   try {
     const q = query(collection(db, 'reviews'), orderBy('createdAt', 'desc'))
-    const snapshot = await getDocs(q)
+    const snapshot = await withTimeout(getDocs(q), 10000)
     return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
   } catch (error) {
     console.error('Error loading reviews:', error)
