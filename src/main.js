@@ -78,6 +78,8 @@ function goToSection(index) {
       s.classList.add('section--visible')
     } else {
       s.classList.remove('section--visible')
+      // Reset entrance animation for sections that slide back down
+      s.classList.remove('section--has-shown')
     }
   })
 
@@ -85,6 +87,12 @@ function goToSection(index) {
   sections.forEach(s => s.classList.remove('section--active'))
   void sections[currentIndex].offsetWidth
   sections[currentIndex].classList.add('section--active')
+
+  // After entrance animation completes, lock content visible so it shows behind next section
+  const animDuration = currentIndex === 1 ? 2100 : 1400 // services cards stagger longer
+  setTimeout(() => {
+    sections[currentIndex].classList.add('section--has-shown')
+  }, animDuration)
 
   updateActiveNav()
   resetAllDividers()
@@ -258,9 +266,15 @@ document.addEventListener('click', (e) => {
     e.stopPropagation()
     const productId = addBtn.dataset.product
     if (productId && products[productId] && products[productId].available) {
-      addBtn.textContent = '✓ ADDED'
-      addBtn.classList.add('added')
-      addToCart(productId)
+      if (cart.includes(productId)) {
+        removeFromCart(productId)
+        addBtn.textContent = '+ ADD TO CART'
+        addBtn.classList.remove('added')
+      } else {
+        addToCart(productId)
+        addBtn.textContent = 'REMOVE'
+        addBtn.classList.add('added')
+      }
     }
   }
 })
