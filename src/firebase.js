@@ -2,12 +2,12 @@ import { initializeApp } from 'firebase/app'
 import { getFirestore, collection, addDoc, getDocs, orderBy, query, serverTimestamp } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBjrawfRiGoyYpCbCmhaFnZqFJlDBH2Huo",
-  authDomain: "website-reviews-4e498.firebaseapp.com",
-  projectId: "website-reviews-4e498",
-  storageBucket: "website-reviews-4e498.firebasestorage.app",
-  messagingSenderId: "754891650",
-  appId: "1:754891650:web:fc0d3c7870d72ae7e1f1a4"
+  apiKey: "AIzaSyA48d0Nz7tRHADnH3fMtzSG7i2ZL2vF-yo",
+  authDomain: "website-reviews-16f40.firebaseapp.com",
+  projectId: "website-reviews-16f40",
+  storageBucket: "website-reviews-16f40.firebasestorage.app",
+  messagingSenderId: "1059724893621",
+  appId: "1:1059724893621:web:f9897231f49b9917430dfc"
 }
 
 const app = initializeApp(firebaseConfig)
