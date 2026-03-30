@@ -2,6 +2,20 @@
   box-sizing: border-box;
 }
 
+/* Prevent ANY flash on load — body is invisible until JS confirms ready */
+body.loading .scroll-container,
+body.loading .top {
+  visibility: hidden;
+}
+body.loading .section,
+body.loading .panel {
+  transform: translateY(100%) !important;
+  transition: none !important;
+}
+body.loading .section--home {
+  transform: translateY(0) !important;
+}
+
 :root {
   --ink: #1a1a1a;
   --muted: rgba(30, 30, 30, 0.55);
@@ -155,6 +169,10 @@ body {
   background: #c3c5b7;
   will-change: transform;
   transform: translateY(100%);
+  transition: none;
+}
+
+.sections-ready .section {
   transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
@@ -551,6 +569,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  will-change: opacity;
 }
 
 .contact-shape {
@@ -565,12 +584,10 @@ body {
 .trace--sq-outer {
   stroke-dasharray: 140 30;
   animation: sqOuterFlow 20s linear infinite;
-  will-change: stroke-dashoffset;
 }
 .trace--sq-inner {
   stroke-dasharray: 90 20;
   animation: sqInnerFlow 24s linear infinite;
-  will-change: stroke-dashoffset;
 }
 
 @keyframes sqOuterFlow { 0% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -170; } }
@@ -1129,6 +1146,39 @@ body {
 .section--reviews.section--active .reviews-title { animation: riseIn 0.7s ease-out 0.2s forwards; }
 .section--reviews.section--active .reviews-marquee { animation: riseIn 0.7s ease-out 0.7s forwards; }
 
+/* Contact entrance animations */
+@keyframes slideFromLeft {
+  from { opacity: 0; transform: translateX(-80px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideFromRight {
+  from { opacity: 0; transform: translateX(80px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.section--contact .contact-left,
+.section--contact .contact-center,
+.section--contact .contact-right {
+  opacity: 0;
+}
+
+@keyframes fadeInSlow {
+  from { opacity: 0.02; }
+  to { opacity: 1; }
+}
+
+.section--contact.section--active .contact-left { animation: slideFromLeft 1.4s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards; }
+.section--contact.section--active .contact-center { animation: fadeInSlow 8s linear 0.3s forwards; }
+.section--contact.section--active .contact-right { animation: slideFromRight 1.4s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards; }
+
+.section--has-shown .contact-left,
+.section--has-shown .contact-center,
+.section--has-shown .contact-right {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  animation: none !important;
+}
+
 /* Review hover glow */
 .review {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -1289,14 +1339,14 @@ body {
   font-weight: 300;
   letter-spacing: 0.08em;
   line-height: 1.1;
-  color: #000;
+  color: #fff;
   margin: 0 0 clamp(8px, 1.2vh, 16px);
 }
 
 .service-detail__tagline {
-  font-size: clamp(0.75rem, 0.9vw, 0.95rem);
+  font-size: clamp(0.6rem, 0.7vw, 0.78rem);
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.55);
+  color: rgba(0, 0, 0, 0.38);
   margin: 0 0 clamp(30px, 4vh, 50px);
   letter-spacing: 0.02em;
 }

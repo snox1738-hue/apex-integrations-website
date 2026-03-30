@@ -89,7 +89,9 @@ function goToSection(index) {
   sections[currentIndex].classList.add('section--active')
 
   // After entrance animation completes, lock content visible so it shows behind next section
-  const animDuration = currentIndex === 1 ? 2100 : 1400 // services cards stagger longer
+  // Services cards stagger to 2.1s, contact fade is 8.5s, others ~1.4s
+  const durations = { 1: 2100, 3: 8500 } // index 1 = services, index 3 = contact
+  const animDuration = durations[currentIndex] || 1400
   setTimeout(() => {
     sections[currentIndex].classList.add('section--has-shown')
   }, animDuration)
@@ -285,9 +287,9 @@ const serviceInfo = {
     title: 'AI VOICE RECEPTIONIST',
     price: '$299/mo',
     sections: [
-      { title: '24/7 CALL ANSWERING', text: 'Your AI receptionist picks up every call — nights, weekends, lunch breaks. Patients hear a natural, professional voice that represents your practice exactly how you want. No hold music. No voicemail. No missed opportunities.' },
-      { title: 'APPOINTMENT SCHEDULING', text: 'Books directly into your calendar in real time. Handles new patient intake, rescheduling, and cancellations. Sends confirmation texts automatically. Your front desk staff can focus on patients in the chair instead of answering phones.' },
-      { title: 'MISSED CALL RECOVERY', text: 'Every missed call gets an automatic follow-up within minutes. The system texts the patient, answers their questions, and books them in — recovering revenue that would have walked out the door to a competitor.' },
+      { title: '24/7 CALL ANSWERING', text: 'Your AI receptionist picks up every call — nights, weekends, lunch breaks. Customers hear a natural, professional voice that represents your business exactly how you want. No hold music. No voicemail. No missed opportunities.' },
+      { title: 'APPOINTMENT SCHEDULING', text: 'Books directly into your calendar in real time. Handles new client intake, rescheduling, and cancellations. Sends confirmation texts automatically. Your team can focus on what matters instead of answering phones.' },
+      { title: 'REVENUE RECOVERY', text: 'Missed calls cost you thousands. Our system follows up automatically, converting abandoned inquiries into booked revenue.' },
       { title: 'SMART CALL ROUTING', text: 'Emergencies get routed to the right person immediately. Insurance questions, directions, hours — all handled automatically. Complex cases get flagged and forwarded to your team with full context.' },
       { title: 'MONTHLY REPORTING', text: 'See exactly how many calls were answered, appointments booked, and revenue recovered. Clear ROI tracking so you always know what you\'re getting for your investment.' }
     ]
@@ -297,20 +299,20 @@ const serviceInfo = {
     price: '$999 one-time + $249/mo',
     sections: [
       { title: 'CUSTOM DESIGN & BUILD', text: 'No templates. No drag-and-drop builders. Your site is designed from scratch to match your practice\'s brand, personality, and goals. Every element is intentional — from the layout to the color palette to the call-to-action placement.' },
-      { title: 'CONVERSION ENGINEERING', text: 'Beautiful isn\'t enough. Every page is built to convert visitors into patients. Strategic placement of booking buttons, trust signals, testimonials, and contact forms. We study what makes dental patients click — and we build around that.' },
-      { title: 'SEO FOUNDATION', text: 'Your site launches with proper on-page SEO — meta tags, schema markup, Google Business integration, local keywords, fast load times. This is the foundation that gets you ranking for "dentist near me" in your area.' },
+      { title: 'CONVERSION ENGINEERING', text: 'Beautiful isn\'t enough. Every page is built to convert visitors into customers. Strategic placement of booking buttons, trust signals, testimonials, and contact forms. We study what makes customers click — and we build around that.' },
+      { title: 'SEO FOUNDATION', text: 'Your site launches with proper on-page SEO — meta tags, schema markup, Google Business integration, local keywords, fast load times. This is the foundation that gets you ranking for your services in your area in your area.' },
       { title: 'MONTHLY SEO & MAINTENANCE ($249/MO)', text: 'Ongoing search engine optimization, content updates, performance monitoring, Google ranking reports, security patches, and hosting. We keep your site fast, secure, and climbing the rankings month over month.' },
-      { title: 'MOBILE-FIRST & FAST', text: 'Over 60% of dental searches happen on phones. Your site loads in under 2 seconds, looks perfect on every device, and passes every Google speed test. Slow sites lose patients — yours won\'t.' }
+      { title: 'MOBILE-FIRST & FAST', text: 'Over 60% of local searches happen on phones. Your site loads in under 2 seconds, looks perfect on every device, and passes every Google speed test. Slow sites lose customers — yours won\'t.' }
     ]
   },
   leads: {
     title: 'LEAD GENERATION',
     price: '$999/mo + ad spend',
     sections: [
-      { title: 'META ADS MANAGEMENT', text: 'We create, launch, and optimize Facebook and Instagram ad campaigns targeting potential patients within 10-15 miles of your practice. Professionally designed ads that stop the scroll and drive bookings.' },
-      { title: 'AUDIENCE TARGETING', text: 'We build custom audiences based on demographics, interests, and behaviors specific to dental patients in your area. Lookalike audiences, retargeting, and geo-fencing to maximize every dollar of ad spend.' },
-      { title: 'AD CREATIVE & COPYWRITING', text: 'Professional ad copy and visuals designed specifically for dental practices. Before/after showcases, special offers, new patient campaigns — all A/B tested and optimized for the highest conversion rate.' },
-      { title: 'LANDING PAGES & FUNNELS', text: 'Dedicated landing pages built for each campaign. When a potential patient clicks your ad, they land on a page designed to do one thing — get them to book. No distractions, no clutter, just conversion.' },
+      { title: 'META ADS MANAGEMENT', text: 'We create, launch, and optimize Facebook and Instagram ad campaigns targeting potential customers within 10-15 miles of your business. Professionally designed ads that stop the scroll and drive bookings.' },
+      { title: 'AUDIENCE TARGETING', text: 'We build custom audiences based on demographics, interests, and behaviors specific to your ideal customers in your area. Lookalike audiences, retargeting, and geo-fencing to maximize every dollar of ad spend.' },
+      { title: 'AD CREATIVE & COPYWRITING', text: 'Professional ad copy and visuals designed specifically for your business. Before/after showcases, special offers, new customer campaigns — all A/B tested and optimized for the highest conversion rate.' },
+      { title: 'LANDING PAGES & FUNNELS', text: 'Dedicated landing pages built for each campaign. When a potential customer clicks your ad, they land on a page designed to do one thing — get them to book. No distractions, no clutter, just conversion.' },
       { title: 'MONTHLY PERFORMANCE REPORTS', text: 'Full transparency. Every month you get a breakdown of impressions, clicks, leads generated, cost per lead, and booked appointments. You\'ll know exactly what your investment is producing.' }
     ]
   }
@@ -404,66 +406,66 @@ document.addEventListener('touchend', (e) => {
 const reviewData = {
   martinez: {
     name: 'Carlos Martinez',
-    practice: 'Sonoran Family Dental',
+    practice: 'Sonoran Services Group',
     location: 'Tucson, AZ',
     quote: 'Sam was great. Didn\'t pressure me at all. Really happy with the website.',
-    bio: 'Family dental practice in central Tucson.'
+    bio: 'Service business in central Tucson.'
   },
   lawson: {
     name: 'Emily Lawson',
-    practice: 'Lawson Dental Care',
+    practice: 'Lawson & Co',
     location: 'Tucson, AZ',
     quote: 'John helped me set everything up. Super nice guy, very patient. Made the whole process easy.',
-    bio: 'General and cosmetic dentistry in northwest Tucson.'
+    bio: 'Full-service business in northwest Tucson.'
   },
   park: {
     name: 'David Park',
-    practice: 'Park Dental Studio',
+    practice: 'Park Creative Studio',
     location: 'Tucson, AZ',
     quote: 'Honestly didn\'t think I needed a new website but Sam convinced me to give it a shot. Glad I did. Getting way more calls now.',
-    bio: 'Dental implants and cosmetic work on Tucson\'s east side.'
+    bio: 'Creative services on Tucson\'s east side.'
   },
   okafor: {
     name: 'James Okafor',
-    practice: 'Desert Smile Dental',
+    practice: 'Desert Smile Co',
     location: 'Phoenix, AZ',
     quote: 'These guys are legit. Sam knows what he\'s talking about.',
-    bio: 'Multi-provider practice in central Phoenix.'
+    bio: 'Multi-location business in central Phoenix.'
   },
   chen: {
     name: 'Maria Chen',
-    practice: 'Bright Dental Group',
+    practice: 'Bright Growth Group',
     location: 'Scottsdale, AZ',
     quote: 'Was skeptical at first but Sam really came through. The website looks amazing and we\'re already seeing results.',
-    bio: 'Three-location dental group in Scottsdale and North Phoenix.'
+    bio: 'Three-location business in Scottsdale and North Phoenix.'
   },
   reed: {
     name: 'Marcus Reed',
-    practice: 'Reed Family Dentistry',
+    practice: 'Reed Family Services',
     location: 'Phoenix, AZ',
     quote: 'John walked me through everything. Really easy to talk to. Would recommend.',
-    bio: 'Family dentistry in central Phoenix.'
+    bio: 'Family business in central Phoenix.'
   },
   nguyen: {
     name: 'Rachel Nguyen',
-    practice: 'Cactus Dental Care',
+    practice: 'Cactus Creek Co',
     location: 'Gilbert, AZ',
     quote: 'Such a great investment for our practice. Sam is super nice and actually cares about getting it right. They\'re awesome. Give them a chance!',
-    bio: 'General and pediatric dentistry in Gilbert.'
+    bio: 'Growing business in Gilbert.'
   },
   torres: {
     name: 'Michael Torres',
-    practice: 'Copper Creek Dental',
+    practice: 'Copper Creek Services',
     location: 'Tucson, AZ',
     quote: 'The voice receptionist thing is unreal. We don\'t miss calls anymore. Wish I got it sooner.',
-    bio: 'Emergency and restorative dental care in north Tucson.'
+    bio: 'Service business in north Tucson.'
   },
   walsh: {
     name: 'Amanda Walsh',
     practice: 'Walsh & Partners',
     location: 'Flagstaff, AZ',
-    quote: 'Sam\'s team did a great job on our site. Looks professional, loads fast, patients love it. 10/10.',
-    bio: 'Multi-location dental group in Northern Arizona.'
+    quote: 'Sam\'s team did a great job on our site. Looks professional, loads fast, clients love it. 10/10.',
+    bio: 'Multi-location business in Northern Arizona.'
   }
 }
 
@@ -562,6 +564,16 @@ document.addEventListener('keydown', (e) => {
 
 updateActiveNav()
 sections[0].classList.add('section--active')
+
+// Remove loading state and enable transitions — triple rAF to guarantee paint is settled
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.body.classList.remove('loading')
+      document.querySelector('.scroll-container').classList.add('sections-ready')
+    })
+  })
+})
 
 // Service card click → open detail panel
 const panels = {

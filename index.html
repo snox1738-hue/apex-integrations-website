@@ -8,8 +8,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/src/styles/main.css" />
+  <style>
+    /* Inline anti-flash: sections hidden until JS is ready */
+    body.loading .scroll-container { visibility: hidden; }
+    body.loading .section, body.loading .panel { transform: translateY(100%) !important; transition: none !important; }
+    body.loading .section--home { transform: translateY(0) !important; }
+  </style>
 </head>
-<body>
+<body class="loading">
   <video id="bg-video" muted loop playsinline autoplay></video>
 
   <!-- Fixed nav -->
@@ -134,7 +140,7 @@
                   <p class="review__text">"Great customer service. Very happy and satisfied with Apex. Definitely would use again."</p>
                   <div class="review__author">
                     <span class="review__name">Carlos Martinez</span>
-                    <span class="review__role">Sonoran Family Dental — Tucson, AZ</span>
+                    <span class="review__role">Sonoran Services Group — Tucson, AZ</span>
                   </div>
                 </div>
                 <div class="review" data-review="lawson">
@@ -142,7 +148,7 @@
                   <p class="review__text">"John helped me set everything up. Super nice guy, very patient. Made the whole process easy."</p>
                   <div class="review__author">
                     <span class="review__name">Emily Lawson</span>
-                    <span class="review__role">Lawson Dental Care — Tucson, AZ</span>
+                    <span class="review__role">Lawson & Co — Tucson, AZ</span>
                   </div>
                 </div>
                 <div class="review" data-review="park">
@@ -150,7 +156,7 @@
                   <p class="review__text">"Didn't think I needed a new website but decided to go for it. Glad I did. Getting way more calls now."</p>
                   <div class="review__author">
                     <span class="review__name">David Park</span>
-                    <span class="review__role">Park Dental Studio — Tucson, AZ</span>
+                    <span class="review__role">Park Creative Studio — Tucson, AZ</span>
                   </div>
                 </div>
                 <!-- Duplicates -->
@@ -159,7 +165,7 @@
                   <p class="review__text">"Great customer service. Very happy and satisfied with Apex. Definitely would use again."</p>
                   <div class="review__author">
                     <span class="review__name">Carlos Martinez</span>
-                    <span class="review__role">Sonoran Family Dental — Tucson, AZ</span>
+                    <span class="review__role">Sonoran Services Group — Tucson, AZ</span>
                   </div>
                 </div>
                 <div class="review" data-review="lawson">
@@ -167,7 +173,7 @@
                   <p class="review__text">"John helped me set everything up. Super nice guy, very patient. Made the whole process easy."</p>
                   <div class="review__author">
                     <span class="review__name">Emily Lawson</span>
-                    <span class="review__role">Lawson Dental Care — Tucson, AZ</span>
+                    <span class="review__role">Lawson & Co — Tucson, AZ</span>
                   </div>
                 </div>
                 <div class="review" data-review="park">
@@ -175,7 +181,7 @@
                   <p class="review__text">"Didn't think I needed a new website but decided to go for it. Glad I did. Getting way more calls now."</p>
                   <div class="review__author">
                     <span class="review__name">David Park</span>
-                    <span class="review__role">Park Dental Studio — Tucson, AZ</span>
+                    <span class="review__role">Park Creative Studio — Tucson, AZ</span>
                   </div>
                 </div>
               </div>
@@ -188,7 +194,7 @@
                   <p class="review__text">"Really happy with how everything turned out. Would definitely work with them again."</p>
                   <div class="review__author">
                     <span class="review__name">James Okafor</span>
-                    <span class="review__role">Desert Smile Dental — Phoenix, AZ</span>
+                    <span class="review__role">Desert Smile Co — Phoenix, AZ</span>
                   </div>
                 </div>
                 <div class="review" data-review="chen">
@@ -196,7 +202,7 @@
                   <p class="review__text">"Was skeptical at first but Sam really came through. The website looks amazing and we're already seeing results."</p>
                   <div class="review__author">
                     <span class="review__name">Maria Chen</span>
-                    <span class="review__role">Bright Dental Group — Scottsdale, AZ</span>
+                    <span class="review__role">Bright Growth Group — Scottsdale, AZ</span>
                   </div>
                 </div>
                 <div class="review" data-review="reed">
@@ -204,7 +210,7 @@
                   <p class="review__text">"John walked me through everything. Really easy to talk to. Would recommend."</p>
                   <div class="review__author">
                     <span class="review__name">Marcus Reed</span>
-                    <span class="review__role">Reed Family Dentistry — Phoenix, AZ</span>
+                    <span class="review__role">Reed Family Services — Phoenix, AZ</span>
                   </div>
                 </div>
                 <!-- Duplicates -->
@@ -213,7 +219,7 @@
                   <p class="review__text">"Really happy with how everything turned out. Would definitely work with them again."</p>
                   <div class="review__author">
                     <span class="review__name">James Okafor</span>
-                    <span class="review__role">Desert Smile Dental — Phoenix, AZ</span>
+                    <span class="review__role">Desert Smile Co — Phoenix, AZ</span>
                   </div>
                 </div>
                 <div class="review" data-review="chen">
@@ -221,7 +227,7 @@
                   <p class="review__text">"Was skeptical at first but Sam really came through. The website looks amazing and we're already seeing results."</p>
                   <div class="review__author">
                     <span class="review__name">Maria Chen</span>
-                    <span class="review__role">Bright Dental Group — Scottsdale, AZ</span>
+                    <span class="review__role">Bright Growth Group — Scottsdale, AZ</span>
                   </div>
                 </div>
                 <div class="review" data-review="reed">
@@ -229,7 +235,7 @@
                   <p class="review__text">"John walked me through everything. Really easy to talk to. Would recommend."</p>
                   <div class="review__author">
                     <span class="review__name">Marcus Reed</span>
-                    <span class="review__role">Reed Family Dentistry — Phoenix, AZ</span>
+                    <span class="review__role">Reed Family Services — Phoenix, AZ</span>
                   </div>
                 </div>
               </div>
@@ -242,7 +248,7 @@
                   <p class="review__text">"Such a great investment for our practice. Sam is super nice and actually cares about getting it right. They're awesome. Give them a chance!"</p>
                   <div class="review__author">
                     <span class="review__name">Rachel Nguyen</span>
-                    <span class="review__role">Cactus Dental Care — Gilbert, AZ</span>
+                    <span class="review__role">Cactus Creek Co — Gilbert, AZ</span>
                   </div>
                 </div>
                 <div class="review" data-review="torres">
@@ -250,12 +256,12 @@
                   <p class="review__text">"The voice receptionist thing is unreal. We don't miss calls anymore. Wish I got it sooner."</p>
                   <div class="review__author">
                     <span class="review__name">Michael Torres</span>
-                    <span class="review__role">Copper Creek Dental — Tucson, AZ</span>
+                    <span class="review__role">Copper Creek Services — Tucson, AZ</span>
                   </div>
                 </div>
                 <div class="review" data-review="walsh">
                   <div class="review__stars">★ ★ ★ ★ ★</div>
-                  <p class="review__text">"Sam's team did a great job on our site. Looks professional, loads fast, patients love it. 10/10."</p>
+                  <p class="review__text">"Sam's team did a great job on our site. Looks professional, loads fast, clients love it. 10/10."</p>
                   <div class="review__author">
                     <span class="review__name">Amanda Walsh</span>
                     <span class="review__role">Walsh &amp; Partners — Flagstaff, AZ</span>
@@ -267,7 +273,7 @@
                   <p class="review__text">"Such a great investment for our practice. Sam is super nice and actually cares about getting it right. They're awesome. Give them a chance!"</p>
                   <div class="review__author">
                     <span class="review__name">Rachel Nguyen</span>
-                    <span class="review__role">Cactus Dental Care — Gilbert, AZ</span>
+                    <span class="review__role">Cactus Creek Co — Gilbert, AZ</span>
                   </div>
                 </div>
                 <div class="review" data-review="torres">
@@ -275,12 +281,12 @@
                   <p class="review__text">"The voice receptionist thing is unreal. We don't miss calls anymore. Wish I got it sooner."</p>
                   <div class="review__author">
                     <span class="review__name">Michael Torres</span>
-                    <span class="review__role">Copper Creek Dental — Tucson, AZ</span>
+                    <span class="review__role">Copper Creek Services — Tucson, AZ</span>
                   </div>
                 </div>
                 <div class="review" data-review="walsh">
                   <div class="review__stars">★ ★ ★ ★ ★</div>
-                  <p class="review__text">"Sam's team did a great job on our site. Looks professional, loads fast, patients love it. 10/10."</p>
+                  <p class="review__text">"Sam's team did a great job on our site. Looks professional, loads fast, clients love it. 10/10."</p>
                   <div class="review__author">
                     <span class="review__name">Amanda Walsh</span>
                     <span class="review__role">Walsh &amp; Partners — Flagstaff, AZ</span>
@@ -390,8 +396,8 @@
               <p class="service-feature__desc">Schedules appointments directly into your calendar. Confirms, reschedules, and sends reminders — all without human intervention.</p>
             </div>
             <div class="service-feature">
-              <h3 class="service-feature__title">REVENUE RECOVERY</h3>
-              <p class="service-feature__desc">Missed calls cost you thousands. Our system follows up automatically, converting abandoned inquiries into booked revenue.</p>
+              <h3 class="service-feature__title">MISSED CALL RECOVERY</h3>
+              <p class="service-feature__desc">Every missed call gets an automatic follow-up within minutes. The system texts the customer, answers their questions, and books them in — recovering revenue that would have walked out the door to a competitor.</p>
             </div>
           </div>
           <div class="service-detail__actions"><button class="add-to-cart-btn" data-product="voice">+ ADD TO CART</button><button class="more-info-btn" data-info="voice">MORE INFO</button></div>
@@ -435,8 +441,8 @@
               <p class="service-feature__desc">Beautiful isn't enough. Every element is strategically placed to turn visitors into customers — from layout to copy to call-to-action.</p>
             </div>
             <div class="service-feature">
-              <h3 class="service-feature__title">LIGHTNING FAST</h3>
-              <p class="service-feature__desc">Speed kills the competition. Sub-second load times, mobile-first responsive design, and SEO built into the foundation.</p>
+              <h3 class="service-feature__title">SEO THAT RANKS</h3>
+              <p class="service-feature__desc">Show up when customers search for your business. We build SEO into every page — local keywords, Google Business optimization, and monthly content that climbs the rankings month over month.</p>
             </div>
           </div>
           <div class="service-detail__actions"><button class="add-to-cart-btn" data-product="website">+ ADD TO CART</button><button class="more-info-btn" data-info="website">MORE INFO</button></div>
