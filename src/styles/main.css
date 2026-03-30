@@ -1196,7 +1196,27 @@ body {
   stroke-linejoin: round !important;
   stroke-linecap: round !important;
   will-change: auto;
-  filter: drop-shadow(0 0 6px rgba(255, 250, 200, 0.8)) drop-shadow(0 0 20px rgba(255, 235, 150, 0.5));
+}
+
+/* Radial glow behind SVG — no filter, pure CSS, no Chrome artifacts */
+.card__visual {
+  position: relative;
+}
+.card__visual::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 250, 200, 0.25) 0%, rgba(255, 240, 170, 0.08) 50%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+.card__visual svg {
+  position: relative;
+  z-index: 1;
 }
 
 /* A */
