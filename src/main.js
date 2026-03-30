@@ -720,6 +720,39 @@ document.addEventListener('click', (e) => {
   }
 })
 
+// ─── Contact form — Netlify Forms with AJAX submit ───
+const contactForm = document.getElementById('contact-form')
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    const submitBtn = contactForm.querySelector('.contact-form__submit')
+    const originalText = submitBtn.textContent
+    submitBtn.textContent = 'SENDING...'
+    submitBtn.disabled = true
+
+    try {
+      const formData = new FormData(contactForm)
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+
+      if (response.ok) {
+        submitBtn.textContent = 'MESSAGE SENT ✓'
+        contactForm.reset()
+        setTimeout(() => { submitBtn.textContent = originalText; submitBtn.disabled = false }, 3000)
+      } else {
+        submitBtn.textContent = 'ERROR — TRY AGAIN'
+        submitBtn.disabled = false
+      }
+    } catch (err) {
+      submitBtn.textContent = 'ERROR — TRY AGAIN'
+      submitBtn.disabled = false
+    }
+  })
+}
+
 // ─── Checkout — open Stripe payment links ───
 const checkoutBtn = document.getElementById('cart-checkout')
 if (checkoutBtn) {
