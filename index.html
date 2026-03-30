@@ -379,6 +379,7 @@
         <div class="service-detail__right">
           <h1 class="service-detail__title">AI VOICE<br>RECEPTIONIST</h1>
           <p class="service-detail__tagline">Your front desk, reimagined.</p>
+          
           <div class="service-detail__features">
             <div class="service-feature">
               <h3 class="service-feature__title">24/7 CALL HANDLING</h3>
@@ -393,7 +394,7 @@
               <p class="service-feature__desc">Missed calls cost you thousands. Our system follows up automatically, converting abandoned inquiries into booked revenue.</p>
             </div>
           </div>
-          <a href="#contact" class="service-detail__cta panel__back">GET STARTED</a>
+          <div class="service-detail__actions"><button class="add-to-cart-btn" data-product="voice">+ ADD TO CART</button><button class="more-info-btn" data-info="voice">MORE INFO</button></div>
         </div>
       </div>
     </div>
@@ -423,6 +424,7 @@
         <div class="service-detail__right">
           <h1 class="service-detail__title">WEBSITE<br>CREATION</h1>
           <p class="service-detail__tagline">Your digital storefront, engineered to convert.</p>
+          
           <div class="service-detail__features">
             <div class="service-feature">
               <h3 class="service-feature__title">CUSTOM DESIGN</h3>
@@ -437,7 +439,7 @@
               <p class="service-feature__desc">Speed kills the competition. Sub-second load times, mobile-first responsive design, and SEO built into the foundation.</p>
             </div>
           </div>
-          <a href="#contact" class="service-detail__cta panel__back">GET STARTED</a>
+          <div class="service-detail__actions"><button class="add-to-cart-btn" data-product="website">+ ADD TO CART</button><button class="more-info-btn" data-info="website">MORE INFO</button></div>
         </div>
       </div>
     </div>
@@ -467,6 +469,7 @@
         <div class="service-detail__right">
           <h1 class="service-detail__title">LEAD<br>GENERATION</h1>
           <p class="service-detail__tagline">Your pipeline, permanently full.</p>
+          
           <div class="service-detail__features">
             <div class="service-feature">
               <h3 class="service-feature__title">TARGETED PROSPECTING</h3>
@@ -481,21 +484,51 @@
               <p class="service-feature__desc">One city or fifty. Ten leads a day or a thousand. The system scales with your ambition — no additional headcount required.</p>
             </div>
           </div>
-          <a href="#contact" class="service-detail__cta panel__back">GET STARTED</a>
+          <div class="service-detail__actions"><button class="add-to-cart-btn" data-product="leads">+ ADD TO CART</button><button class="more-info-btn" data-info="leads">MORE INFO</button></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Pricing panel -->
+  <!-- Cart panel -->
   <section id="pricing-panel" class="panel">
     <div class="panel__inner">
-      <div class="pricing-wrap">
+      <div class="cart-wrap">
         <p class="panel__back pricing-back">&larr; BACK</p>
-        <h2 class="pricing-title">PRICING</h2>
+        <div class="cart-header">
+          <h2 class="cart-title">YOUR CART</h2>
+          <p class="cart-subtitle" id="cart-count">0 items</p>
+        </div>
+
+        <div class="cart-items" id="cart-items">
+          <div class="cart-empty" id="cart-empty">
+            <p class="cart-empty__text">Your cart is empty.</p>
+            <p class="cart-empty__sub">Browse our services and add what you need.</p>
+          </div>
+        </div>
+
+        <div class="cart-footer" id="cart-footer" style="display:none">
+          <div class="cart-divider"></div>
+          <div class="cart-total">
+            <span class="cart-total__label">TOTAL</span>
+            <span class="cart-total__amount" id="cart-total">$0/mo</span>
+          </div>
+          <p class="cart-note">Billed monthly. Cancel anytime. No setup fees.</p>
+          <button class="cart-checkout" id="cart-checkout">PROCEED TO CHECKOUT</button>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- Service info overlay -->
+  <div id="info-overlay" class="info-overlay" style="display:none">
+    <div class="info-overlay__inner">
+      <p class="info-overlay__back" id="info-back">&larr; BACK</p>
+      <h2 class="info-overlay__title" id="info-title"></h2>
+      <p class="info-overlay__price" id="info-price"></p>
+      <div class="info-overlay__content" id="info-content"></div>
+    </div>
+  </div>
 
   <!-- Leave a Review overlay -->
   <div id="review-form-overlay" class="review-form-overlay" style="display:none">
