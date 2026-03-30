@@ -253,9 +253,9 @@ function renderCart() {
         updateActiveNav()
       }
       // Open the service panel
-      if (servicePanels[serviceId]) {
+      if (panels[serviceId]) {
         closeAllPanels()
-        servicePanels[serviceId].classList.add('panel--open')
+        panels[serviceId].classList.add('panel--open')
       }
     })
   })
@@ -611,7 +611,8 @@ document.addEventListener('click', (e) => {
         const idx = sections.indexOf(target)
         if (idx !== -1) {
           currentIndex = idx
-          scrollContainer.scrollTop = sections[idx].offsetTop
+          // Sections are fixed/stacked, just update state
+          goToSection(idx)
           updateActiveNav()
         }
       }
