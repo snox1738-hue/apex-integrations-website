@@ -3,3 +3,6 @@ dist/
 .DS_Store
 *.backup-shapes
 *.backup-shapes2
+
+# Local Netlify folder
+.netlify

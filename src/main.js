@@ -152,7 +152,7 @@ function updateActiveNav() {
 const cart = []
 const products = {
   voice: { name: 'AI Voice Receptionist', desc: 'Automated call handling & booking', upfront: 0, monthly: 299, available: true, paymentLink: 'https://buy.stripe.com/eVq6oA6Xm9JM8EmdII73G03' },
-  website: { name: 'Website Creation', desc: 'Custom-built conversion website', upfront: 750, monthly: 249, available: true, paymentLink: 'https://buy.stripe.com/00wbIU95u5tw6we20073G02' },
+  website: { name: 'Website Creation', desc: 'Custom-built conversion website', upfront: 750, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/00wbIU95u5tw6we20073G02' },
   leads: { name: 'Lead Generation', desc: 'Meta ads management & strategy', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/eVq14g0yYcVYf2KbAA73G04' }
 }
 
@@ -240,7 +240,11 @@ function renderCart() {
   })
 
   const dueToday = totalUpfront + totalMonthly
-  cartTotalEl.innerHTML = '$' + dueToday.toLocaleString() + ' <span class="cart-total__after">then $' + totalMonthly.toLocaleString() + '/mo</span>'
+  if (totalMonthly > 0) {
+    cartTotalEl.innerHTML = '$' + dueToday.toLocaleString() + ' <span class="cart-total__after">then $' + totalMonthly.toLocaleString() + '/mo</span>'
+  } else {
+    cartTotalEl.innerHTML = '$' + dueToday.toLocaleString()
+  }
 
   // Remove button listeners
   cartItemsEl.querySelectorAll('[data-remove]').forEach(btn => {
@@ -307,12 +311,12 @@ const serviceInfo = {
   },
   website: {
     title: 'WEBSITE CREATION',
-    price: '$999 one-time + $249/mo',
+    price: '$750 one-time',
     sections: [
       { title: 'CUSTOM DESIGN & BUILD', text: 'No templates. No drag-and-drop builders. Your site is designed from scratch to match your practice\'s brand, personality, and goals. Every element is intentional — from the layout to the color palette to the call-to-action placement.' },
       { title: 'CONVERSION ENGINEERING', text: 'Beautiful isn\'t enough. Every page is built to convert visitors into customers. Strategic placement of booking buttons, trust signals, testimonials, and contact forms. We study what makes customers click — and we build around that.' },
       { title: 'SEO FOUNDATION', text: 'Your site launches with proper on-page SEO — meta tags, schema markup, Google Business integration, local keywords, fast load times. This is the foundation that gets you ranking for your services in your area in your area.' },
-      { title: 'MONTHLY SEO & MAINTENANCE ($249/MO)', text: 'Ongoing search engine optimization, content updates, performance monitoring, Google ranking reports, security patches, and hosting. We keep your site fast, secure, and climbing the rankings month over month.' },
+      { title: 'SEO & LAUNCH OPTIMIZATION', text: 'Your site launches with full search engine optimization, performance tuning, Google ranking setup, security configuration, and fast hosting. Everything you need to start ranking from day one.' },
       { title: 'MOBILE-FIRST & FAST', text: 'Over 60% of local searches happen on phones. Your site loads in under 2 seconds, looks perfect on every device, and passes every Google speed test. Slow sites lose customers — yours won\'t.' }
     ]
   },
@@ -720,7 +724,7 @@ document.addEventListener('click', (e) => {
   }
 })
 
-// ─── Contact form — Netlify Forms with AJAX submit ───
+// ─── Contact form — Netlify function + Firestore ───
 const contactForm = document.getElementById('contact-form')
 if (contactForm) {
   contactForm.addEventListener('submit', async (e) => {
@@ -732,10 +736,16 @@ if (contactForm) {
 
     try {
       const formData = new FormData(contactForm)
-      const response = await fetch('/', {
+      const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        phone: formData.get('phone') || '',
+        message: formData.get('message'),
+      }
+      const response = await fetch('/.netlify/functions/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString()
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
       })
 
       if (response.ok) {
