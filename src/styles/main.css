@@ -1704,11 +1704,8 @@ body {
     transition: transform 0.8s ease-out !important;
   }
 
-  /* Kill all SVG trace animations */
-  .card__visual svg * {
-    animation: none !important;
-    stroke-dashoffset: 0 !important;
-  }
+  /* SVG trace animations stay on — they're cheap now that the
+     background video is 1080p (was a perf kill from the 4K days) */
 
   /* Kill review marquee animation */
   .review-track {
