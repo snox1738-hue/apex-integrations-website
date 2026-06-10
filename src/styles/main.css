@@ -227,7 +227,7 @@ body {
 .subhead {
   margin: clamp(0.8rem, 1.5vh, 1.2rem) 0 0;
   max-width: 22rem;
-  font-size: clamp(0.5rem, 0.6vw, 0.65rem);
+  font-size: clamp(0.625rem, 0.75vw, 0.775rem);
   animation: slideUp 1s ease-out 0.3s forwards;
   opacity: 0;
   font-weight: 400;
@@ -1775,7 +1775,7 @@ body {
   }
 
   .subhead {
-    font-size: clamp(0.55rem, 2.5vw, 0.7rem);
+    font-size: clamp(0.675rem, 2.8vw, 0.825rem);
     max-width: 90%;
   }
 
