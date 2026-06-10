@@ -151,9 +151,9 @@ function updateActiveNav() {
 // ─── Cart system ───
 const cart = []
 const products = {
-  voice: { name: 'AI Voice Receptionist', desc: 'Automated call handling & booking', upfront: 0, monthly: 299, available: true, paymentLink: 'https://buy.stripe.com/eVq6oA6Xm9JM8EmdII73G03' },
+  voice: { name: 'Meta Ad Creation', desc: 'Meta ads strategy, creative & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/eVq14g0yYcVYf2KbAA73G04' },
   website: { name: 'Website Creation', desc: 'Custom-built conversion website', upfront: 750, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/00wbIU95u5tw6we20073G02' },
-  leads: { name: 'Lead Generation', desc: 'Meta ads management & strategy', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/eVq14g0yYcVYf2KbAA73G04' }
+  leads: { name: 'GEO (Generative Engine Optimization)', desc: 'AI search visibility & optimization', upfront: 0, monthly: 299, available: true, paymentLink: 'https://buy.stripe.com/eVq6oA6Xm9JM8EmdII73G03' }
 }
 
 const cartItemsEl = document.getElementById('cart-items')
@@ -299,14 +299,14 @@ document.addEventListener('click', (e) => {
 // ─── Service info overlay ───
 const serviceInfo = {
   voice: {
-    title: 'AI VOICE RECEPTIONIST',
-    price: '$299/mo',
+    title: 'META AD CREATION',
+    price: '$999/mo + ad spend',
     sections: [
-      { title: '24/7 CALL ANSWERING', text: 'Your AI receptionist picks up every call — nights, weekends, lunch breaks. Customers hear a natural, professional voice that represents your business exactly how you want. No hold music. No voicemail. No missed opportunities.' },
-      { title: 'APPOINTMENT SCHEDULING', text: 'Books directly into your calendar in real time. Handles new client intake, rescheduling, and cancellations. Sends confirmation texts automatically. Your team can focus on what matters instead of answering phones.' },
-      { title: 'REVENUE RECOVERY', text: 'Missed calls cost you thousands. Our system follows up automatically, converting abandoned inquiries into booked revenue.' },
-      { title: 'SMART CALL ROUTING', text: 'Emergencies get routed to the right person immediately. Insurance questions, directions, hours — all handled automatically. Complex cases get flagged and forwarded to your team with full context.' },
-      { title: 'MONTHLY REPORTING', text: 'See exactly how many calls were answered, appointments booked, and revenue recovered. Clear ROI tracking so you always know what you\'re getting for your investment.' }
+      { title: 'CAMPAIGN STRATEGY & MANAGEMENT', text: 'We plan, build, launch, and optimize Facebook and Instagram campaigns around your goals. Objectives, budgets, bidding, and placements are managed daily — engineered for return on ad spend, not vanity metrics.' },
+      { title: 'AD CREATIVE & COPYWRITING', text: 'Professional ad visuals and copy designed specifically for your business. Hooks that stop the scroll, offers that convert, and messaging that sounds like you — all A/B tested and iterated until they perform.' },
+      { title: 'AUDIENCE TARGETING', text: 'Custom audiences built on demographics, interests, and behaviors specific to your ideal customers. Lookalike audiences, retargeting, and local geo-targeting maximize every dollar of ad spend.' },
+      { title: 'LANDING PAGES & FUNNELS', text: 'Dedicated landing pages built for each campaign. When a potential customer clicks your ad, they land on a page designed to do one thing — get them to book. No distractions, no clutter, just conversion.' },
+      { title: 'MONTHLY PERFORMANCE REPORTS', text: 'Full transparency. Every month you get a breakdown of impressions, clicks, leads generated, cost per lead, and booked appointments. You\'ll know exactly what your investment is producing.' }
     ]
   },
   website: {
@@ -321,14 +321,14 @@ const serviceInfo = {
     ]
   },
   leads: {
-    title: 'LEAD GENERATION',
-    price: '$999/mo + ad spend',
+    title: 'GENERATIVE ENGINE OPTIMIZATION (GEO)',
+    price: '$299/mo',
     sections: [
-      { title: 'META ADS MANAGEMENT', text: 'We create, launch, and optimize Facebook and Instagram ad campaigns targeting potential customers within 10-15 miles of your business. Professionally designed ads that stop the scroll and drive bookings.' },
-      { title: 'AUDIENCE TARGETING', text: 'We build custom audiences based on demographics, interests, and behaviors specific to your ideal customers in your area. Lookalike audiences, retargeting, and geo-fencing to maximize every dollar of ad spend.' },
-      { title: 'AD CREATIVE & COPYWRITING', text: 'Professional ad copy and visuals designed specifically for your business. Before/after showcases, special offers, new customer campaigns — all A/B tested and optimized for the highest conversion rate.' },
-      { title: 'LANDING PAGES & FUNNELS', text: 'Dedicated landing pages built for each campaign. When a potential customer clicks your ad, they land on a page designed to do one thing — get them to book. No distractions, no clutter, just conversion.' },
-      { title: 'MONTHLY PERFORMANCE REPORTS', text: 'Full transparency. Every month you get a breakdown of impressions, clicks, leads generated, cost per lead, and booked appointments. You\'ll know exactly what your investment is producing.' }
+      { title: 'AI SEARCH VISIBILITY', text: 'Millions of customers now ask ChatGPT, Gemini, and Google AI for recommendations instead of scrolling through search results. GEO is the practice of making sure the answer those engines give is your business.' },
+      { title: 'ENTITY & CONTENT OPTIMIZATION', text: 'AI engines need to understand exactly who you are, what you do, and where you operate. We structure your web presence — schema markup, business data, and authoritative content — so you\'re cited accurately and often.' },
+      { title: 'REVIEWS & AUTHORITY SIGNALS', text: 'AI recommends businesses it trusts. We strengthen the trust signals engines weigh most: consistent citations, review velocity and quality, and mentions on the sources AI models actually read.' },
+      { title: 'AI VISIBILITY MONITORING', text: 'We track how the major AI engines answer the questions your customers actually ask — and measure your share of those recommendations month over month against your competitors.' },
+      { title: 'MONTHLY REPORTING', text: 'A clear monthly report on where you appear in AI answers, what changed, and what we\'re doing next. You\'ll always know how your visibility is trending.' }
     ]
   }
 }
