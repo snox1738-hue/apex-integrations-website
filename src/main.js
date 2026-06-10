@@ -153,7 +153,7 @@ const cart = []
 const products = {
   voice: { name: 'Meta Ad Creation', desc: 'Meta ads strategy, scripting & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/eVq14g0yYcVYf2KbAA73G04' },
   website: { name: 'Website Creation', desc: 'Custom-built conversion website', upfront: 750, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/00wbIU95u5tw6we20073G02' },
-  leads: { name: 'GEO (Generative Engine Optimization)', desc: 'AI search visibility & optimization', upfront: 0, monthly: 299, available: true, paymentLink: 'https://buy.stripe.com/eVq6oA6Xm9JM8EmdII73G03' }
+  leads: { name: 'Generative Engine Optimization', desc: 'AI search visibility & optimization', upfront: 0, monthly: 299, available: true, paymentLink: 'https://buy.stripe.com/eVq6oA6Xm9JM8EmdII73G03' }
 }
 
 const cartItemsEl = document.getElementById('cart-items')
@@ -321,7 +321,7 @@ const serviceInfo = {
     ]
   },
   leads: {
-    title: 'GENERATIVE ENGINE OPTIMIZATION (GEO)',
+    title: 'GENERATIVE ENGINE OPTIMIZATION',
     price: '$299/mo',
     sections: [
       { title: 'AI SEARCH VISIBILITY', text: 'Millions of customers now ask ChatGPT, Gemini, and Google AI for recommendations instead of scrolling through search results. GEO is the practice of making sure the answer those engines give is your business.' },
