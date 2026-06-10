@@ -247,6 +247,7 @@ function addToCart(productId) {
   closeAllPanels()
   updateCartBadge()
   syncCartButtons()
+  resetCheckout()
 }
 
 function removeFromCart(productId) {
@@ -255,6 +256,7 @@ function removeFromCart(productId) {
   renderCart()
   updateCartBadge()
   syncCartButtons()
+  resetCheckout()
 }
 
 // Keep every ADD TO CART button in step with the cart — items can also be
@@ -397,7 +399,7 @@ const serviceInfo = {
     title: 'WEBSITE CREATION',
     price: '$750 one-time',
     sections: [
-      { title: 'CUSTOM DESIGN & BUILD', text: 'No templates. No drag-and-drop builders. Your site is designed from scratch to match your practice\'s brand, personality, and goals. Every element is intentional — from the layout to the color palette to the call-to-action placement.' },
+      { title: 'CUSTOM DESIGN & BUILD', text: 'No templates. No drag-and-drop builders. Your site is designed from scratch to match your business\'s brand, personality, and goals. Every element is intentional — from the layout to the color palette to the call-to-action placement.' },
       { title: 'CONVERSION ENGINEERING', text: 'Beautiful isn\'t enough. Every page is built to convert visitors into customers. Strategic placement of booking buttons, trust signals, testimonials, and contact forms. We study what makes customers click — and we build around that.' },
       { title: 'SEO FOUNDATION', text: 'Your site launches with proper on-page SEO — meta tags, schema markup, Google Business integration, local keywords, fast load times. This is the foundation that gets you ranking for your services in your area.' },
       { title: 'SEO & LAUNCH OPTIMIZATION', text: 'Your site launches with full search engine optimization, performance tuning, Google ranking setup, security configuration, and fast hosting. Everything you need to start ranking from day one.' },
@@ -566,14 +568,14 @@ const reviewData = {
     name: 'Rachel Nguyen',
     practice: 'Cactus Creek Co',
     location: 'Gilbert, AZ',
-    quote: 'Such a great investment for our practice. Sam is super nice and actually cares about getting it right. They\'re awesome. Give them a chance!',
+    quote: 'Such a great investment for our business. Sam is super nice and actually cares about getting it right. They\'re awesome. Give them a chance!',
     bio: 'Growing business in Gilbert.'
   },
   torres: {
     name: 'Michael Torres',
     practice: 'Copper Creek Services',
     location: 'Tucson, AZ',
-    quote: 'The voice receptionist thing is unreal. We don\'t miss calls anymore. Wish I got it sooner.',
+    quote: 'The ad campaigns are unreal. Our phone hasn\'t stopped ringing since we started. Wish I got it sooner.',
     bio: 'Service business in north Tucson.'
   },
   walsh: {
@@ -640,20 +642,31 @@ if (reviewForm) {
   reviewForm.addEventListener('submit', async (e) => {
     e.preventDefault()
     const formData = new FormData(reviewForm)
+    // Trim + hard caps — maxlength attributes can be bypassed, and oversized
+    // values would render on the live site
+    const clean = (v, max) => String(v ?? '').trim().slice(0, max)
     const data = {
-      name: formData.get('name'),
-      practice: formData.get('practice'),
-      location: formData.get('location'),
-      review: formData.get('review'),
-      stars: selectedStars || 5
+      name: clean(formData.get('name'), 60),
+      practice: clean(formData.get('practice'), 80),
+      location: clean(formData.get('location'), 120),
+      review: clean(formData.get('review'), 500),
+      stars: Math.min(5, Math.max(1, selectedStars || 5))
     }
-    
+    if (!data.name || !data.review) return
+
     const submitBtn = reviewForm.querySelector('.review-form__submit')
     if (submitBtn) { submitBtn.textContent = 'SUBMITTING...'; submitBtn.disabled = true }
-    
+
     const result = await submitReview(data)
-    
+
     if (result.success) {
+      // Fire-and-forget Telegram ping — a failed notification shouldn't
+      // affect the visitor's experience
+      fetch('/.netlify/functions/review-notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }).catch(() => {})
       reviewForm.reset()
       selectedStars = 0
       if (starSelect) starSelect.querySelectorAll('.star-btn').forEach(s => s.classList.remove('active'))
@@ -866,24 +879,30 @@ if (contactForm) {
 }
 
 // ─── Checkout — open Stripe payment links ───
+// Popup blockers allow one window.open per user gesture, so with multiple
+// items we open them one click at a time and turn the button into a stepper.
 const checkoutBtn = document.getElementById('cart-checkout')
+let checkoutQueue = []
+
+function resetCheckout() {
+  checkoutQueue = []
+  if (checkoutBtn) checkoutBtn.textContent = 'PROCEED TO CHECKOUT'
+}
+
 if (checkoutBtn) {
   checkoutBtn.addEventListener('click', () => {
     if (cart.length === 0) return
-    // If one item in cart, go directly to its payment link
-    if (cart.length === 1) {
-      const p = products[cart[0]]
-      if (p && p.paymentLink) {
-        window.open(p.paymentLink, '_blank')
-      }
-      return
+    if (checkoutQueue.length === 0) checkoutQueue = [...cart]
+    const id = checkoutQueue.shift()
+    const p = products[id]
+    if (p && p.paymentLink) {
+      window.open(p.paymentLink, '_blank')
     }
-    // Multiple items — open each payment link in a new tab
-    cart.forEach(id => {
-      const p = products[id]
-      if (p && p.paymentLink) {
-        window.open(p.paymentLink, '_blank')
-      }
-    })
+    if (checkoutQueue.length > 0) {
+      const opened = cart.length - checkoutQueue.length
+      checkoutBtn.textContent = `OPEN NEXT PAYMENT (${opened}/${cart.length} OPENED)`
+    } else {
+      checkoutBtn.textContent = 'PROCEED TO CHECKOUT'
+    }
   })
 }
