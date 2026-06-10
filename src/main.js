@@ -55,12 +55,25 @@ if (video) {
 
   const gestureEvents = ['touchstart', 'touchend', 'pointerdown', 'click']
 
-  video.addEventListener('playing', () => {
+  function revealIntro() {
     introStarted = true
     posterEl.style.display = 'none'
     startLoopLoad()
     removeGestureRetries()
-  })
+  }
+  // Swap poster → video on the exact frame the video first renders
+  // (requestVideoFrameCallback), not on the earlier 'playing' event —
+  // keeps the handoff invisible. 'playing' + timeout is the fallback for
+  // browsers without rVFC or where it stalls.
+  if ('requestVideoFrameCallback' in HTMLVideoElement.prototype) {
+    video.requestVideoFrameCallback(revealIntro)
+    video.addEventListener('playing', () => {
+      startLoopLoad()
+      setTimeout(() => { if (!introStarted) revealIntro() }, 250)
+    })
+  } else {
+    video.addEventListener('playing', revealIntro)
+  }
   // An early loop 'playing' must never hide the poster while the intro is
   // still on its way — only after the intro has ended or failed
   loopEl.addEventListener('playing', () => {
