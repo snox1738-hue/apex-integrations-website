@@ -1,0 +1,5 @@
+# Apex Integrations — https://apexintlaunch.com
+User-agent: *
+Allow: /
+
+Sitemap: https://apexintlaunch.com/sitemap.xml

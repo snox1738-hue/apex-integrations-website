@@ -8,29 +8,102 @@ const video = document.getElementById('bg-video')
 if (video) {
   const loopEl = document.createElement('video')
   loopEl.muted = true
+  loopEl.defaultMuted = true
   loopEl.loop = true
   loopEl.playsInline = true
-  loopEl.preload = 'auto'
+  loopEl.setAttribute('muted', '')
+  loopEl.setAttribute('playsinline', '')
+  loopEl.setAttribute('webkit-playsinline', '')
+  // Don't compete with the intro for bandwidth — the loop starts
+  // downloading once the intro is actually rendering frames
+  loopEl.preload = 'none'
   loopEl.src = loopSrc
   video.parentNode.insertBefore(loopEl, video)
 
+  video.muted = true
+  video.defaultMuted = true
+  video.playsInline = true
+  video.setAttribute('webkit-playsinline', '')
+  video.preload = 'auto'
   video.src = introSrc
   video.loop = false
-  video.poster = posterSrc
+
+  // Poster image stacked over the videos until one is genuinely playing.
+  // Covers any native blocked-autoplay glyph (iOS Low Power Mode) — the
+  // user can never see a play button, only the still frame.
+  const posterEl = document.createElement('img')
+  posterEl.src = posterSrc
+  posterEl.alt = ''
+  posterEl.setAttribute('aria-hidden', 'true')
+  video.parentNode.insertBefore(posterEl, video.nextSibling)
+
+  let introStarted = false
+  let loopLoadStarted = false
+
+  function startLoopLoad() {
+    if (loopLoadStarted) return
+    loopLoadStarted = true
+    loopEl.preload = 'auto'
+    loopEl.load()
+  }
+
+  video.addEventListener('playing', () => {
+    introStarted = true
+    posterEl.style.display = 'none'
+    startLoopLoad()
+    removeGestureRetries()
+  })
+  loopEl.addEventListener('playing', () => {
+    posterEl.style.display = 'none'
+  })
+
+  // If the intro can't load or decode, skip straight to the loop
+  video.addEventListener('error', () => {
+    video.style.display = 'none'
+    startLoopLoad()
+    loopEl.play().catch(() => {})
+  })
+
   video.play().catch(() => {})
 
-  // iOS needs a user gesture to start video — retry on first touch
-  function tryPlayOnTouch() {
+  // Autoplay can be blocked (iOS Low Power Mode, data saver) — keep
+  // retrying on every user gesture until playback actually starts
+  const gestureEvents = ['touchstart', 'touchend', 'pointerdown', 'click']
+  let loopUnlocked = false
+  function tryPlayOnGesture() {
+    if (introStarted) { removeGestureRetries(); return }
     video.play().catch(() => {})
-    loopEl.play().catch(() => {})
-    document.removeEventListener('touchstart', tryPlayOnTouch)
+    // Unlock the loop video inside this same gesture — its own play()
+    // happens ~10s from now when the intro ends, long after the gesture
+    // expires, so it would otherwise stay blocked (iOS Low Power Mode)
+    if (!loopUnlocked) {
+      const p = loopEl.play()
+      if (p) p.then(() => { loopUnlocked = true; loopEl.pause(); loopEl.currentTime = 0 }).catch(() => {})
+    }
   }
-  document.addEventListener('touchstart', tryPlayOnTouch, { passive: true })
+  function removeGestureRetries() {
+    gestureEvents.forEach(ev => document.removeEventListener(ev, tryPlayOnGesture))
+  }
+  gestureEvents.forEach(ev => document.addEventListener(ev, tryPlayOnGesture, { passive: true }))
 
   video.addEventListener('ended', () => {
     loopEl.currentTime = 0
-    loopEl.play().catch(() => {})
-    video.style.display = 'none'
+    // If the loop's play() is refused, retry on the next user gesture
+    const tryLoop = () => {
+      loopEl.play().then(() => {
+        gestureEvents.forEach(ev => document.removeEventListener(ev, tryLoop))
+      }).catch(() => {})
+    }
+    tryLoop()
+    gestureEvents.forEach(ev => document.addEventListener(ev, tryLoop, { passive: true }))
+    // Keep the intro's last frame visible until the loop is actually
+    // rendering — avoids a flash if the loop is still buffering
+    const hideIntro = () => {
+      video.style.display = 'none'
+      loopEl.removeEventListener('playing', hideIntro)
+    }
+    if (!loopEl.paused && loopEl.readyState >= 2) hideIntro()
+    else loopEl.addEventListener('playing', hideIntro)
   })
 
   function scaleAll() {
@@ -60,6 +133,9 @@ if (video) {
     video.style.zIndex = '0'
     Object.assign(loopEl.style, s)
     loopEl.style.zIndex = '0'
+    Object.assign(posterEl.style, s)
+    posterEl.style.zIndex = '0'
+    posterEl.style.objectFit = 'cover'
   }
 
   scaleAll()
@@ -170,6 +246,7 @@ function addToCart(productId) {
   // Close service panel and go back to services
   closeAllPanels()
   updateCartBadge()
+  syncCartButtons()
 }
 
 function removeFromCart(productId) {
@@ -177,6 +254,17 @@ function removeFromCart(productId) {
   if (idx !== -1) cart.splice(idx, 1)
   renderCart()
   updateCartBadge()
+  syncCartButtons()
+}
+
+// Keep every ADD TO CART button in step with the cart — items can also be
+// removed from the cart panel, which the buttons otherwise never hear about
+function syncCartButtons() {
+  document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    const inCart = cart.includes(btn.dataset.product)
+    btn.textContent = inCart ? 'REMOVE' : '+ ADD TO CART'
+    btn.classList.toggle('added', inCart)
+  })
 }
 
 function updateCartBadge() {
@@ -285,12 +373,8 @@ document.addEventListener('click', (e) => {
     if (productId && products[productId] && products[productId].available) {
       if (cart.includes(productId)) {
         removeFromCart(productId)
-        addBtn.textContent = '+ ADD TO CART'
-        addBtn.classList.remove('added')
       } else {
         addToCart(productId)
-        addBtn.textContent = 'REMOVE'
-        addBtn.classList.add('added')
       }
     }
   }
@@ -315,7 +399,7 @@ const serviceInfo = {
     sections: [
       { title: 'CUSTOM DESIGN & BUILD', text: 'No templates. No drag-and-drop builders. Your site is designed from scratch to match your practice\'s brand, personality, and goals. Every element is intentional — from the layout to the color palette to the call-to-action placement.' },
       { title: 'CONVERSION ENGINEERING', text: 'Beautiful isn\'t enough. Every page is built to convert visitors into customers. Strategic placement of booking buttons, trust signals, testimonials, and contact forms. We study what makes customers click — and we build around that.' },
-      { title: 'SEO FOUNDATION', text: 'Your site launches with proper on-page SEO — meta tags, schema markup, Google Business integration, local keywords, fast load times. This is the foundation that gets you ranking for your services in your area in your area.' },
+      { title: 'SEO FOUNDATION', text: 'Your site launches with proper on-page SEO — meta tags, schema markup, Google Business integration, local keywords, fast load times. This is the foundation that gets you ranking for your services in your area.' },
       { title: 'SEO & LAUNCH OPTIMIZATION', text: 'Your site launches with full search engine optimization, performance tuning, Google ranking setup, security configuration, and fast hosting. Everything you need to start ranking from day one.' },
       { title: 'MOBILE-FIRST & FAST', text: 'Over 60% of local searches happen on phones. Your site loads in under 2 seconds, looks perfect on every device, and passes every Google speed test. Slow sites lose customers — yours won\'t.' }
     ]
@@ -396,8 +480,15 @@ document.querySelectorAll('.top .nav__link, .top .brand').forEach(link => {
   })
 })
 
+// Any open panel/overlay should capture scroll & keys instead of paging sections
+function overlayOpen() {
+  return !!document.querySelector('.panel--open, .info-overlay--open, .review-detail--open, .review-form-overlay--open')
+}
+
 // Wheel — one section at a time
 document.addEventListener('wheel', (e) => {
+  // Let overlays scroll natively; don't page the background behind them
+  if (overlayOpen()) return
   e.preventDefault()
   if (isScrolling) return
   if (e.deltaY > 0) goToSection(currentIndex + 1)
@@ -420,6 +511,7 @@ document.addEventListener('touchmove', (e) => {
 }, { passive: false })
 
 document.addEventListener('touchend', (e) => {
+  if (overlayOpen()) return  // swiping inside an overlay shouldn't page the background
   if (isScrolling || !touchMoving) return  // ignore taps (no movement)
   const diff = touchStartY - e.changedTouches[0].clientY
   if (diff > 50) goToSection(currentIndex + 1)
@@ -532,6 +624,8 @@ if (starSelect) {
     })
     star.addEventListener('click', () => {
       selectedStars = parseInt(star.dataset.star)
+      // Update fill on click too — touch devices never fire mouseenter
+      stars.forEach(s => s.classList.toggle('active', parseInt(s.dataset.star) <= selectedStars))
     })
   })
   starSelect.addEventListener('mouseleave', () => {
@@ -572,32 +666,39 @@ if (reviewForm) {
   })
 }
 
+// Escape user-submitted text before injecting as HTML (prevents stored XSS)
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
+}
+
 // Load and render reviews from Firebase — distribute evenly across 3 rows
 async function renderFirebaseReviews() {
   const reviews = await loadReviews()
   if (reviews.length === 0) return
-  
+
   // Get all 3 row tracks
   const tracks = document.querySelectorAll('.reviews-row__track')
   if (tracks.length === 0) return
-  
+
   // Round-robin: review 0 → row 0, review 1 → row 1, review 2 → row 2, review 3 → row 0, etc.
   reviews.forEach((r, i) => {
     const trackIdx = i % tracks.length
     const track = tracks[trackIdx]
-    
+
     // Skip if already rendered
     if (track.querySelector(`[data-firebase-id="${r.id}"]`)) return
-    
+
+    // Clamp stars to 1–5 — bad data would make repeat() throw and kill the render
+    const stars = Math.min(5, Math.max(1, parseInt(r.stars, 10) || 5))
     const card = document.createElement('div')
     card.className = 'review'
     card.setAttribute('data-firebase-id', r.id)
     card.innerHTML = `
-      <div class="review__stars">${'★'.repeat(r.stars || 5)}${'☆'.repeat(5 - (r.stars || 5))}</div>
-      <p class="review__text">"${r.review}"</p>
+      <div class="review__stars">${'★'.repeat(stars)}${'☆'.repeat(5 - stars)}</div>
+      <p class="review__text">"${escapeHtml(r.review)}"</p>
       <div class="review__author">
-        <span class="review__name">${r.name}</span>
-        <span class="review__role">${r.practice}${r.location ? ' — ' + r.location : ''}</span>
+        <span class="review__name">${escapeHtml(r.name)}</span>
+        <span class="review__role">${escapeHtml(r.practice)}${r.location ? ' — ' + escapeHtml(r.location) : ''}</span>
       </div>
     `
     
@@ -643,6 +744,7 @@ if (reviewFormBack && reviewFormOverlay) {
 
 // Keyboard support
 document.addEventListener('keydown', (e) => {
+  if (overlayOpen()) return
   if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); goToSection(currentIndex + 1) }
   if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); goToSection(currentIndex - 1) }
 })

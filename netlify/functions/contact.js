@@ -37,20 +37,22 @@ export default async (request) => {
       body: JSON.stringify(doc),
     }).catch(err => console.error('Firestore error:', err));
 
-    // 2. Send Telegram notification
-    const tgToken = '8646893981:AAGgrG6e-UbG4kPu9bJhTlgkGLVLwbWmOyw';
-    const chatId = '8732054665';
+    // 2. Send Telegram notification (credentials live in Netlify env vars)
+    const tgToken = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
     const tgText = `📩 *New Contact Form Submission*\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n📱 *Phone:* ${phone || 'Not provided'}\n\n💬 *Message:*\n${message}`;
-    
-    const tgPromise = fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: tgText,
-        parse_mode: 'Markdown',
-      }),
-    }).catch(err => console.error('Telegram error:', err));
+
+    const tgPromise = (tgToken && chatId)
+      ? fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: tgText,
+            parse_mode: 'Markdown',
+          }),
+        }).catch(err => console.error('Telegram error:', err))
+      : Promise.resolve(console.error('Telegram env vars not set — skipping notification'));
 
     // Run both in parallel
     await Promise.all([firestorePromise, tgPromise]);
