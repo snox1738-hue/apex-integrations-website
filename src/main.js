@@ -47,46 +47,55 @@ if (video) {
     loopEl.load()
   }
 
+  // Set once the intro is finished (ended or failed) — only then may the
+  // loop video take over the screen
+  let introDone = false
+
+  const gestureEvents = ['touchstart', 'touchend', 'pointerdown', 'click']
+
   video.addEventListener('playing', () => {
     introStarted = true
     posterEl.style.display = 'none'
     startLoopLoad()
     removeGestureRetries()
   })
+  // An early loop 'playing' must never hide the poster while the intro is
+  // still on its way — only after the intro has ended or failed
   loopEl.addEventListener('playing', () => {
-    posterEl.style.display = 'none'
+    if (introDone) posterEl.style.display = 'none'
   })
 
   // If the intro can't load or decode, skip straight to the loop
   video.addEventListener('error', () => {
+    introDone = true
     video.style.display = 'none'
     startLoopLoad()
     loopEl.play().catch(() => {})
   })
 
-  video.play().catch(() => {})
-
-  // Autoplay can be blocked (iOS Low Power Mode, data saver) — keep
-  // retrying on every user gesture until playback actually starts
-  const gestureEvents = ['touchstart', 'touchend', 'pointerdown', 'click']
-  let loopUnlocked = false
+  // Gesture retries exist ONLY for the blocked-autoplay case (iOS Low Power
+  // Mode, data saver). On phones where autoplay works — the normal case —
+  // no gesture handler is ever registered, so nothing can touch the videos
+  // mid-intro. (A second play() during the intro can stall the first video
+  // on iPhones, which glitched the intro and skipped to the loop.)
   function tryPlayOnGesture() {
     if (introStarted) { removeGestureRetries(); return }
     video.play().catch(() => {})
-    // Unlock the loop video inside this same gesture — its own play()
-    // happens ~10s from now when the intro ends, long after the gesture
-    // expires, so it would otherwise stay blocked (iOS Low Power Mode)
-    if (!loopUnlocked) {
-      const p = loopEl.play()
-      if (p) p.then(() => { loopUnlocked = true; loopEl.pause(); loopEl.currentTime = 0 }).catch(() => {})
-    }
   }
   function removeGestureRetries() {
     gestureEvents.forEach(ev => document.removeEventListener(ev, tryPlayOnGesture))
   }
-  gestureEvents.forEach(ev => document.addEventListener(ev, tryPlayOnGesture, { passive: true }))
+  const firstAttempt = video.play()
+  if (firstAttempt && firstAttempt.catch) {
+    firstAttempt.catch(() => {
+      if (!introStarted) {
+        gestureEvents.forEach(ev => document.addEventListener(ev, tryPlayOnGesture, { passive: true }))
+      }
+    })
+  }
 
   video.addEventListener('ended', () => {
+    introDone = true
     loopEl.currentTime = 0
     // If the loop's play() is refused, retry on the next user gesture
     const tryLoop = () => {
