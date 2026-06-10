@@ -39,8 +39,18 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-#bg-video {
+/* Background video layers — intro video, loop video, poster image.
+   Sized entirely in CSS (16:9 cover box at 147% zoom) so the very first
+   paint is already at final scale — no JS-applied resize pop on load. */
+#bg-video,
+.bg-layer {
   position: fixed;
+  top: 50%;
+  left: 50%;
+  width: max(147vw, calc(147vh * 16 / 9));
+  height: max(147vh, calc(147vw * 9 / 16));
+  transform: translate(-50%, -50%);
+  object-fit: cover;
   z-index: 0;
   pointer-events: none;
 }
@@ -1755,7 +1765,7 @@ body {
 
   /* ─── Video background ─── */
   #bg-video,
-  #bg-video + video {
+  .bg-layer {
     position: fixed !important;
   }
 

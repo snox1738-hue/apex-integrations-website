@@ -18,6 +18,7 @@ if (video) {
   // downloading once the intro is actually rendering frames
   loopEl.preload = 'none'
   loopEl.src = loopSrc
+  loopEl.className = 'bg-layer'
   video.parentNode.insertBefore(loopEl, video)
 
   video.muted = true
@@ -35,6 +36,7 @@ if (video) {
   posterEl.src = posterSrc
   posterEl.alt = ''
   posterEl.setAttribute('aria-hidden', 'true')
+  posterEl.className = 'bg-layer'
   video.parentNode.insertBefore(posterEl, video.nextSibling)
 
   let introStarted = false
@@ -115,42 +117,8 @@ if (video) {
     else loopEl.addEventListener('playing', hideIntro)
   })
 
-  function scaleAll() {
-    const vw = window.innerWidth
-    const vh = window.innerHeight
-    const vRatio = 16 / 9
-    const wRatio = vw / vh
-    const zoom = 1.47
-    let w, h
-    if (wRatio > vRatio) {
-      w = vw * zoom
-      h = w / vRatio
-    } else {
-      h = vh * zoom
-      w = h * vRatio
-    }
-    const s = {
-      position: 'fixed',
-      top: '50%',
-      left: '50%',
-      width: w + 'px',
-      height: h + 'px',
-      transform: 'translate(-50%, -50%)',
-      pointerEvents: 'none'
-    }
-    Object.assign(video.style, s)
-    video.style.zIndex = '0'
-    Object.assign(loopEl.style, s)
-    loopEl.style.zIndex = '0'
-    Object.assign(posterEl.style, s)
-    posterEl.style.zIndex = '0'
-    posterEl.style.objectFit = 'cover'
-  }
-
-  scaleAll()
-  video.addEventListener('loadedmetadata', scaleAll)
-  loopEl.addEventListener('loadedmetadata', scaleAll)
-  window.addEventListener('resize', scaleAll)
+  // Sizing is pure CSS (#bg-video / .bg-layer) — first paint is already at
+  // final scale and window resizes are handled without any JS
 }
 
 // Panel-based navigation
