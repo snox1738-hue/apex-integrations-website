@@ -151,7 +151,7 @@ function updateActiveNav() {
 // ─── Cart system ───
 const cart = []
 const products = {
-  voice: { name: 'Meta Ad Creation', desc: 'Meta ads strategy, creative & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/eVq14g0yYcVYf2KbAA73G04' },
+  voice: { name: 'Meta Ad Creation', desc: 'Meta ads strategy, scripting & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/eVq14g0yYcVYf2KbAA73G04' },
   website: { name: 'Website Creation', desc: 'Custom-built conversion website', upfront: 750, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/00wbIU95u5tw6we20073G02' },
   leads: { name: 'GEO (Generative Engine Optimization)', desc: 'AI search visibility & optimization', upfront: 0, monthly: 299, available: true, paymentLink: 'https://buy.stripe.com/eVq6oA6Xm9JM8EmdII73G03' }
 }
@@ -303,7 +303,7 @@ const serviceInfo = {
     price: '$999/mo + ad spend',
     sections: [
       { title: 'CAMPAIGN STRATEGY & MANAGEMENT', text: 'We plan, build, launch, and optimize Facebook and Instagram campaigns around your goals. Objectives, budgets, bidding, and placements are managed daily — engineered for return on ad spend, not vanity metrics.' },
-      { title: 'AD CREATIVE & COPYWRITING', text: 'Professional ad visuals and copy designed specifically for your business. Hooks that stop the scroll, offers that convert, and messaging that sounds like you — all A/B tested and iterated until they perform.' },
+      { title: 'CREATIVE SCRIPTING', text: 'Every winning ad starts with a script that sells. We write the hooks, angles, and copy for your campaigns — proven frameworks tailored to your brand and offer. You provide the footage or photos; we turn them into ads that convert.' },
       { title: 'AUDIENCE TARGETING', text: 'Custom audiences built on demographics, interests, and behaviors specific to your ideal customers. Lookalike audiences, retargeting, and local geo-targeting maximize every dollar of ad spend.' },
       { title: 'LANDING PAGES & FUNNELS', text: 'Dedicated landing pages built for each campaign. When a potential customer clicks your ad, they land on a page designed to do one thing — get them to book. No distractions, no clutter, just conversion.' },
       { title: 'MONTHLY PERFORMANCE REPORTS', text: 'Full transparency. Every month you get a breakdown of impressions, clicks, leads generated, cost per lead, and booked appointments. You\'ll know exactly what your investment is producing.' }
