@@ -439,7 +439,7 @@ const reviewData = {
     name: 'Emily Lawson',
     practice: 'Lawson & Co',
     location: 'Tucson, AZ',
-    quote: 'John helped me set everything up. Super nice guy, very patient. Made the whole process easy.',
+    quote: 'Owen helped me set everything up. Super nice guy, very patient. Made the whole process easy.',
     bio: 'Full-service business in northwest Tucson.'
   },
   park: {
@@ -467,7 +467,7 @@ const reviewData = {
     name: 'Marcus Reed',
     practice: 'Reed Family Services',
     location: 'Phoenix, AZ',
-    quote: 'John walked me through everything. Really easy to talk to. Would recommend.',
+    quote: 'Owen walked me through everything. Really easy to talk to. Would recommend.',
     bio: 'Family business in central Phoenix.'
   },
   nguyen: {
