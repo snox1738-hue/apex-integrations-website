@@ -217,7 +217,7 @@ function updateActiveNav() {
 // ─── Cart system ───
 const cart = []
 const products = {
-  voice: { name: 'Meta Ad Creation', desc: 'Meta ads strategy, scripting & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/eVq14g0yYcVYf2KbAA73G04' },
+  voice: { name: 'Meta Ad Development / Management', desc: 'Meta ads strategy, scripting & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/eVq14g0yYcVYf2KbAA73G04' },
   website: { name: 'Website Creation', desc: 'Custom-built conversion website', upfront: 750, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/00wbIU95u5tw6we20073G02' },
   leads: { name: 'Generative Engine Optimization', desc: 'AI search visibility & optimization', upfront: 0, monthly: 299, available: true, paymentLink: 'https://buy.stripe.com/eVq6oA6Xm9JM8EmdII73G03' }
 }
@@ -375,7 +375,7 @@ document.addEventListener('click', (e) => {
 // ─── Service info overlay ───
 const serviceInfo = {
   voice: {
-    title: 'META AD CREATION',
+    title: 'META AD DEVELOPMENT / MANAGEMENT',
     price: '$999/mo + ad spend',
     sections: [
       { title: 'CAMPAIGN STRATEGY & MANAGEMENT', text: 'We plan, build, launch, and optimize Facebook and Instagram campaigns around your goals. Objectives, budgets, bidding, and placements are managed daily — engineered for return on ad spend, not vanity metrics.' },

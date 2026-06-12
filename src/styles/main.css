@@ -1909,6 +1909,12 @@ body {
     padding-right: 0;
   }
 
+  /* Scale panel titles with screen width so long lines like
+     "DEVELOPMENT /" never orphan-wrap on phones */
+  .service-detail__title {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+
   /* ─── Reviews section ─── */
   .reviews-wrap {
     min-height: calc(100vh - 52px);
