@@ -218,7 +218,7 @@ function updateActiveNav() {
 const cart = []
 const products = {
   voice: { name: 'Meta Ad Development / Management', desc: 'Meta ads strategy, scripting & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/eVq14g0yYcVYf2KbAA73G04' },
-  website: { name: 'Website Creation', desc: 'Custom-built conversion website', upfront: 750, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/00wbIU95u5tw6we20073G02' },
+  website: { name: 'Website Creation', desc: 'Custom-built conversion website', upfront: 749, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/00wbIU95u5tw6we20073G02' },
   leads: { name: 'Generative Engine Optimization', desc: 'AI search visibility & optimization', upfront: 0, monthly: 299, available: true, paymentLink: 'https://buy.stripe.com/eVq6oA6Xm9JM8EmdII73G03' }
 }
 
@@ -387,7 +387,7 @@ const serviceInfo = {
   },
   website: {
     title: 'WEBSITE CREATION',
-    price: '$750 one-time',
+    price: '$749 one-time',
     sections: [
       { title: 'CUSTOM DESIGN & BUILD', text: 'No templates. No drag-and-drop builders. Your site is designed from scratch to match your business\'s brand, personality, and goals. Every element is intentional — from the layout to the color palette to the call-to-action placement.' },
       { title: 'CONVERSION ENGINEERING', text: 'Beautiful isn\'t enough. Every page is built to convert visitors into customers. Strategic placement of booking buttons, trust signals, testimonials, and contact forms. We study what makes customers click — and we build around that.' },
