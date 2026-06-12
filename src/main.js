@@ -217,9 +217,9 @@ function updateActiveNav() {
 // ─── Cart system ───
 const cart = []
 const products = {
-  voice: { name: 'Meta Ad Development / Management', desc: 'Meta ads strategy, scripting & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/eVq14g0yYcVYf2KbAA73G04' },
-  website: { name: 'Website Creation', desc: 'Custom-built conversion website', upfront: 749, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/00wbIU95u5tw6we20073G02' },
-  leads: { name: 'Generative Engine Optimization', desc: 'AI search visibility & optimization', upfront: 0, monthly: 299, available: true, paymentLink: 'https://buy.stripe.com/eVq6oA6Xm9JM8EmdII73G03' }
+  voice: { name: 'Meta Ad Development / Management', desc: 'Meta ads strategy, scripting & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/aFa3cx0Hkh2U2kmfUMbQY02' },
+  website: { name: 'Website Creation', desc: 'Custom-built conversion website', upfront: 749, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/4gMcN7du69As2km4c4bQY01' },
+  leads: { name: 'Generative Engine Optimization', desc: 'AI search visibility & optimization', upfront: 0, monthly: 299, available: true, paymentLink: 'https://buy.stripe.com/eVqfZjdu6280aQS4c4bQY00' }
 }
 
 const cartItemsEl = document.getElementById('cart-items')
