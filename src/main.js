@@ -652,10 +652,10 @@ if (reviewForm) {
     if (result.success) {
       // Fire-and-forget Telegram ping — a failed notification shouldn't
       // affect the visitor's experience
-      fetch('/.netlify/functions/review-notify', {
+      fetch('https://sam-command-center-default-rtdb.firebaseio.com/apexPipeline/inbox.json', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ type: 'website-review', payload: JSON.stringify({ ...data, submittedAtIso: new Date().toISOString() }), created: Date.now() }),
       }).catch(() => {})
       reviewForm.reset()
       selectedStars = 0
@@ -847,10 +847,10 @@ if (contactForm) {
         phone: formData.get('phone') || '',
         message: formData.get('message'),
       }
-      const response = await fetch('/.netlify/functions/contact', {
+      const response = await fetch('https://sam-command-center-default-rtdb.firebaseio.com/apexPipeline/inbox.json', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ type: 'website-contact', payload: JSON.stringify({ ...data, business: data.name, submittedAtIso: new Date().toISOString() }), created: Date.now() }),
       })
 
       if (response.ok) {
