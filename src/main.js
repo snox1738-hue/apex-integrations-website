@@ -217,7 +217,7 @@ function updateActiveNav() {
 // ─── Cart system ───
 const cart = []
 const products = {
-  voice: { name: 'Meta Ad Development / Management', desc: 'Meta ads strategy, scripting & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/aFa3cx0Hkh2U2kmfUMbQY02' },
+  voice: { name: 'Meta Ad Development / Management', desc: 'Meta ads strategy, scripting & management', upfront: 250, monthly: 749, available: true, paymentLink: 'https://buy.stripe.com/8x2dRbeya7sk5wy5g8bQY03' }, // $999 today then $749/mo (Stripe link swapped 2026-07-20)
   website: { name: 'Website Creation', desc: 'Custom-built conversion website', upfront: 749, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/4gMcN7du69As2km4c4bQY01' },
   leads: { name: 'Generative Engine Optimization', desc: 'AI search visibility & optimization', upfront: 0, monthly: 299, available: true, paymentLink: 'https://buy.stripe.com/eVqfZjdu6280aQS4c4bQY00' }
 }
@@ -300,7 +300,7 @@ function renderCart() {
     item.className = 'cart-item'
     let priceHtml = ''
     if (p.upfront > 0 && p.monthly > 0) {
-      priceHtml = `<span class="cart-item__price">$${p.upfront}</span><span class="cart-item__monthly">+ $${p.monthly}/mo</span>`
+      priceHtml = `<span class="cart-item__price">$${(p.upfront + p.monthly).toLocaleString()}</span><span class="cart-item__monthly">to start, then $${p.monthly}/mo</span>`
     } else if (p.monthly > 0) {
       priceHtml = `<span class="cart-item__price">$${p.monthly}/mo</span>`
     } else {
@@ -376,7 +376,7 @@ document.addEventListener('click', (e) => {
 const serviceInfo = {
   voice: {
     title: 'META AD DEVELOPMENT / MANAGEMENT',
-    price: '$999/mo + ad spend',
+    price: '$999 to start, then $749/mo + ad spend',
     sections: [
       { title: 'CAMPAIGN STRATEGY & MANAGEMENT', text: 'We plan, build, launch, and optimize Facebook and Instagram campaigns around your goals. Objectives, budgets, bidding, and placements are managed daily — engineered for return on ad spend, not vanity metrics.' },
       { title: 'CREATIVE SCRIPTING', text: 'Every winning ad starts with a script that sells. We write the hooks, angles, and copy for your campaigns — proven frameworks tailored to your brand and offer. You provide the footage or photos; we turn them into ads that convert.' },
