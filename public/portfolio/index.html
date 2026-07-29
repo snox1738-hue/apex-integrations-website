@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Unlisted page: reachable by direct link, kept out of search results -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="Apex Integrations builds websites for auto detailing businesses — fast, mobile-first, and wired to take bookings. See our work.">
+<title>Our Work | Apex Integrations</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --bg: #dcd5c5;
+    --bg-hi: #e4dece;
+    --bg-lo: #d2cab8;
+    --panel: #e9e3d5;
+    --panel-2: #e1dbcc;
+    --line: rgba(38,34,26,0.16);
+    --ink: #262420;
+    --muted: #625c50;
+    --faint: #8a8272;
+    --gold: #b88a3c;
+    --gold-light: #d4ac57;
+    --gold-deep: #96702c;
+    --cream: #f6f3ec;
+    --radius: 12px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .display { font-family: 'Montserrat', sans-serif; }
+.container { max-width: 1220px; margin: 0 auto; padding: 0 30px; }
+::selection { background: rgba(184,138,60,0.3); }
+
+/* ── Nav ── */
+.nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+    background: rgba(220,213,197,0.72);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(38,34,26,0.08);
+    transition: background 0.3s ease;
+}
+.nav-inner {
+    display: flex; align-items: center;
+    /* longhands so .container's horizontal padding isn't clobbered */
+    padding-top: 12px; padding-bottom: 12px;
+}
+/* Brand lockup: transparent PNG — gold mountain forms the "A" of APEX INTEGRATIONS */
+.brand { display: inline-flex; align-items: center; text-decoration: none; }
+.brand .logo-img { height: 46px; width: auto; display: block; object-fit: contain; }
+.brand .logo-img.missing { display: none; }
+.brand .logo-mark {
+    width: 38px; height: 38px; border-radius: 8px; flex: none;
+    background: linear-gradient(140deg, var(--gold-light), var(--gold-deep));
+    color: var(--cream); font-family: 'Montserrat'; font-weight: 900; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+}
+
+/* ── Page header ── */
+.pagehead { padding: 116px 0 30px; }
+.eyebrow {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: 'Montserrat'; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--gold-deep); margin-bottom: 1rem;
+}
+.eyebrow::before { content: ''; width: 30px; height: 2px; background: var(--gold); }
+.pagehead h1 {
+    font-family: 'Montserrat'; font-size: clamp(2rem, 4.4vw, 3rem); font-weight: 800;
+    line-height: 1.05; letter-spacing: -0.01em; text-transform: uppercase;
+    color: var(--ink);
+}
+.pagehead p { color: var(--muted); font-size: 1rem; margin-top: 0.8rem; max-width: 46ch; }
+
+/* ── Work grid ── */
+.work { padding: 30px 0 96px; }
+
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
+
+.card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; cursor: pointer; display: flex; flex-direction: column;
+    transition: transform 0.32s cubic-bezier(0.22,1,0.36,1), border-color 0.32s ease, box-shadow 0.32s ease;
+}
+.card:hover { transform: translateY(-6px); border-color: rgba(184,138,60,0.55); box-shadow: 0 26px 55px rgba(70,56,28,0.2); }
+.card:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+/* Live scaled preview */
+.shot {
+    position: relative; width: 100%; aspect-ratio: 16 / 10; overflow: hidden;
+    background: var(--panel-2); border-bottom: 1px solid var(--line);
+}
+.shot iframe {
+    position: absolute; top: 0; left: 0;
+    width: 1440px; height: 900px;
+    transform-origin: 0 0;
+    border: 0; pointer-events: none;
+    opacity: 0; transition: opacity 0.6s ease;
+}
+.shot iframe.ready { opacity: 1; }
+.shot .placeholder {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 12px; color: var(--faint); font-size: 0.85rem;
+    background: linear-gradient(135deg, #e6e0d2, #dcd5c5);
+}
+.shot .spinner {
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 2px solid rgba(184,138,60,0.25); border-top-color: var(--gold);
+    animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
+.shot .glass {
+    position: absolute; inset: 0; z-index: 3;
+    background: linear-gradient(180deg, rgba(30,25,16,0) 55%, rgba(30,25,16,0.55) 100%);
+    opacity: 0; transition: opacity 0.3s ease;
+    display: flex; align-items: flex-end; justify-content: center; padding-bottom: 20px;
+}
+.card:hover .glass { opacity: 1; }
+.glass .peek {
+    font-family: 'Montserrat'; font-weight: 600; font-size: 0.76rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    background: var(--cream); color: var(--ink); padding: 9px 20px; border-radius: 2px;
+}
+
+.card-body { padding: 1.5rem 1.6rem 1.6rem; display: flex; flex-direction: column; flex: 1; }
+.card-body h3 { font-family: 'Montserrat'; font-size: 1.24rem; font-weight: 700; margin-bottom: 0.5rem; }
+.card-body p { color: var(--muted); font-size: 0.92rem; }
+
+/* ── Modal ── */
+.modal {
+    position: fixed; inset: 0; z-index: 1000; display: none;
+    background: rgba(34,29,18,0.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    padding: 18px;
+}
+.modal.open { display: flex; flex-direction: column; }
+.modal-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 0 4px 14px; flex-wrap: wrap;
+}
+.modal-title { font-family: 'Montserrat'; font-weight: 800; font-size: 1.05rem; color: var(--cream); }
+.modal-actions { display: flex; align-items: center; gap: 10px; }
+.mbtn {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: 'Montserrat'; font-weight: 600; font-size: 0.82rem;
+    padding: 9px 18px; border-radius: 2px; text-decoration: none; cursor: pointer;
+    border: 1px solid rgba(246,243,236,0.28); background: rgba(246,243,236,0.1); color: var(--cream);
+    transition: background 0.22s ease, border-color 0.22s ease;
+}
+.mbtn:hover { background: rgba(246,243,236,0.2); border-color: rgba(246,243,236,0.45); }
+.mbtn.primary { background: var(--gold); color: #211c10; border-color: transparent; }
+.mbtn.primary:hover { background: var(--gold-light); }
+.viewport {
+    flex: 1; border-radius: 8px; overflow: hidden; background: #fff;
+    border: 1px solid rgba(246,243,236,0.2); min-height: 0;
+}
+.viewport iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* Device toggle */
+.seg { display: inline-flex; background: rgba(246,243,236,0.1); border: 1px solid rgba(246,243,236,0.28); border-radius: 2px; overflow: hidden; }
+.seg button {
+    font-family: 'Montserrat'; font-weight: 600; font-size: 0.78rem; color: rgba(246,243,236,0.72);
+    background: transparent; border: 0; padding: 9px 16px; cursor: pointer; transition: 0.2s;
+}
+.seg button.active { background: rgba(246,243,236,0.2); color: var(--cream); }
+.viewport.phone { max-width: 420px; margin: 0 auto; width: 100%; }
+
+/* ── Footer ── */
+footer { border-top: 1px solid var(--line); padding: 30px 0; }
+.foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.foot-logo { height: 30px; width: auto; opacity: 0.75; }
+.foot-note { color: var(--faint); font-size: 0.8rem; font-family: 'Montserrat'; letter-spacing: 0.04em; }
+
+@media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; }
+    .pagehead { padding: 100px 0 24px; }
+    .modal { padding: 12px; }
+    .modal-bar { padding-bottom: 10px; }
+    .seg { display: none; }
+
+    /* No scrollbars on phones — the page keeps scrolling, the bar just isn't drawn */
+    html { scrollbar-width: none; -ms-overflow-style: none; }
+    html::-webkit-scrollbar { width: 0; height: 0; }
+
+    /* The previewed site is cross-origin, so its own scrollbars can't be styled
+       from here — overhang the iframe on both axes so .viewport's overflow
+       clips them away. Dragging still scrolls the preview. */
+    .viewport iframe { width: calc(100% + 22px); height: calc(100% + 22px); }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+    <div class="container nav-inner">
+        <a class="brand" href="#top" aria-label="Apex Integrations">
+            <!-- Transparent lockup: mountain forms the "A" — dark lettering for the light nav -->
+            <img class="logo-img" src="/portfolio/assets/apex-wordmark-dark.png" alt="Apex Integrations"
+                 onerror="this.classList.add('missing'); document.getElementById('fallbackMark').style.display='flex';">
+            <span class="logo-mark" id="fallbackMark" style="display:none;">A</span>
+        </a>
+    </div>
+</nav>
+
+<header class="pagehead" id="top">
+    <div class="container">
+        <span class="eyebrow">Portfolio</span>
+        <h1>Selected Work</h1>
+    </div>
+</header>
+
+<section class="work">
+    <div class="container">
+        <div class="grid" id="grid"></div>
+    </div>
+</section>
+
+<footer>
+    <div class="container foot">
+        <img class="foot-logo" src="/portfolio/assets/apex-wordmark-dark.png" alt="Apex Integrations" onerror="this.style.display='none';">
+        <span class="foot-note">© 2026 Apex Integrations</span>
+    </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-bar">
+        <div class="modal-title" id="modalTitle">Preview</div>
+        <div class="modal-actions">
+            <div class="seg" id="deviceSeg">
+                <button type="button" class="active" data-mode="desktop">Desktop</button>
+                <button type="button" data-mode="phone">Phone</button>
+            </div>
+            <button class="mbtn" id="closeModal" type="button">Close ✕</button>
+        </div>
+    </div>
+    <div class="viewport" id="viewport"><iframe id="modalFrame" title="Site preview" src="about:blank"></iframe></div>
+</div>
+
+<script>
+const PROJECTS = [
+    {
+        name: "Standard Detailing Funnel",
+        url: "https://restoredetailingaz.com/",
+        blurb: "Service menu, packages, and pricing on a single scrolling page, with online booking reachable from anywhere on the site."
+    },
+    {
+        name: "High Ticket Funnel",
+        url: "https://restore-ceramic-demo.pages.dev/",
+        blurb: "Built around a quote request instead of instant booking, with dedicated pages for ceramic coating, paint correction, and memberships."
+    }
+];
+
+const grid = document.getElementById('grid');
+
+grid.innerHTML = PROJECTS.map((p, i) => `
+    <article class="card" tabindex="0" role="button" aria-label="Preview ${p.name}" data-i="${i}">
+        <div class="shot" data-src="${p.url}">
+            <div class="placeholder"><div class="spinner"></div><span>Loading preview…</span></div>
+            <div class="glass"><span class="peek">Tap to preview →</span></div>
+        </div>
+        <div class="card-body">
+            <h3>${p.name}</h3>
+            <p>${p.blurb}</p>
+        </div>
+    </article>
+`).join('');
+
+// Scale each live preview to fit its card
+function fitFrame(shot) {
+    const frame = shot.querySelector('iframe');
+    if (!frame) return;
+    const scale = shot.clientWidth / 1440;
+    frame.style.transform = `scale(${scale})`;
+    frame.style.height = (shot.clientHeight / scale) + 'px';
+}
+
+// Load a preview when it nears the viewport — with a timed fallback so a
+// preview never sits on a spinner if IntersectionObserver doesn't fire.
+function loadPreview(shot) {
+    if (shot.dataset.loaded) return;
+    shot.dataset.loaded = '1';
+    const frame = document.createElement('iframe');
+    frame.setAttribute('scrolling', 'no');
+    frame.setAttribute('tabindex', '-1');
+    frame.setAttribute('aria-hidden', 'true');
+    frame.setAttribute('loading', 'lazy');
+    frame.src = shot.dataset.src;
+    frame.addEventListener('load', () => {
+        frame.classList.add('ready');
+        const ph = shot.querySelector('.placeholder');
+        if (ph) ph.style.display = 'none';
+    });
+    shot.insertBefore(frame, shot.firstChild);
+    fitFrame(shot);
+}
+
+const shots = [...document.querySelectorAll('.shot')];
+
+if ('IntersectionObserver' in window) {
+    const frameObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            obs.unobserve(entry.target);
+            loadPreview(entry.target);
+        });
+    }, { rootMargin: '400px' });
+    shots.forEach(s => frameObserver.observe(s));
+}
+
+// Safety net: stagger-load anything still unloaded after a moment
+setTimeout(() => {
+    shots.forEach((s, i) => setTimeout(() => loadPreview(s), i * 400));
+}, 2500);
+
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => document.querySelectorAll('.shot').forEach(fitFrame), 150);
+});
+
+// Modal
+const modal = document.getElementById('modal');
+const modalFrame = document.getElementById('modalFrame');
+const modalTitle = document.getElementById('modalTitle');
+const viewport = document.getElementById('viewport');
+
+function openProject(i) {
+    const p = PROJECTS[i];
+    modalTitle.childNodes[0].nodeValue = p.name;
+    modalFrame.src = p.url;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeProject() {
+    modal.classList.remove('open');
+    modalFrame.src = 'about:blank';
+    document.body.style.overflow = '';
+    viewport.classList.remove('phone');
+    document.querySelectorAll('#deviceSeg button').forEach(b => b.classList.toggle('active', b.dataset.mode === 'desktop'));
+}
+
+grid.addEventListener('click', e => {
+    const card = e.target.closest('.card');
+    if (card) openProject(+card.dataset.i);
+});
+grid.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const card = e.target.closest('.card');
+    if (card) { e.preventDefault(); openProject(+card.dataset.i); }
+});
+
+document.getElementById('closeModal').addEventListener('click', closeProject);
+modal.addEventListener('click', e => { if (e.target === modal) closeProject(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeProject(); });
+
+document.getElementById('deviceSeg').addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    document.querySelectorAll('#deviceSeg button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    viewport.classList.toggle('phone', btn.dataset.mode === 'phone');
+});
+</script>
+</body>
+</html>
