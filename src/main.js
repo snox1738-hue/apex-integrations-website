@@ -224,8 +224,8 @@ const cart = []
 // remember Stripe prices are immutable — add a new price, make a new payment
 // link, and swap BOTH the number and the URL here so they never drift apart.
 const products = {
-  // Stripe "Detailing Playbook" — $499 one-off.
-  basic: { name: 'Basic — Detailing Playbook', desc: 'SOPs, chemicals, equipment, brand design & social media course', upfront: 499, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/8x25kF1Lo5kc5wy8skbQY08' },
+  // Stripe "Detailing Package" — $499 one-off.
+  basic: { name: 'Basic — The Full Package', desc: 'SOPs, chemicals, equipment, brand design & social media course', upfront: 499, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/8x25kF1Lo5kc5wy8skbQY08' },
   // Stripe "Website Creation" — $749 one-off.
   core: { name: 'Core — Website + SEO', desc: 'Custom-built conversion website with SEO built in', upfront: 749, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/4gMcN7du69As2km4c4bQY01' },
   // Stripe "Meta Ad Management" — $999/mo recurring, no trial, so the first $999
@@ -388,7 +388,7 @@ document.addEventListener('click', (e) => {
 // ─── Service info overlay ───
 const serviceInfo = {
   basic: {
-    title: 'BASIC — DETAILING PLAYBOOK',
+    title: 'BASIC — THE FULL PACKAGE',
     price: '$499 one-time',
     sections: [
       { title: 'THE SYSTEMS', text: 'The fastest, most efficient SOPs for mobile detailing — the exact step-by-step process we use to detail cars quickly without sacrificing quality, so you can take on more jobs in less time.' },
