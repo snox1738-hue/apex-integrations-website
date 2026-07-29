@@ -165,10 +165,13 @@ function goToSection(index) {
   void sections[currentIndex].offsetWidth
   sections[currentIndex].classList.add('section--active')
 
-  // After entrance animation completes, lock content visible so it shows behind next section
-  // Services cards stagger to 2.1s, contact fade is 8.5s, others ~1.4s
-  const durations = { 1: 2100, 3: 8500 } // index 1 = services, index 3 = contact
-  const animDuration = durations[currentIndex] || 1400
+  // After entrance animation completes, lock content visible so it shows behind next section.
+  // Keyed by section id rather than index — index-keyed durations silently break
+  // whenever a section is added or removed (removing Reviews shifted contact from
+  // 3 to 2, which cut its 8s fade short and snapped it to full brightness).
+  // Services cards stagger to 2.1s, contact's slow fade is 8s + 0.3s delay, others ~1.4s.
+  const durations = { services: 2100, contact: 8500 }
+  const animDuration = durations[sections[currentIndex].id] || 1400
   setTimeout(() => {
     sections[currentIndex].classList.add('section--has-shown')
   }, animDuration)
