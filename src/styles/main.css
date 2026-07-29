@@ -333,6 +333,39 @@ body {
   margin: 0;
 }
 
+.bundle-mgmt-btn {
+  align-self: flex-start;
+  margin-top: clamp(14px, 2vh, 22px);
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1vw, 14px);
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 999px;
+  padding: clamp(10px, 1.2vh, 14px) clamp(20px, 2vw, 32px);
+  font-family: inherit;
+  font-size: clamp(8px, 0.65vw, 10px);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bundle-mgmt-btn:hover {
+  border-color: rgba(255, 250, 220, 0.5);
+  box-shadow: 0 0 8px 1px rgba(255, 250, 220, 0.4), 0 0 20px 2px rgba(255, 240, 180, 0.2);
+}
+
+.bundle-mgmt-btn__sub {
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  opacity: 0.55;
+  font-size: 0.95em;
+}
+
 /* ─── Reviews, Pricing, Contact sections ─── */
 .section--reviews,
 .section--pricing,
@@ -1585,13 +1618,15 @@ body {
   letter-spacing: 0.04em;
 }
 
-.service-panel .service-detail__actions {
+.service-panel .service-detail__actions,
+.service-panel .bundle-mgmt-btn {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .service-panel.panel--open .service-detail__actions { opacity: 1; transform: translateY(0); transition-delay: 2.4s; }
+.service-panel.panel--open .bundle-mgmt-btn { opacity: 1; transform: translateY(0); transition-delay: 2.6s; }
 
 /* Animate service detail content in */
 .service-panel .service-detail__title,
@@ -1676,6 +1711,9 @@ body {
     align-items: center;
   }
   .service-detail__cta {
+    align-self: center;
+  }
+  .bundle-mgmt-btn {
     align-self: center;
   }
 }

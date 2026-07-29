@@ -216,10 +216,20 @@ function updateActiveNav() {
 
 // ─── Cart system ───
 const cart = []
+// Every price below is verified to match its Stripe payment link exactly
+// (checked against the live checkout pages on 2026-07-28). If a price changes,
+// remember Stripe prices are immutable — add a new price, make a new payment
+// link, and swap BOTH the number and the URL here so they never drift apart.
 const products = {
-  voice: { name: 'Meta Ad Development / Management', desc: 'Meta ads strategy, scripting & management', upfront: 250, monthly: 749, available: true, paymentLink: 'https://buy.stripe.com/8x2dRbeya7sk5wy5g8bQY03' }, // $999 today then $749/mo (Stripe link swapped 2026-07-20)
-  website: { name: 'Website Creation', desc: 'Custom-built conversion website', upfront: 749, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/4gMcN7du69As2km4c4bQY01' },
-  leads: { name: 'Generative Engine Optimization', desc: 'AI search visibility & optimization', upfront: 0, monthly: 299, available: true, paymentLink: 'https://buy.stripe.com/eVqfZjdu6280aQS4c4bQY00' }
+  // Stripe "Detailing Playbook" — $499 one-off.
+  basic: { name: 'Basic — Detailing Playbook', desc: 'SOPs, chemicals, equipment, brand design & social media course', upfront: 499, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/8x25kF1Lo5kc5wy8skbQY08' },
+  // Stripe "Website Creation" — $749 one-off.
+  core: { name: 'Core — Website + SEO', desc: 'Custom-built conversion website with SEO built in', upfront: 749, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/4gMcN7du69As2km4c4bQY01' },
+  // Stripe "Meta Ad Management" — $999/mo recurring, no trial, so the first $999
+  // is charged at signup and $999/mo after.
+  elite: { name: 'Elite — Meta Ad Creation & Management', desc: 'Meta ads strategy, creative, scripting & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/6oU9AV75IcMEe34380bQY05' },
+  // Stripe "CORE--Website management SEO RECURRING" — $249/mo recurring.
+  management: { name: 'Bundle Management', desc: 'Unlimited website edits + ongoing SEO', upfront: 0, monthly: 249, available: true, paymentLink: 'https://buy.stripe.com/fZu5kF61E8wof788skbQY06' }
 }
 
 const cartItemsEl = document.getElementById('cart-items')
@@ -374,37 +384,46 @@ document.addEventListener('click', (e) => {
 
 // ─── Service info overlay ───
 const serviceInfo = {
-  voice: {
-    title: 'META AD DEVELOPMENT / MANAGEMENT',
-    price: '$999 to start, then $749/mo + ad spend',
+  basic: {
+    title: 'BASIC — DETAILING PLAYBOOK',
+    price: '$499 one-time',
     sections: [
-      { title: 'CAMPAIGN STRATEGY & MANAGEMENT', text: 'We plan, build, launch, and optimize Facebook and Instagram campaigns around your goals. Objectives, budgets, bidding, and placements are managed daily — engineered for return on ad spend, not vanity metrics.' },
-      { title: 'CREATIVE SCRIPTING', text: 'Every winning ad starts with a script that sells. We write the hooks, angles, and copy for your campaigns — proven frameworks tailored to your brand and offer. You provide the footage or photos; we turn them into ads that convert.' },
-      { title: 'AUDIENCE TARGETING', text: 'Custom audiences built on demographics, interests, and behaviors specific to your ideal customers. Lookalike audiences, retargeting, and local geo-targeting maximize every dollar of ad spend.' },
-      { title: 'LANDING PAGES & FUNNELS', text: 'Dedicated landing pages built for each campaign. When a potential customer clicks your ad, they land on a page designed to do one thing — get them to book. No distractions, no clutter, just conversion.' },
-      { title: 'MONTHLY PERFORMANCE REPORTS', text: 'Full transparency. Every month you get a breakdown of impressions, clicks, leads generated, cost per lead, and booked appointments. You\'ll know exactly what your investment is producing.' }
+      { title: 'THE SYSTEMS', text: 'The fastest, most efficient SOPs for mobile detailing — the exact step-by-step process we use to detail cars quickly without sacrificing quality, so you can take on more jobs in less time.' },
+      { title: 'THE CHEMICALS', text: 'No more trying to find the right chemicals and wasting money on products that don\'t work. We give you the exact chemicals to use for every part of the job — what actually gets cars clean.' },
+      { title: 'THE EQUIPMENT', text: 'The best equipment, brand by brand — vacuums, air compressors, brushes, and everything else you need. Skip the trial and error and buy the right gear the first time.' },
+      { title: 'CUSTOM BRAND DESIGN', text: 'On top of the playbook, we custom design your business cards, flyers, tent/pop-up signage, and work apparel — shirts, hats, and more — so your business looks professional from day one.' },
+      { title: 'SOCIAL MEDIA GROWTH COURSE', text: 'A complete blueprint, start to finish, showing you exactly how to gain traction on social media and actually grow — not theory, a step-by-step plan.' }
     ]
   },
-  website: {
-    title: 'WEBSITE CREATION',
+  core: {
+    title: 'CORE — WEBSITE + SEO',
     price: '$749 one-time',
     sections: [
       { title: 'CUSTOM DESIGN & BUILD', text: 'No templates. No drag-and-drop builders. Your site is designed from scratch to match your business\'s brand, personality, and goals. Every element is intentional — from the layout to the color palette to the call-to-action placement.' },
       { title: 'CONVERSION ENGINEERING', text: 'Beautiful isn\'t enough. Every page is built to convert visitors into customers. Strategic placement of booking buttons, trust signals, testimonials, and contact forms. We study what makes customers click — and we build around that.' },
       { title: 'SEO FOUNDATION', text: 'Your site launches with proper on-page SEO — meta tags, schema markup, Google Business integration, local keywords, fast load times. This is the foundation that gets you ranking for your services in your area.' },
-      { title: 'SEO & LAUNCH OPTIMIZATION', text: 'Your site launches with full search engine optimization, performance tuning, Google ranking setup, security configuration, and fast hosting. Everything you need to start ranking from day one.' },
-      { title: 'MOBILE-FIRST & FAST', text: 'Over 60% of local searches happen on phones. Your site loads in under 2 seconds, looks perfect on every device, and passes every Google speed test. Slow sites lose customers — yours won\'t.' }
+      { title: 'MOBILE-FIRST & FAST', text: 'Over 60% of local searches happen on phones. Your site loads in under 2 seconds, looks perfect on every device, and passes every Google speed test. Slow sites lose customers — yours won\'t.' },
+      { title: 'WANT ONGOING SEO & EDITS?', text: 'Core covers the build. If you want us to keep making changes to your site and keep actively working your SEO every month, add Bundle Management — $249/mo, covers both.' }
     ]
   },
-  leads: {
-    title: 'GENERATIVE ENGINE OPTIMIZATION',
-    price: '$299/mo',
+  elite: {
+    title: 'ELITE — META AD CREATION & MANAGEMENT',
+    price: '$999/mo — first month charged today',
     sections: [
-      { title: 'AI SEARCH VISIBILITY', text: 'Millions of customers now ask ChatGPT, Gemini, and Google AI for recommendations instead of scrolling through search results. GEO is the practice of making sure the answer those engines give is your business.' },
-      { title: 'ENTITY & CONTENT OPTIMIZATION', text: 'AI engines need to understand exactly who you are, what you do, and where you operate. We structure your web presence — schema markup, business data, and authoritative content — so you\'re cited accurately and often.' },
-      { title: 'REVIEWS & AUTHORITY SIGNALS', text: 'AI recommends businesses it trusts. We strengthen the trust signals engines weigh most: consistent citations, review velocity and quality, and mentions on the sources AI models actually read.' },
-      { title: 'AI VISIBILITY MONITORING', text: 'We track how the major AI engines answer the questions your customers actually ask — and measure your share of those recommendations month over month against your competitors.' },
-      { title: 'MONTHLY REPORTING', text: 'A clear monthly report on where you appear in AI answers, what changed, and what we\'re doing next. You\'ll always know how your visibility is trending.' }
+      { title: 'CAMPAIGN STRATEGY & MANAGEMENT', text: 'We plan, build, launch, and optimize Facebook and Instagram campaigns around your goals. Objectives, budgets, bidding, and placements are managed daily — engineered for return on ad spend, not vanity metrics.' },
+      { title: 'CREATIVE SCRIPTING & EDITING', text: 'Every winning ad starts with a script that sells. We write, script, and edit the ads themselves — hooks, angles, copy, and cuts tailored to your brand and offer.' },
+      { title: 'LANDING PAGES & FUNNELS', text: 'Dedicated landing pages built for each campaign. When a potential customer clicks your ad, they land on a page designed to do one thing — get them to book. No distractions, no clutter, just conversion.' },
+      { title: 'AUDIENCE TARGETING', text: 'Custom audiences built on demographics, interests, and behaviors specific to your ideal customers. Lookalike audiences, retargeting, and local geo-targeting maximize every dollar of ad spend.' },
+      { title: 'MONTHLY PERFORMANCE REPORTS', text: 'Full transparency. Every month you get a breakdown of impressions, clicks, leads generated, cost per lead, and booked appointments. You\'ll know exactly what your investment is producing.' }
+    ]
+  },
+  management: {
+    title: 'BUNDLE MANAGEMENT',
+    price: '$249/mo',
+    sections: [
+      { title: 'UNLIMITED WEBSITE EDITS', text: 'Change anything on your site, whenever you want — copy, photos, pricing, hours, new pages. Just ask, and it\'s done. No per-edit invoices.' },
+      { title: 'ONGOING SEO', text: 'SEO isn\'t a one-time setup — it\'s continuous work. We keep actively optimizing your site every month so you stay on top of search instead of slipping behind competitors.' },
+      { title: 'ONE FLAT MONTHLY FEE', text: 'One predictable monthly fee covers both website management and SEO — no separate vendors to manage, no surprise bills.' }
     ]
   }
 }
@@ -767,9 +786,10 @@ requestAnimationFrame(() => {
 
 // Service card click → open detail panel
 const panels = {
-  voice: document.getElementById('voice-panel'),
-  website: document.getElementById('website-panel'),
-  leads: document.getElementById('leads-panel'),
+  basic: document.getElementById('basic-panel'),
+  core: document.getElementById('core-panel'),
+  elite: document.getElementById('elite-panel'),
+  management: document.getElementById('management-panel'),
 }
 
 function closeAllPanels(instant = false) {
