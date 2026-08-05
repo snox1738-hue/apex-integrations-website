@@ -224,13 +224,18 @@ const cart = []
 // remember Stripe prices are immutable — add a new price, make a new payment
 // link, and swap BOTH the number and the URL here so they never drift apart.
 const products = {
-  // Stripe "Detailing Package" — $499 one-off.
-  basic: { name: 'Basic — The Full Package', desc: 'SOPs, chemicals, equipment, brand design & social media course', upfront: 499, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/8x25kF1Lo5kc5wy8skbQY08' },
+  // Tier IDs map to display names as: basic = website, core = Meta ads,
+  // elite = the full package. (The ID is NOT the price tier order — it's just
+  // a stable key wired to a fixed Stripe product, so never reassign a link.)
   // Stripe "Website Creation" — $749 one-off.
-  core: { name: 'Core — Website + SEO', desc: 'Custom-built conversion website with SEO built in', upfront: 749, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/4gMcN7du69As2km4c4bQY01' },
+  basic: { name: 'Basic — Website + SEO', desc: 'Custom-built conversion website with SEO built in', upfront: 749, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/4gMcN7du69As2km4c4bQY01' },
   // Stripe "Meta Ad Management" — $999/mo recurring, no trial, so the first $999
   // is charged at signup and $999/mo after.
-  elite: { name: 'Elite — Meta Ad Creation & Management', desc: 'Meta ads strategy, creative, scripting & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/6oU9AV75IcMEe34380bQY05' },
+  core: { name: 'Core — Meta Ad Creation & Management', desc: 'Meta ads strategy, creative, scripting & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/6oU9AV75IcMEe34380bQY05' },
+  // Elite (the full package) — $1499 one-off. Stripe payment link added 2026-08-05.
+  // Keep the price and the link in lockstep — Stripe prices are immutable, so a
+  // price change means a new price + new link, swapped in together.
+  elite: { name: 'Elite — The Full Package', desc: 'Website + social media guide + Meta ads set up & run for month one, plus an optional full brand redesign', upfront: 1499, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/eVqfZjahUcME8IK4c4bQY09' },
   // Stripe "CORE--Website management SEO RECURRING" — $249/mo recurring.
   management: { name: 'Bundle Management', desc: 'Unlimited website edits + ongoing SEO', upfront: 0, monthly: 249, available: true, paymentLink: 'https://buy.stripe.com/fZu5kF61E8wof788skbQY06' }
 }
@@ -240,6 +245,7 @@ const cartEmptyEl = document.getElementById('cart-empty')
 const cartFooterEl = document.getElementById('cart-footer')
 const cartCountEl = document.getElementById('cart-count')
 const cartTotalEl = document.getElementById('cart-total')
+const cartNoteEl = document.getElementById('cart-note')
 const cartIconLink = document.querySelector('.nav__link--icon')
 
 function addToCart(productId) {
@@ -339,6 +345,15 @@ function renderCart() {
     cartTotalEl.innerHTML = '$' + dueToday.toLocaleString()
   }
 
+  // Note reflects the actual cart: only mention recurring billing when
+  // something in the cart is genuinely monthly. A one-time item (e.g. the
+  // $1499 Ultimate) must never say "billed monthly."
+  if (cartNoteEl) {
+    cartNoteEl.textContent = totalMonthly > 0
+      ? 'First payment covers setup + month one. Then billed monthly. Cancel anytime.'
+      : 'One-time payment.'
+  }
+
   // Remove button listeners
   cartItemsEl.querySelectorAll('[data-remove]').forEach(btn => {
     btn.addEventListener('click', () => removeFromCart(btn.dataset.remove))
@@ -388,29 +403,18 @@ document.addEventListener('click', (e) => {
 // ─── Service info overlay ───
 const serviceInfo = {
   basic: {
-    title: 'BASIC — THE FULL PACKAGE',
-    price: '$499 one-time',
-    sections: [
-      { title: 'THE SYSTEMS', text: 'The fastest, most efficient SOPs for mobile detailing — the exact step-by-step process we use to detail cars quickly without sacrificing quality, so you can take on more jobs in less time.' },
-      { title: 'THE CHEMICALS', text: 'No more trying to find the right chemicals and wasting money on products that don\'t work. We give you the exact chemicals to use for every part of the job — what actually gets cars clean.' },
-      { title: 'THE EQUIPMENT', text: 'The best equipment, brand by brand — vacuums, air compressors, brushes, and everything else you need. Skip the trial and error and buy the right gear the first time.' },
-      { title: 'CUSTOM BRAND DESIGN', text: 'On top of the playbook, we custom design your business cards, flyers, tent/pop-up signage, and work apparel — shirts, hats, and more — so your business looks professional from day one.' },
-      { title: 'SOCIAL MEDIA GROWTH COURSE', text: 'A complete blueprint, start to finish, showing you exactly how to gain traction on social media and actually grow — not theory, a step-by-step plan.' }
-    ]
-  },
-  core: {
-    title: 'CORE — WEBSITE + SEO',
+    title: 'BASIC — WEBSITE + SEO',
     price: '$749 one-time',
     sections: [
       { title: 'CUSTOM DESIGN & BUILD', text: 'No templates. No drag-and-drop builders. Your site is designed from scratch to match your business\'s brand, personality, and goals. Every element is intentional — from the layout to the color palette to the call-to-action placement.' },
       { title: 'CONVERSION ENGINEERING', text: 'Beautiful isn\'t enough. Every page is built to convert visitors into customers. Strategic placement of booking buttons, trust signals, testimonials, and contact forms. We study what makes customers click — and we build around that.' },
       { title: 'SEO FOUNDATION', text: 'Your site launches with proper on-page SEO — meta tags, schema markup, Google Business integration, local keywords, fast load times. This is the foundation that gets you ranking for your services in your area.' },
       { title: 'MOBILE-FIRST & FAST', text: 'Over 60% of local searches happen on phones. Your site loads in under 2 seconds, looks perfect on every device, and passes every Google speed test. Slow sites lose customers — yours won\'t.' },
-      { title: 'WANT ONGOING SEO & EDITS?', text: 'Core covers the build. If you want us to keep making changes to your site and keep actively working your SEO every month, add Bundle Management — $249/mo, covers both.' }
+      { title: 'WANT ONGOING SEO & EDITS?', text: 'Basic covers the build. If you want us to keep making changes to your site and keep actively working your SEO every month, add Bundle Management — $249/mo, covers both.' }
     ]
   },
-  elite: {
-    title: 'ELITE — META AD CREATION & MANAGEMENT',
+  core: {
+    title: 'CORE — META AD CREATION & MANAGEMENT',
     price: '$999/mo — first month charged today',
     sections: [
       { title: 'CAMPAIGN STRATEGY & MANAGEMENT', text: 'We plan, build, launch, and optimize Facebook and Instagram campaigns around your goals. Objectives, budgets, bidding, and placements are managed daily — engineered for return on ad spend, not vanity metrics.' },
@@ -418,6 +422,16 @@ const serviceInfo = {
       { title: 'LANDING PAGES & FUNNELS', text: 'Dedicated landing pages built for each campaign. When a potential customer clicks your ad, they land on a page designed to do one thing — get them to book. No distractions, no clutter, just conversion.' },
       { title: 'AUDIENCE TARGETING', text: 'Custom audiences built on demographics, interests, and behaviors specific to your ideal customers. Lookalike audiences, retargeting, and local geo-targeting maximize every dollar of ad spend.' },
       { title: 'MONTHLY PERFORMANCE REPORTS', text: 'Full transparency. Every month you get a breakdown of impressions, clicks, leads generated, cost per lead, and booked appointments. You\'ll know exactly what your investment is producing.' }
+    ]
+  },
+  elite: {
+    title: 'ELITE — THE FULL PACKAGE',
+    price: '$1499 one-time',
+    sections: [
+      { title: 'CUSTOM WEBSITE', text: 'A custom-built, conversion-ready website — designed from scratch to match your brand, engineered to turn visitors into booked customers, with SEO built in from day one. Your digital storefront, done right.' },
+      { title: 'SOCIAL MEDIA GUIDE', text: 'Our complete social media growth guide — the exact step-by-step blueprint for getting found, building an audience, and turning followers into paying customers. No theory, just the plan.' },
+      { title: 'META ADS — SET UP & RUN', text: 'We set up your Facebook and Instagram ads and run them for your entire first month — strategy, creative, targeting, and daily optimization. Your campaigns go live and start working while you focus on the work.' },
+      { title: 'OPTIONAL FULL BRAND REDESIGN', text: 'Want a fresh look to match? We\'ll redesign your door hangers, logo, A-frame sign, flyers — everything. Print-ready and on-brand, so every touchpoint looks like an established business.' }
     ]
   },
   management: {
