@@ -233,10 +233,11 @@ const products = {
   // is charged at signup and $999/mo after.
   core: { name: 'Core — Meta Ad Creation & Management', desc: 'Meta ads strategy, creative, scripting & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/6oU9AV75IcMEe34380bQY05' },
   // Elite BASE — Stripe "ELITE-THE COMPLETE PACKAGE" (link eVqf...): $1,499 due
-  // today ($499 setup + $1,000 first month), then $1,000/mo, NO free trial.
-  // Modeled as upfront $499 + monthly $1,000 so due-today = $1,499 (setup + month
-  // one, both charged now) and ongoing = $1,000/mo.
-  elite: { name: 'Elite — The Full Package', desc: 'Website + social media guide + Meta ads set up & run, plus an optional full brand redesign', upfront: 499, monthly: 1000, available: true, paymentLink: 'https://buy.stripe.com/eVqfZjahUcME8IK4c4bQY09' },
+  // today, NO free trial. DISPLAYED as $1,499 to start, then $999/mo (modeled as
+  // upfront $500 + monthly $999 so due-today = $1,499 and ongoing shows $999/mo).
+  // NOTE: the Stripe link actually bills $1,000/mo — update the Stripe price to
+  // $999/mo (new price + new link) so the charge matches this display.
+  elite: { name: 'Elite — The Full Package', desc: 'Website + social media guide + Meta ads set up & run, plus an optional full brand redesign', upfront: 500, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/eVqfZjahUcME8IK4c4bQY09' },
   // Elite WITH Website Management — Stripe "ELITE - FULL PACKAGE + WEBSITE
   // MANAGEMENT" (link cNid...): $1,499 today, then $1,149/mo after 30 days free.
   // The "+ Website Management" button on the Elite card SWAPS between this and the
@@ -482,13 +483,13 @@ const serviceInfo = {
   },
   elite: {
     title: 'ELITE — THE FULL PACKAGE',
-    price: '$1,499 to start, then $1,000/mo — or $1,149/mo with Website Management',
+    price: '$1,499 to start, then $999/mo — or $1,149/mo with Website Management',
     sections: [
       { title: 'CUSTOM WEBSITE', text: 'A custom-built, conversion-ready website — designed from scratch to match your brand, engineered to turn visitors into booked customers, with SEO built in from day one. Your digital storefront, done right.' },
       { title: 'SOCIAL MEDIA GUIDE', text: 'Our complete social media growth guide — the exact step-by-step blueprint for getting found, building an audience, and turning followers into paying customers. No theory, just the plan.' },
       { title: 'META ADS — SET UP & RUN', text: 'We set up your Facebook and Instagram ads and run them for your entire first month — strategy, creative, targeting, and daily optimization. Your campaigns go live and start working while you focus on the work.' },
       { title: 'OPTIONAL FULL BRAND REDESIGN', text: 'Want a fresh look to match? We\'ll redesign your door hangers, logo, A-frame sign, flyers — everything. Print-ready and on-brand, so every touchpoint looks like an established business.' },
-      { title: 'ADD WEBSITE MANAGEMENT', text: 'Keep it all running for you — unlimited website edits, active monthly SEO, and domain management. Add it onto Elite for $149/mo more (your Elite goes from $1,000/mo to $1,149/mo).' }
+      { title: 'ADD WEBSITE MANAGEMENT', text: 'Keep it all running for you — unlimited website edits, active monthly SEO, and domain management. Add it onto Elite for $149/mo more (your Elite goes from $999/mo to $1,149/mo).' }
     ]
   },
   management: {
