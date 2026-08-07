@@ -243,12 +243,12 @@ const products = {
   // The "+ Website Management" button on the Elite card SWAPS between this and the
   // base above — they're two separate Stripe products, so only ONE is ever in the
   // cart at a time (never both, or checkout would charge the setup twice).
-  eliteManaged: { name: 'Elite — The Full Package + Website Management', desc: 'Everything in the full package, plus ongoing website management, SEO & domain management', upfront: 1499, monthly: 1149, monthlyTrialDays: 30, available: true, paymentLink: 'https://buy.stripe.com/cNidRbgGiaEw7EGfUMbQY0a' },
+  eliteManaged: { name: 'Elite — The Full Package + Website Management', desc: 'Everything in the full package, plus ongoing website management & domain management', upfront: 1499, monthly: 1149, monthlyTrialDays: 30, available: true, paymentLink: 'https://buy.stripe.com/cNidRbgGiaEw7EGfUMbQY0a' },
   // Stripe "CORE--Website management SEO RECURRING" — $249/mo recurring.
   // Now includes domain management — if the client wants a domain email, we buy
   // the domain and set it up for them. Standalone add-on for non-Elite clients;
   // on Elite it's the "+ Website Management" upgrade (base $1,000/mo → $1,149/mo).
-  management: { name: 'Bundle Management', desc: 'Unlimited website edits, ongoing SEO & domain management', upfront: 0, monthly: 249, available: true, paymentLink: 'https://buy.stripe.com/fZu5kF61E8wof788skbQY06' }
+  management: { name: 'Bundle Management', desc: 'Unlimited website edits & domain management', upfront: 0, monthly: 249, available: true, paymentLink: 'https://buy.stripe.com/fZu5kF61E8wof788skbQY06' }
 }
 
 const cartItemsEl = document.getElementById('cart-items')
@@ -465,9 +465,9 @@ const serviceInfo = {
     sections: [
       { title: 'CUSTOM DESIGN & BUILD', text: 'No templates. No drag-and-drop builders. Your site is designed from scratch to match your business\'s brand, personality, and goals. Every element is intentional — from the layout to the color palette to the call-to-action placement.' },
       { title: 'CONVERSION ENGINEERING', text: 'Beautiful isn\'t enough. Every page is built to convert visitors into customers. Strategic placement of booking buttons, trust signals, testimonials, and contact forms. We study what makes customers click — and we build around that.' },
-      { title: 'SEO FOUNDATION', text: 'Your site launches with proper on-page SEO — meta tags, schema markup, Google Business integration, local keywords, fast load times. This is the foundation that gets you ranking for your services in your area.' },
+      { title: 'SEO BUILT INTO THE CODE', text: 'Your site launches with SEO built into the backend code — meta tags, schema markup, Google Business integration, local keywords, and fast load times, so you\'re set up to rank from day one. Built in at launch — not an ongoing service.' },
       { title: 'MOBILE-FIRST & FAST', text: 'Over 60% of local searches happen on phones. Your site loads in under 2 seconds, looks perfect on every device, and passes every Google speed test. Slow sites lose customers — yours won\'t.' },
-      { title: 'WANT ONGOING SEO & EDITS?', text: 'Basic covers the build. If you want us to keep making changes to your site and keep actively working your SEO every month, add Bundle Management — $249/mo, covers both.' }
+      { title: 'WANT ONGOING EDITS?', text: 'Basic covers the build. If you want us to keep making changes to your site — copy, photos, pricing, new pages — add Bundle Management — $249/mo.' }
     ]
   },
   core: {
@@ -486,10 +486,10 @@ const serviceInfo = {
     price: '$1,499 to start, then $999/mo — or $1,149/mo with Website Management',
     sections: [
       { title: 'CUSTOM WEBSITE', text: 'A custom-built, conversion-ready website — designed from scratch to match your brand, engineered to turn visitors into booked customers, with SEO built in from day one. Your digital storefront, done right.' },
-      { title: 'SOCIAL MEDIA GUIDE', text: 'Our complete social media growth guide — the exact step-by-step blueprint for getting found, building an audience, and turning followers into paying customers. No theory, just the plan.' },
+      { title: 'DETAIL PRO — ELITE TIER, FREE FOR A YEAR', text: 'One full year of Detail Pro on the Elite tier — completely free, on us. The top plan of our detailing app: run your whole operation — customers, appointments, scheduling, and more — unlocked for 12 months.' },
       { title: 'META ADS — SET UP & RUN', text: 'We set up your Facebook and Instagram ads and run them for your entire first month — strategy, creative, targeting, and daily optimization. Your campaigns go live and start working while you focus on the work.' },
       { title: 'OPTIONAL FULL BRAND REDESIGN', text: 'Want a fresh look to match? We\'ll redesign your door hangers, logo, A-frame sign, flyers — everything. Print-ready and on-brand, so every touchpoint looks like an established business.' },
-      { title: 'ADD WEBSITE MANAGEMENT', text: 'Keep it all running for you — unlimited website edits, active monthly SEO, and domain management. Add it onto Elite for $149/mo more (your Elite goes from $999/mo to $1,149/mo).' }
+      { title: 'ADD WEBSITE MANAGEMENT', text: 'Keep it all running for you — unlimited website edits and domain management. Add it onto Elite for $149/mo more (your Elite goes from $999/mo to $1,149/mo).' }
     ]
   },
   management: {
@@ -497,9 +497,8 @@ const serviceInfo = {
     price: '$249/mo — or $149/mo bundled with Elite',
     sections: [
       { title: 'UNLIMITED WEBSITE EDITS', text: 'Change anything on your site, whenever you want — copy, photos, pricing, hours, new pages. Just ask, and it\'s done. No per-edit invoices.' },
-      { title: 'ONGOING SEO', text: 'SEO isn\'t a one-time setup — it\'s continuous work. We keep actively optimizing your site every month so you stay on top of search instead of slipping behind competitors.' },
       { title: 'DOMAIN MANAGEMENT', text: 'Your domain is handled for you. Want a professional domain email (you@yourbusiness.com)? We buy the domain and set the whole thing up — no registrars to wrangle, no DNS headaches.' },
-      { title: 'ONE FLAT MONTHLY FEE', text: 'One predictable monthly fee covers website management, SEO, and domain management — no separate vendors, no surprise bills. Add it onto the Elite package and it\'s $149/mo — $100 off.' }
+      { title: 'ONE FLAT MONTHLY FEE', text: 'One predictable monthly fee covers website management and domain management — no separate vendors, no surprise bills. Add it onto the Elite package and it\'s $149/mo — $100 off.' }
     ]
   }
 }
