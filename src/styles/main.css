@@ -377,6 +377,24 @@ body {
   font-size: 0.95em;
 }
 
+/* Elite's discounted Bundle Management add-on: struck-through was-price + in-cart state */
+.bundle-mgmt-btn__was {
+  opacity: 0.5;
+  text-decoration: line-through;
+  margin-right: 0.35em;
+}
+
+.bundle-mgmt-btn--addon.added {
+  border-color: rgba(180, 150, 30, 0.6);
+  background: rgba(255, 250, 220, 0.35);
+}
+
+.bundle-mgmt-btn--addon.added .bundle-mgmt-btn__label::after {
+  content: ' ✓ ADDED';
+  font-weight: 700;
+  color: #5a4a00;
+}
+
 /* ─── Reviews, Pricing, Contact sections ─── */
 .section--reviews,
 .section--pricing,
