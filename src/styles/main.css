@@ -1960,7 +1960,9 @@ body {
 
   .service-detail {
     grid-template-columns: 1fr;
-    padding: 60px 20px 40px;
+    /* Generous bottom padding + safe-area so the ADD TO CART button always
+       clears Safari's bottom toolbar and there is real room to scroll to it */
+    padding: 60px 20px calc(120px + env(safe-area-inset-bottom, 0px));
     gap: 24px;
   }
 
