@@ -1947,6 +1947,15 @@ body {
   .panel {
     position: fixed;
     z-index: 200 !important;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Let panel content grow past the viewport and scroll — long panels
+     (e.g. Elite) were clipping their ADD TO CART button with no way to reach it */
+  .panel__inner {
+    height: auto;
+    min-height: 100%;
   }
 
   .service-detail {
