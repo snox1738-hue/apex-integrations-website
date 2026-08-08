@@ -1426,28 +1426,13 @@ body {
 }
 
 .service-price__amount {
-  position: relative;
   display: inline-block;
-  font-family: 'Oxanium', Inter, sans-serif;
+  font-family: -apple-system, system-ui, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(1.9rem, 2.9vw, 2.8rem);
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1;
   color: #1a1a1a;
-}
-
-/* Futuristic "slice" cut through the numerals — a hairline bar painted in the
-   panel background colour (#c3c5b7) so it reads as a clean cut in the digits. */
-.service-price__amount::after {
-  content: '';
-  position: absolute;
-  left: -4%;
-  right: -4%;
-  top: 54%;
-  height: 0.09em;
-  background: #c3c5b7;
-  transform: skewY(-5deg);
-  pointer-events: none;
 }
 
 .service-price__slash {
@@ -1490,9 +1475,9 @@ body {
 }
 
 .service-price__was {
-  font-family: 'Oxanium', Inter, sans-serif;
+  font-family: -apple-system, system-ui, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(0.85rem, 1.1vw, 1.1rem);
-  font-weight: 500;
+  font-weight: 600;
   color: rgba(0, 0, 0, 0.35);
   text-decoration-thickness: 1px;
   text-decoration-color: rgba(0, 0, 0, 0.4);
@@ -1500,7 +1485,7 @@ body {
 
 .service-price__amount--now {
   color: #1a1a1a;
-  font-weight: 600;
+  font-weight: 700;
   font-size: clamp(1.9rem, 2.9vw, 2.8rem);
 }
 
