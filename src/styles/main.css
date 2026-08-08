@@ -1426,6 +1426,7 @@ body {
 }
 
 .service-price__amount {
+  position: relative;
   display: inline-block;
   font-family: -apple-system, system-ui, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(1.9rem, 2.9vw, 2.8rem);
@@ -1433,6 +1434,19 @@ body {
   letter-spacing: -0.02em;
   line-height: 1;
   color: #1a1a1a;
+}
+
+/* macOS-clock style "slit" — a clean horizontal cut sliced through the
+   numerals, painted in the panel background colour (#c3c5b7). */
+.service-price__amount::after {
+  content: '';
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  top: 52%;
+  height: 0.07em;
+  background: #c3c5b7;
+  pointer-events: none;
 }
 
 .service-price__slash {
@@ -1526,6 +1540,8 @@ body {
 /* macOS lock-screen clock look — San Francisco (system-ui) at a heavy weight,
    tight and clean. Falls back gracefully off Apple devices. */
 .countdown__unit b {
+  position: relative;
+  display: inline-block;
   font-family: -apple-system, system-ui, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(1.4rem, 2vw, 1.9rem);
   font-weight: 700;
@@ -1533,6 +1549,18 @@ body {
   color: #1a1a1a;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
+}
+
+/* Same macOS-clock slit through the countdown digits */
+.countdown__unit b::after {
+  content: '';
+  position: absolute;
+  left: -8%;
+  right: -8%;
+  top: 52%;
+  height: 0.07em;
+  background: #c3c5b7;
+  pointer-events: none;
 }
 
 .countdown__unit i {
