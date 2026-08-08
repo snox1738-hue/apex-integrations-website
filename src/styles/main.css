@@ -1443,8 +1443,8 @@ body {
   position: absolute;
   left: -3%;
   right: -3%;
-  top: 50%;
-  height: 0.13em;
+  top: 60%;
+  height: 0.1em;
   background: #c3c5b7;
   transform: translateY(-50%);
   pointer-events: none;
@@ -1558,8 +1558,8 @@ body {
   position: absolute;
   left: -8%;
   right: -8%;
-  top: 50%;
-  height: 0.13em;
+  top: 60%;
+  height: 0.1em;
   background: #c3c5b7;
   transform: translateY(-50%);
   pointer-events: none;
