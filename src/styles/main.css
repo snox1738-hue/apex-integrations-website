@@ -1441,11 +1441,12 @@ body {
 .service-price__amount::after {
   content: '';
   position: absolute;
-  left: -2%;
-  right: -2%;
-  top: 52%;
-  height: 0.07em;
+  left: -3%;
+  right: -3%;
+  top: 50%;
+  height: 0.13em;
   background: #c3c5b7;
+  transform: translateY(-50%);
   pointer-events: none;
 }
 
@@ -1557,9 +1558,10 @@ body {
   position: absolute;
   left: -8%;
   right: -8%;
-  top: 52%;
-  height: 0.07em;
+  top: 50%;
+  height: 0.13em;
   background: #c3c5b7;
+  transform: translateY(-50%);
   pointer-events: none;
 }
 
