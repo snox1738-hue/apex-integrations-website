@@ -1426,28 +1426,13 @@ body {
 }
 
 .service-price__amount {
-  position: relative;
   display: inline-block;
-  font-family: -apple-system, system-ui, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(1.9rem, 2.9vw, 2.8rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-family: 'Big Shoulders Stencil Display', -apple-system, system-ui, sans-serif;
+  font-size: clamp(2.2rem, 3.4vw, 3.3rem);
+  font-weight: 800;
+  letter-spacing: 0.01em;
   line-height: 1;
   color: #1a1a1a;
-}
-
-/* macOS-clock style "slit" — a clean horizontal cut sliced through the
-   numerals, painted in the panel background colour (#c3c5b7). */
-.service-price__amount::after {
-  content: '';
-  position: absolute;
-  left: -3%;
-  right: -3%;
-  top: 60%;
-  height: 0.1em;
-  background: #c3c5b7;
-  transform: translateY(-50%);
-  pointer-events: none;
 }
 
 .service-price__slash {
@@ -1490,9 +1475,9 @@ body {
 }
 
 .service-price__was {
-  font-family: -apple-system, system-ui, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(0.85rem, 1.1vw, 1.1rem);
-  font-weight: 600;
+  font-family: 'Big Shoulders Stencil Display', -apple-system, system-ui, sans-serif;
+  font-size: clamp(1rem, 1.3vw, 1.3rem);
+  font-weight: 700;
   color: rgba(0, 0, 0, 0.35);
   text-decoration-thickness: 1px;
   text-decoration-color: rgba(0, 0, 0, 0.4);
@@ -1500,8 +1485,8 @@ body {
 
 .service-price__amount--now {
   color: #1a1a1a;
-  font-weight: 700;
-  font-size: clamp(1.9rem, 2.9vw, 2.8rem);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 3.4vw, 3.3rem);
 }
 
 /* ─── Countdown clock ─── */
@@ -1541,28 +1526,14 @@ body {
 /* macOS lock-screen clock look — San Francisco (system-ui) at a heavy weight,
    tight and clean. Falls back gracefully off Apple devices. */
 .countdown__unit b {
-  position: relative;
   display: inline-block;
-  font-family: -apple-system, system-ui, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(1.4rem, 2vw, 1.9rem);
-  font-weight: 700;
+  font-family: 'Big Shoulders Stencil Display', -apple-system, system-ui, sans-serif;
+  font-size: clamp(1.6rem, 2.3vw, 2.2rem);
+  font-weight: 800;
   line-height: 1;
   color: #1a1a1a;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
-}
-
-/* Same macOS-clock slit through the countdown digits */
-.countdown__unit b::after {
-  content: '';
-  position: absolute;
-  left: -8%;
-  right: -8%;
-  top: 60%;
-  height: 0.1em;
-  background: #c3c5b7;
-  transform: translateY(-50%);
-  pointer-events: none;
+  letter-spacing: 0.01em;
 }
 
 .countdown__unit i {
