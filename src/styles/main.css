@@ -1489,68 +1489,15 @@ body {
   font-size: clamp(2.2rem, 3.4vw, 3.3rem);
 }
 
-/* ─── Countdown clock ─── */
-.countdown {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* ─── Limited-time note ─── */
+.offer-note {
+  display: block;
   margin-top: clamp(14px, 2vh, 22px);
-}
-
-.countdown__heading {
   font-size: clamp(8px, 0.58vw, 9px);
   font-weight: 600;
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: rgba(0, 0, 0, 0.5);
-  margin-bottom: clamp(8px, 1vh, 12px);
-}
-
-.countdown__clock {
-  display: flex;
-  align-items: center;
-  gap: clamp(4px, 0.5vw, 7px);
-}
-
-.countdown__unit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: clamp(40px, 4vw, 56px);
-  padding: clamp(8px, 1vh, 12px) clamp(5px, 0.6vw, 9px);
-  background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.18);
-  border-radius: 0;
-}
-
-/* macOS lock-screen clock look — San Francisco (system-ui) at a heavy weight,
-   tight and clean. Falls back gracefully off Apple devices. */
-.countdown__unit b {
-  display: inline-block;
-  font-family: 'Big Shoulders Stencil Display', -apple-system, system-ui, sans-serif;
-  font-size: clamp(1.6rem, 2.3vw, 2.2rem);
-  font-weight: 800;
-  line-height: 1;
-  color: #1a1a1a;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.01em;
-}
-
-.countdown__unit i {
-  font-size: clamp(6px, 0.45vw, 7px);
-  font-style: normal;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  color: rgba(0, 0, 0, 0.4);
-  margin-top: 6px;
-}
-
-.countdown__sep {
-  font-family: -apple-system, system-ui, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(1.2rem, 1.7vw, 1.6rem);
-  font-weight: 700;
-  color: rgba(0, 0, 0, 0.3);
-  transform: translateY(-7px);
 }
 
 .service-detail__right {
