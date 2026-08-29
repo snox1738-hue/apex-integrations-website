@@ -130,6 +130,22 @@ if (video) {
     else loopEl.addEventListener('playing', hideIntro)
   })
 
+  // The background video must never stay paused: iOS pauses it on app
+  // switch / lock and doesn't always resume on return. Restart the active
+  // layer on every path back to the foreground, and whenever the OS pauses
+  // it for any other reason.
+  function resumeActiveVideo() {
+    if (document.hidden) return
+    const active = introDone ? loopEl : video
+    if (active === video && video.ended) return // handoff to loop in flight
+    if (active.paused && active.style.display !== 'none') active.play().catch(() => {})
+  }
+  document.addEventListener('visibilitychange', resumeActiveVideo)
+  window.addEventListener('pageshow', resumeActiveVideo)
+  window.addEventListener('focus', resumeActiveVideo)
+  video.addEventListener('pause', () => setTimeout(resumeActiveVideo, 150))
+  loopEl.addEventListener('pause', () => setTimeout(resumeActiveVideo, 150))
+
   // Sizing is pure CSS (#bg-video / .bg-layer) — first paint is already at
   // final scale and window resizes are handled without any JS
 }
