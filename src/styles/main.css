@@ -2298,10 +2298,10 @@ body {
     align-items: center;
     justify-content: center;
     position: absolute;
-    bottom: 28px;
+    bottom: 44px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 10;
+    z-index: 100;
     pointer-events: none;
   }
 
@@ -2318,7 +2318,7 @@ body {
   }
 
   .swipe-hint--down {
-    bottom: 28px;
+    bottom: 44px;
   }
 
   /* Home: keep the hand above the 48px bottom fade band */
