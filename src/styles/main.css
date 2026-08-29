@@ -1978,6 +1978,7 @@ body {
     min-height: calc(100vh - 36px);
     min-height: calc(100dvh - 36px);
     padding-bottom: 30px;
+    justify-content: flex-start;
   }
 
   .services-header {
@@ -2009,14 +2010,14 @@ body {
   .card {
     max-width: 100% !important;
     width: 100% !important;
-    padding: 10px 10px 14px;
+    padding: 8px 10px 10px;
     border-radius: 14px;
     flex-direction: column;
   }
 
   .card__visual {
     aspect-ratio: 5 / 3;
-    max-height: 120px;
+    max-height: 104px;
     overflow: hidden;
   }
 
@@ -2284,7 +2285,7 @@ body {
     align-items: center;
     justify-content: center;
     position: absolute;
-    bottom: 10px;
+    bottom: 28px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
@@ -2304,7 +2305,7 @@ body {
   }
 
   .swipe-hint--down {
-    bottom: 10px;
+    bottom: 28px;
   }
 
   .swipe-hint--down .swipe-hint__hand {
