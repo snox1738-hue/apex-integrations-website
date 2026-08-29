@@ -33,7 +33,11 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  background: #c3c5b7;
+  /* Matches the clock video's light backdrop: with no theme-color meta,
+     iOS Safari tints its toolbar from this on the homepage (other pages
+     sample their own section backgrounds), so the video meets the toolbar
+     with no hard line. */
+  background: #d9d6cd;
   font-family: Inter, system-ui, -apple-system, sans-serif;
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
