@@ -146,6 +146,40 @@ if (video) {
   video.addEventListener('pause', () => setTimeout(resumeActiveVideo, 150))
   loopEl.addEventListener('pause', () => setTimeout(resumeActiveVideo, 150))
 
+  // Watchdog: play() alone isn't enough after a long stay in another app —
+  // iOS can kill the decoder so the element "plays" without advancing.
+  // Every 2s while visible, confirm the active video's clock is moving;
+  // nudge it first, and on a second consecutive stall reload the source
+  // and resume from the same spot (loop layer only — never mid-intro).
+  let wdTime = -1
+  let wdStalls = 0
+  setInterval(() => {
+    if (document.hidden) return
+    const active = introDone ? loopEl : video
+    if (active.style.display === 'none') return
+    if (active === video && (video.ended || !introStarted)) return
+    const t = active.currentTime
+    if (t === wdTime) {
+      wdStalls++
+      if (wdStalls === 1) {
+        active.play().catch(() => {})
+      } else if (wdStalls >= 2 && active === loopEl) {
+        const at = t
+        const onceReady = () => {
+          loopEl.removeEventListener('canplay', onceReady)
+          try { loopEl.currentTime = at } catch { /* start over */ }
+          loopEl.play().catch(() => {})
+        }
+        loopEl.addEventListener('canplay', onceReady)
+        loopEl.load()
+        wdStalls = 0
+      }
+    } else {
+      wdStalls = 0
+    }
+    wdTime = t
+  }, 2000)
+
   // Sizing is pure CSS (#bg-video / .bg-layer) — first paint is already at
   // final scale and window resizes are handled without any JS
 }
