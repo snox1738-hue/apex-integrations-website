@@ -61,12 +61,14 @@ body {
     background: linear-gradient(to bottom, #c3c5b7 0%, rgba(195, 197, 183, 0) 100%);
   }
   .section--home::after {
-    /* Extend well past the layout viewport: the fixed video keeps painting
-       below it (behind the iOS toolbar / home indicator), which otherwise
-       shows as a hard sage-to-video line at the viewport's bottom edge */
+    /* Solid sage through the entire iOS toolbar region (and 220px past the
+       layout viewport, where the fixed video keeps painting behind the home
+       indicator) so Safari's toolbar-glass boundary never crosses a color
+       transition — that boundary reads as a hard line on device. The fade
+       itself happens fully above the toolbar. */
     bottom: -220px;
-    height: 330px;
-    background: linear-gradient(to top, #c3c5b7 0%, #c3c5b7 66.7%, rgba(195, 197, 183, 0) 100%);
+    height: 490px;
+    background: linear-gradient(to top, #c3c5b7 0%, #c3c5b7 77.6%, rgba(195, 197, 183, 0) 100%);
   }
 }
 
