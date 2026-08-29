@@ -67,10 +67,10 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    height: 28px;
+    height: 16px;
     z-index: 1;
     pointer-events: none;
-    background: linear-gradient(to bottom, rgba(195, 197, 183, 0) 0%, #c3c5b7 60%, #c3c5b7 100%);
+    background: linear-gradient(to bottom, rgba(195, 197, 183, 0) 0%, #c3c5b7 70%, #c3c5b7 100%);
   }
 }
 
