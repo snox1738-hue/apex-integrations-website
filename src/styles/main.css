@@ -46,6 +46,27 @@ body {
   body {
     background: #d2cec5;
   }
+
+  /* Fade the video into the browser-chrome tint at the screen edges so the
+     status bar / URL bar blend seamlessly no matter which frame is showing */
+  .section--home::before,
+  .section--home::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 110px;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .section--home::before {
+    top: 0;
+    background: linear-gradient(to bottom, #d2cec5 0%, rgba(210, 206, 197, 0) 100%);
+  }
+  .section--home::after {
+    bottom: 0;
+    background: linear-gradient(to top, #d2cec5 0%, rgba(210, 206, 197, 0) 100%);
+  }
 }
 
 /* Background video layers — intro video, loop video, poster image.
