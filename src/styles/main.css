@@ -1905,7 +1905,7 @@ body {
   /* ─── Nav bar ─── */
   .top {
     grid-template-columns: auto 1fr auto;
-    padding: 12px 16px;
+    padding: 8px 16px;
     gap: 8px;
     background: transparent;
     align-items: center;
@@ -1937,8 +1937,6 @@ body {
     gap: 0.8rem;
   }
 
-  --nav-height: 52px;
-
   /* ─── Video background ─── */
   #bg-video,
   .bg-layer {
@@ -1969,7 +1967,7 @@ body {
 
   /* ─── Services section ─── */
   .section__inner {
-    padding: 52px 24px 0;
+    padding: 36px 24px 0;
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;
@@ -1977,8 +1975,8 @@ body {
   }
 
   .services-wrap {
-    min-height: calc(100vh - 52px);
-    min-height: calc(100dvh - 52px);
+    min-height: calc(100vh - 36px);
+    min-height: calc(100dvh - 36px);
     padding-bottom: 30px;
   }
 
@@ -2268,7 +2266,7 @@ body {
 
   /* ─── Section dividers ─── */
   .section__divider {
-    top: 52px;
+    top: 30px;
     left: 20px;
     right: 20px;
   }
