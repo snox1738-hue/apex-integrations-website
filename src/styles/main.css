@@ -46,32 +46,19 @@ body {
      status bar / URL bar blend seamlessly no matter which frame is showing.
      iOS Safari only reads the chrome tint once at load, so one static color
      (sage, matching every other section) is used everywhere. */
-  .section--home::before,
-  .section--home::after {
+  .section--home::before {
     content: '';
     position: absolute;
     left: 0;
     right: 0;
+    top: 0;
     height: 110px;
     z-index: 1;
     pointer-events: none;
-  }
-  .section--home::before {
-    top: 0;
     background: linear-gradient(to bottom, #c3c5b7 0%, rgba(195, 197, 183, 0) 100%);
   }
-  .section--home::after {
-    /* Solid sage through the entire iOS toolbar region (and 220px past the
-       layout viewport, where the fixed video keeps painting behind the home
-       indicator) so Safari's toolbar-glass boundary never crosses a color
-       transition — that boundary reads as a hard line on device. The fade
-       itself happens fully above the toolbar. */
-    /* No long gradient — a translucent fade over the video reads as blur.
-       Solid band with just a 16px edge soften. */
-    bottom: -220px;
-    height: 490px;
-    background: linear-gradient(to top, #c3c5b7 0%, #c3c5b7 96.7%, rgba(195, 197, 183, 0) 100%);
-  }
+  /* Bottom deliberately has NO overlay: every fade/band variant looked worse
+     than the stock iOS treatment of the video (user-tested 2026-08-28). */
 }
 
 /* Background video layers — intro video, loop video, poster image.
