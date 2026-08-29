@@ -2321,6 +2321,11 @@ body {
     bottom: 28px;
   }
 
+  /* Home: keep the hand above the 48px bottom fade band */
+  .section--home .swipe-hint {
+    bottom: 58px;
+  }
+
   .swipe-hint--down .swipe-hint__hand {
     animation: swipeDown 2s ease-in-out infinite;
     animation-delay: 3s;
