@@ -14,6 +14,20 @@
       "runtimeArgs": ["--prefix", "/Users/clawbot/Projects/command-center", "run", "dev"],
       "port": 5173,
       "autoPort": true
+    },
+    {
+      "name": "sam-crm-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "/Users/clawbot/Projects/sam-crm", "run", "dev:emu"],
+      "port": 5173,
+      "autoPort": true
+    },
+    {
+      "name": "apex-portal-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "/Users/clawbot/Projects/apex-portal", "run", "dev"],
+      "port": 5180,
+      "autoPort": true
     }
   ]
 }
