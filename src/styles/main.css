@@ -33,11 +33,7 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  /* Matches the clock video's light backdrop: with no theme-color meta,
-     iOS Safari tints its toolbar from this on the homepage (other pages
-     sample their own section backgrounds), so the video meets the toolbar
-     with no hard line. */
-  background: #d9d6cd;
+  background: #c3c5b7;
   font-family: Inter, system-ui, -apple-system, sans-serif;
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
@@ -61,8 +57,21 @@ body {
     pointer-events: none;
     background: linear-gradient(to bottom, #c3c5b7 0%, rgba(195, 197, 183, 0) 100%);
   }
-  /* Bottom deliberately has NO overlay: every fade/band variant looked worse
-     than the stock iOS treatment of the video (user-tested 2026-08-28). */
+  /* Bottom: a SHORT fade to solid sage ending exactly at the viewport bottom,
+     where iOS Safari's theme-color toolbar paint begins — sage meets sage, so
+     the paint boundary (the old "hard line") dissolves. Keep it tight: the
+     shading must not eat further up into the video than the boundary zone. */
+  .section--home::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 48px;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(195, 197, 183, 0) 0%, #c3c5b7 100%);
+  }
 }
 
 /* Background video layers — intro video, loop video, poster image.
