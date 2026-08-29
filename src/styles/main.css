@@ -2321,6 +2321,11 @@ body {
     bottom: 44px;
   }
 
+  /* Contact (last page): no hint — it crowded the form's send button */
+  .section--contact .swipe-hint {
+    display: none;
+  }
+
   /* Home: keep the hand above the 48px bottom fade band */
   .section--home .swipe-hint {
     bottom: 58px;
