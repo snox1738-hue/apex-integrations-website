@@ -66,9 +66,11 @@ body {
        indicator) so Safari's toolbar-glass boundary never crosses a color
        transition — that boundary reads as a hard line on device. The fade
        itself happens fully above the toolbar. */
+    /* No long gradient — a translucent fade over the video reads as blur.
+       Solid band with just a 16px edge soften. */
     bottom: -220px;
     height: 490px;
-    background: linear-gradient(to top, #c3c5b7 0%, #c3c5b7 77.6%, rgba(195, 197, 183, 0) 100%);
+    background: linear-gradient(to top, #c3c5b7 0%, #c3c5b7 96.7%, rgba(195, 197, 183, 0) 100%);
   }
 }
 
