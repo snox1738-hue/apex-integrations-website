@@ -1784,7 +1784,8 @@ body {
 .service-panel .service-detail__title,
 .service-panel .service-detail__tagline,
 .service-panel .service-feature,
-.service-panel .service-detail__cta,
+.service-panel .service-detail__actions,
+.service-panel .bundle-mgmt-btn,
 .service-panel .service-detail__shape,
 .service-panel .service-price,
 .service-panel .service-detail__back {
@@ -1800,7 +1801,8 @@ body {
 .service-panel.panel--open .service-feature:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 2.0s; }
 .service-panel.panel--open .service-feature:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 2.2s; }
 .service-panel.panel--open .service-feature:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 2.4s; }
-.service-panel.panel--open .service-detail__cta { opacity: 1; transform: translateY(0); transition-delay: 2.6s; }
+.service-panel.panel--open .service-detail__actions { opacity: 1; transform: translateY(0); transition-delay: 2.6s; }
+.service-panel.panel--open .bundle-mgmt-btn { opacity: 1; transform: translateY(0); transition-delay: 2.7s; }
 .service-panel.panel--open .service-detail__back { opacity: 1; transform: translateY(0); transition-delay: 2.0s; }
 
 /* ─── Fixed logo ─── */
@@ -2111,6 +2113,20 @@ body {
   .service-detail__right {
     padding-right: 0;
   }
+
+  /* Panel entrance, mobile: the layout is a single stacked column, so
+     reveal strictly top-to-bottom (desktop delays follow the two-column
+     order and look scrambled here) */
+  .service-panel.panel--open .service-detail__shape { transition-delay: 1.2s; }
+  .service-panel.panel--open .service-detail__back { transition-delay: 1.35s; }
+  .service-panel.panel--open .service-price { transition-delay: 1.5s; }
+  .service-panel.panel--open .service-detail__title { transition-delay: 1.65s; }
+  .service-panel.panel--open .service-detail__tagline { transition-delay: 1.8s; }
+  .service-panel.panel--open .service-feature:nth-child(1) { transition-delay: 1.95s; }
+  .service-panel.panel--open .service-feature:nth-child(2) { transition-delay: 2.1s; }
+  .service-panel.panel--open .service-feature:nth-child(3) { transition-delay: 2.25s; }
+  .service-panel.panel--open .service-detail__actions { transition-delay: 2.4s; }
+  .service-panel.panel--open .bundle-mgmt-btn { transition-delay: 2.5s; }
 
   /* Scale panel titles with screen width so long lines like
      "DEVELOPMENT /" never orphan-wrap on phones */
