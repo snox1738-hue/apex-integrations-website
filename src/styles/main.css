@@ -67,8 +67,8 @@ body {
        transition — that boundary reads as a hard line on device. The fade
        itself happens fully above the toolbar. */
     bottom: -220px;
-    height: 490px;
-    background: linear-gradient(to top, #c3c5b7 0%, #c3c5b7 77.6%, rgba(195, 197, 183, 0) 100%);
+    height: 400px;
+    background: linear-gradient(to top, #c3c5b7 0%, #c3c5b7 82.5%, rgba(195, 197, 183, 0) 100%);
   }
 }
 
