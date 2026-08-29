@@ -860,7 +860,9 @@ if (window.matchMedia('(pointer: coarse)').matches) {
     const covered = document.querySelector('.panel--open, .info-overlay--open, .review-detail--open, .review-form-overlay--open')
     const color = !covered && sections[currentIndex].id === 'home' ? CHROME_HOME : CHROME_SITE
     if (themeMeta) themeMeta.content = color
+    // Safari derives the bar tint from html/body background too, so set both
     document.documentElement.style.background = color
+    document.body.style.background = color
   }
   syncBrowserChrome()
   new MutationObserver(syncBrowserChrome).observe(document.body, {

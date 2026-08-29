@@ -42,7 +42,8 @@ body {
 /* Phones: overscroll/edge areas start on the homepage, which shows the light
    clock-video backdrop, not the sage page background. JS re-syncs per section. */
 @media (pointer: coarse) {
-  html {
+  html,
+  body {
     background: #d2cec5;
   }
 }

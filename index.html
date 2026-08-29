@@ -3,16 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-    // Phones only: tint the browser chrome (status bar / toolbar) to match the
-    // homepage video backdrop instead of defaulting to the page background.
-    if (window.matchMedia('(pointer: coarse)').matches) {
-      var tc = document.createElement('meta')
-      tc.name = 'theme-color'
-      tc.content = '#d2cec5'
-      document.head.appendChild(tc)
-    }
-  </script>
+  <!-- Mobile browser chrome tint: homepage clock-video backdrop; JS re-syncs per section -->
+  <meta name="theme-color" content="#d2cec5" />
   <title>Apex Integrations — AI Marketing Agency | Meta Ads, Websites & GEO</title>
   <meta name="description" content="Apex Integrations is a full-service AI marketing agency. We build high-converting Meta ad campaigns, conversion-optimized websites, and Generative Engine Optimization (GEO) that gets your business recommended by AI." />
   <link rel="canonical" href="https://apexintlaunch.com/" />
