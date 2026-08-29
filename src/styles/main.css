@@ -39,6 +39,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Phones: overscroll/edge areas start on the homepage, which shows the light
+   clock-video backdrop, not the sage page background. JS re-syncs per section. */
+@media (pointer: coarse) {
+  html {
+    background: #d2cec5;
+  }
+}
+
 /* Background video layers — intro video, loop video, poster image.
    Sized entirely in CSS (16:9 cover box at 147% zoom) so the very first
    paint is already at final scale — no JS-applied resize pop on load. */
