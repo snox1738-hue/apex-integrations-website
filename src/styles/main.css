@@ -61,8 +61,12 @@ body {
     background: linear-gradient(to bottom, #c3c5b7 0%, rgba(195, 197, 183, 0) 100%);
   }
   .section--home::after {
-    bottom: 0;
-    background: linear-gradient(to top, #c3c5b7 0%, rgba(195, 197, 183, 0) 100%);
+    /* Extend well past the layout viewport: the fixed video keeps painting
+       below it (behind the iOS toolbar / home indicator), which otherwise
+       shows as a hard sage-to-video line at the viewport's bottom edge */
+    bottom: -220px;
+    height: 330px;
+    background: linear-gradient(to top, #c3c5b7 0%, #c3c5b7 66.7%, rgba(195, 197, 183, 0) 100%);
   }
 }
 
