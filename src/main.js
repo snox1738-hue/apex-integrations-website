@@ -134,11 +134,31 @@ if (video) {
   // switch / lock and doesn't always resume on return. Restart the active
   // layer on every path back to the foreground, and whenever the OS pauses
   // it for any other reason.
+  function reloadLoopAt(t) {
+    const onceReady = () => {
+      loopEl.removeEventListener('canplay', onceReady)
+      try { loopEl.currentTime = t } catch { /* start over */ }
+      loopEl.play().catch(() => {})
+    }
+    loopEl.addEventListener('canplay', onceReady)
+    loopEl.load()
+  }
   function resumeActiveVideo() {
     if (document.hidden) return
     const active = introDone ? loopEl : video
     if (active === video && video.ended) return // handoff to loop in flight
-    if (active.paused && active.style.display !== 'none') active.play().catch(() => {})
+    if (active.style.display === 'none') return
+    const t0 = active.currentTime
+    if (active.paused) active.play().catch(() => {})
+    // iOS can return from the background with a dead decoder: play() then
+    // "succeeds" but no frames advance. Check fast and reload immediately —
+    // don't make the user tap or wait for the slow watchdog.
+    if (active === loopEl) {
+      setTimeout(() => {
+        if (document.hidden) return
+        if (loopEl.currentTime === t0) reloadLoopAt(t0)
+      }, 450)
+    }
   }
   document.addEventListener('visibilitychange', resumeActiveVideo)
   window.addEventListener('pageshow', resumeActiveVideo)
@@ -164,14 +184,7 @@ if (video) {
       if (wdStalls === 1) {
         active.play().catch(() => {})
       } else if (wdStalls >= 2 && active === loopEl) {
-        const at = t
-        const onceReady = () => {
-          loopEl.removeEventListener('canplay', onceReady)
-          try { loopEl.currentTime = at } catch { /* start over */ }
-          loopEl.play().catch(() => {})
-        }
-        loopEl.addEventListener('canplay', onceReady)
-        loopEl.load()
+        reloadLoopAt(t)
         wdStalls = 0
       }
     } else {
