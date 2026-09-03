@@ -549,7 +549,7 @@ const serviceInfo = {
     price: '$1,499 to start, then $999/mo — or $1,149/mo with Website Management',
     sections: [
       { title: 'CUSTOM WEBSITE', text: 'A custom-built, conversion-ready website — designed from scratch to match your brand, engineered to turn visitors into booked customers, with SEO built in from day one. Your digital storefront, done right.' },
-      { title: 'DETAIL PRO — ELITE TIER, FREE FOR A YEAR', text: 'One full year of Detail Pro on the Elite tier — completely free, on us. The top plan of our detailing app: run your whole operation — customers, appointments, scheduling, and more — unlocked for 12 months.' },
+      { title: 'DETAIL PRO — ELITE TIER, FREE FOR OUR PARTNERSHIP', text: 'Detail Pro on the Elite tier — completely free for the duration of our partnership. The top plan of our detailing app: run your whole operation — customers, appointments, scheduling, and more — unlocked for as long as we work together.' },
       { title: 'META ADS — SET UP & RUN', text: 'We set up your Facebook and Instagram ads and run them for your entire first month — strategy, creative, targeting, and daily optimization. Your campaigns go live and start working while you focus on the work.' },
       { title: 'OPTIONAL FULL BRAND REDESIGN', text: 'Want a fresh look to match? We\'ll redesign your door hangers, logo, A-frame sign, flyers — everything. Print-ready and on-brand, so every touchpoint looks like an established business.' },
       { title: 'ADD WEBSITE MANAGEMENT', text: 'Keep it all running for you — unlimited website edits and domain management. Add it onto Elite for $149/mo more (your Elite goes from $999/mo to $1,149/mo).' }
