@@ -295,13 +295,13 @@ const products = {
   // Stripe "Meta Ad Management" — $999/mo recurring, no trial, so the first $999
   // is charged at signup and $999/mo after.
   core: { name: 'Core — Meta Ad Creation & Management', desc: 'Meta ads strategy, creative, scripting & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/6oU9AV75IcMEe34380bQY05' },
-  // Elite BASE — Stripe "ELITE-THE COMPLETE PACKAGE": ONE-TIME $1,500 today
-  // (price_1UEZ2yRh0PeXBCHEz6aHkOy9). The $1,000/mo that follows is NOT in
+  // Elite BASE — Stripe "NEW ELITE FULL PACHAGE" (plink_1UEZs3..., Sam-made
+  // 2026-09-11): ONE-TIME $1,499 today. The $1,000/mo that follows is NOT in
   // Stripe checkout — Sam bills it manually and tracks when it's due — so
   // `monthlyOffline` keeps it out of the due-today total while still showing
   // "then $1,000/mo" to the client. (Old link eVqf... charged $499 + $1,000/mo
   // subscription — retired 2026-09-11.)
-  elite: { name: 'Elite — The Full Package', desc: 'Website + social media guide + Meta ads set up & run, plus an optional full brand redesign', upfront: 1500, monthly: 1000, monthlyOffline: true, available: true, paymentLink: 'https://buy.stripe.com/9B64gBblYfYQbUWbEwbQY0b' },
+  elite: { name: 'Elite — The Full Package', desc: 'Website + social media guide + Meta ads set up & run, plus an optional full brand redesign', upfront: 1499, monthly: 1000, monthlyOffline: true, available: true, paymentLink: 'https://buy.stripe.com/eVq00l9dQ13WcZ00ZSbQY0c' },
   // Elite WITH Website Management — Stripe "ELITE - FULL PACKAGE + WEBSITE
   // MANAGEMENT" (link cNid...): $1,499 today, then $1,149/mo after 30 days free.
   // The "+ Website Management" button on the Elite card SWAPS between this and the
@@ -551,7 +551,7 @@ const serviceInfo = {
   },
   elite: {
     title: 'ELITE — THE FULL PACKAGE',
-    price: '$1,500 to start, then $1,000/mo — or $1,149/mo with Website Management',
+    price: '$1,499 to start, then $1,000/mo — or $1,149/mo with Website Management',
     sections: [
       { title: 'CUSTOM WEBSITE', text: 'A custom-built, conversion-ready website — designed from scratch to match your brand, engineered to turn visitors into booked customers, with SEO built in from day one. Your digital storefront, done right.' },
       { title: 'DETAIL PRO — ELITE TIER, FREE FOR OUR PARTNERSHIP', text: 'Detail Pro on the Elite tier — completely free for the duration of our partnership. The top plan of our detailing app: run your whole operation — customers, appointments, scheduling, and more — unlocked for as long as we work together.' },
