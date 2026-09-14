@@ -291,7 +291,7 @@ const products = {
   // elite = the full package. (The ID is NOT the price tier order — it's just
   // a stable key wired to a fixed Stripe product, so never reassign a link.)
   // Stripe "Website Creation" — $749 one-off.
-  basic: { name: 'Basic — Website + SEO', desc: 'Custom-built conversion website with SEO built in', upfront: 749, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/4gMcN7du69As2km4c4bQY01' },
+  basic: { name: 'Basic — Professional Website Creation', desc: 'Custom-built, conversion-ready professional website', upfront: 749, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/4gMcN7du69As2km4c4bQY01' },
   // Stripe "Meta Ad Management" — $999/mo recurring, no trial, so the first $999
   // is charged at signup and $999/mo after.
   core: { name: 'Core — Meta Ad Creation & Management', desc: 'Meta ads strategy, creative, scripting & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/6oU9AV75IcMEe34380bQY05' },
@@ -528,12 +528,12 @@ document.addEventListener('click', (e) => {
 // ─── Service info overlay ───
 const serviceInfo = {
   basic: {
-    title: 'BASIC — WEBSITE + SEO',
+    title: 'BASIC — PROFESSIONAL WEBSITE CREATION',
     price: '$749 one-time',
     sections: [
       { title: 'CUSTOM DESIGN & BUILD', text: 'No templates. No drag-and-drop builders. Your site is designed from scratch to match your business\'s brand, personality, and goals. Every element is intentional — from the layout to the color palette to the call-to-action placement.' },
       { title: 'CONVERSION ENGINEERING', text: 'Beautiful isn\'t enough. Every page is built to convert visitors into customers. Strategic placement of booking buttons, trust signals, testimonials, and contact forms. We study what makes customers click — and we build around that.' },
-      { title: 'SEO BUILT INTO THE CODE', text: 'Your site launches with SEO built into the backend code — meta tags, schema markup, Google Business integration, local keywords, and fast load times, so you\'re set up to rank from day one. Built in at launch — not an ongoing service.' },
+      { title: 'GOOGLE BUSINESS, WIRED IN', text: 'Your site launches connected to your Google Business profile — click-to-call, directions, reviews, and booking all in one place, so customers who find you can book you. Built in at launch.' },
       { title: 'MOBILE-FIRST & FAST', text: 'Over 60% of local searches happen on phones. Your site loads in under 2 seconds, looks perfect on every device, and passes every Google speed test. Slow sites lose customers — yours won\'t.' },
       { title: 'WANT ONGOING EDITS?', text: 'Basic covers the build. If you want us to keep making changes to your site — copy, photos, pricing, new pages — add Bundle Management — $249/mo.' }
     ]
@@ -553,7 +553,7 @@ const serviceInfo = {
     title: 'ELITE — THE FULL PACKAGE',
     price: '$1,499 to start, then $1,000/mo — or $1,149/mo with Website Management',
     sections: [
-      { title: 'CUSTOM WEBSITE', text: 'A custom-built, conversion-ready website — designed from scratch to match your brand, engineered to turn visitors into booked customers, with SEO built in from day one. Your digital storefront, done right.' },
+      { title: 'CUSTOM WEBSITE', text: 'A custom-built, conversion-ready website — designed from scratch to match your brand, engineered to turn visitors into booked customers. Your digital storefront, done right.' },
       { title: 'DETAIL PRO — ELITE TIER, FREE FOR OUR PARTNERSHIP', text: 'Detail Pro on the Elite tier — completely free for the duration of our partnership. The top plan of our detailing app: run your whole operation — customers, appointments, scheduling, and more — unlocked for as long as we work together.' },
       { title: 'META ADS — SET UP & RUN', text: 'We set up your Facebook and Instagram ads and run them for your entire first month — strategy, creative, targeting, and daily optimization. Your campaigns go live and start working while you focus on the work.' },
       { title: 'OPTIONAL FULL BRAND REDESIGN', text: 'Want a fresh look to match? We\'ll redesign your door hangers, logo, A-frame sign, flyers — everything. Print-ready and on-brand, so every touchpoint looks like an established business.' },
