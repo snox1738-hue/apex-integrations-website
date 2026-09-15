@@ -90,6 +90,25 @@ body {
   pointer-events: none;
 }
 
+/* Never render iOS/Android native media controls on the background
+   layers — in particular the crossed-out "play" glyph Safari paints
+   when it blocks autoplay (Low Power Mode, return from background). */
+#bg-video::-webkit-media-controls,
+.bg-layer::-webkit-media-controls,
+#bg-video::-webkit-media-controls-panel,
+.bg-layer::-webkit-media-controls-panel,
+#bg-video::-webkit-media-controls-start-playback-button,
+.bg-layer::-webkit-media-controls-start-playback-button,
+#bg-video::-webkit-media-controls-overlay-play-button,
+.bg-layer::-webkit-media-controls-overlay-play-button,
+#bg-video::-webkit-media-controls-play-button,
+.bg-layer::-webkit-media-controls-play-button {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* ─── Fixed nav bar ─── */
 .top {
   position: fixed;

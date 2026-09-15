@@ -55,6 +55,25 @@ if (video) {
 
   const gestureEvents = ['touchstart', 'touchend', 'pointerdown', 'click']
 
+  function activeLayer() { return introDone ? loopEl : video }
+  function showPoster() { posterEl.style.display = '' }
+  function hidePoster() { posterEl.style.display = 'none' }
+
+  // Any time a layer is exposed but not playing (iOS refused play() in
+  // Low Power Mode, or after returning from the background), cover it
+  // with the still poster so the native play glyph can never show, and
+  // resume on the very next tap. Only acts on a PAUSED layer — never
+  // touches a video that is already playing (a second play() mid-intro
+  // can stall it on iPhones).
+  function resumeOnGesture() {
+    const active = activeLayer()
+    if (active === video && video.ended) return
+    if (!active.paused) return
+    active.play().then(hidePoster).catch(() => {})
+  }
+  gestureEvents.forEach(ev => document.addEventListener(ev, resumeOnGesture, { passive: true }))
+  video.addEventListener('playing', () => { if (!introDone) hidePoster() })
+
   function revealIntro() {
     introStarted = true
     posterEl.style.display = 'none'
@@ -116,7 +135,7 @@ if (video) {
     const tryLoop = () => {
       loopEl.play().then(() => {
         gestureEvents.forEach(ev => document.removeEventListener(ev, tryLoop))
-      }).catch(() => {})
+      }).catch(showPoster)
     }
     tryLoop()
     gestureEvents.forEach(ev => document.addEventListener(ev, tryLoop, { passive: true }))
@@ -138,7 +157,7 @@ if (video) {
     const onceReady = () => {
       loopEl.removeEventListener('canplay', onceReady)
       try { loopEl.currentTime = t } catch { /* start over */ }
-      loopEl.play().catch(() => {})
+      loopEl.play().then(hidePoster).catch(showPoster)
     }
     loopEl.addEventListener('canplay', onceReady)
     loopEl.load()
@@ -149,7 +168,7 @@ if (video) {
     if (active === video && video.ended) return // handoff to loop in flight
     if (active.style.display === 'none') return
     const t0 = active.currentTime
-    if (active.paused) active.play().catch(() => {})
+    if (active.paused) active.play().then(hidePoster).catch(showPoster)
     // iOS can return from the background with a dead decoder: play() then
     // "succeeds" but no frames advance. Check fast and reload immediately —
     // don't make the user tap or wait for the slow watchdog.
@@ -182,7 +201,7 @@ if (video) {
     if (t === wdTime) {
       wdStalls++
       if (wdStalls === 1) {
-        active.play().catch(() => {})
+        active.play().then(hidePoster).catch(showPoster)
       } else if (wdStalls >= 2 && active === loopEl) {
         reloadLoopAt(t)
         wdStalls = 0
