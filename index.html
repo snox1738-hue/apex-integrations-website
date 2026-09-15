@@ -58,6 +58,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Big+Shoulders+Stencil+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="/src/assets/clock_poster.jpg" fetchpriority="high" />
   <link rel="stylesheet" href="/src/styles/main.css" />
   <style>
     /* Inline anti-flash: sections hidden until JS is ready */
@@ -68,6 +69,9 @@
 </head>
 <body class="loading">
   <video id="bg-video" muted loop playsinline autoplay></video>
+  <!-- Still poster, in the static HTML so it is fetched by the preload
+       scanner and painted BEFORE any video element can show a play glyph -->
+  <img id="bg-poster" class="bg-layer" src="/src/assets/clock_poster.jpg" alt="" aria-hidden="true" fetchpriority="high" decoding="sync" />
 
   <!-- Fixed nav -->
   <header class="top">

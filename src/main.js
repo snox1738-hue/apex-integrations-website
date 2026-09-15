@@ -26,18 +26,23 @@ if (video) {
   video.playsInline = true
   video.setAttribute('webkit-playsinline', '')
   video.preload = 'auto'
-  video.src = introSrc
   video.loop = false
 
   // Poster image stacked over the videos until one is genuinely playing.
   // Covers any native blocked-autoplay glyph (iOS Low Power Mode) — the
-  // user can never see a play button, only the still frame.
-  const posterEl = document.createElement('img')
-  posterEl.src = posterSrc
-  posterEl.alt = ''
-  posterEl.setAttribute('aria-hidden', 'true')
-  posterEl.className = 'bg-layer'
-  video.parentNode.insertBefore(posterEl, video.nextSibling)
+  // user can never see a play button, only the still frame. It lives in
+  // the static HTML (fetched before this script runs); fall back to
+  // creating it if the markup ever loses it.
+  let posterEl = document.getElementById('bg-poster')
+  if (!posterEl) {
+    posterEl = document.createElement('img')
+    posterEl.id = 'bg-poster'
+    posterEl.src = posterSrc
+    posterEl.alt = ''
+    posterEl.setAttribute('aria-hidden', 'true')
+    posterEl.className = 'bg-layer'
+    video.parentNode.insertBefore(posterEl, video.nextSibling)
+  }
 
   let introStarted = false
   let loopLoadStarted = false
@@ -123,31 +128,67 @@ if (video) {
   // no gesture handler is ever registered, so nothing can touch the videos
   // mid-intro. (A second play() during the intro can stall the first video
   // on iPhones, which glitched the intro and skipped to the loop.)
+  let loopUnlocked = false
   function tryPlayOnGesture() {
     if (introStarted) { removeGestureRetries(); return }
     video.play().catch(() => {})
+    // Autoplay is blocked on this device, so the loop video will be
+    // refused too when the intro ends. Use this same gesture to unlock
+    // the loop element: a play() inside a user gesture, paused right
+    // away, lets iOS accept the later programmatic play().
+    if (!loopUnlocked) {
+      loopUnlocked = true
+      const p = loopEl.play()
+      if (p && p.then) p.then(() => { if (!introDone) loopEl.pause() }).catch(() => {})
+    }
   }
   function removeGestureRetries() {
     gestureEvents.forEach(ev => document.removeEventListener(ev, tryPlayOnGesture))
   }
-  const firstAttempt = video.play()
-  if (firstAttempt && firstAttempt.catch) {
-    firstAttempt.catch(() => {
-      if (!introStarted) {
-        showPoster()
-        gestureEvents.forEach(ev => document.addEventListener(ev, tryPlayOnGesture, { passive: true }))
-      }
-    })
+  function attemptIntro() {
+    video.src = introSrc
+    const firstAttempt = video.play()
+    if (firstAttempt && firstAttempt.catch) {
+      firstAttempt.catch(() => {
+        if (!introStarted) {
+          showPoster()
+          gestureEvents.forEach(ev => document.addEventListener(ev, tryPlayOnGesture, { passive: true }))
+        }
+      })
+    }
+  }
+  // Give the video element a source only once the poster is on screen —
+  // otherwise iOS paints the first frame + play glyph for the few hundred
+  // ms before the poster image arrives. Never wait more than 1.5s.
+  if (posterEl.complete && posterEl.naturalWidth > 0) {
+    attemptIntro()
+  } else {
+    let started = false
+    const go = () => { if (!started) { started = true; attemptIntro() } }
+    posterEl.addEventListener('load', go, { once: true })
+    posterEl.addEventListener('error', go, { once: true })
+    setTimeout(go, 1500)
   }
 
   video.addEventListener('ended', () => {
     introDone = true
-    loopEl.currentTime = 0
-    // If the loop's play() is refused, retry on the next user gesture
+    // Only seek if the loop has actually advanced — a seek forces a
+    // rebuffer, and a rebuffering video-only element is exactly what
+    // Chromium pauses "to save power" in a background tab
+    if (loopEl.currentTime > 0.05) loopEl.currentTime = 0
+    // If the loop's play() is refused, retry once shortly after, and
+    // again on the next user gesture
+    let loopRetried = false
     const tryLoop = () => {
       loopEl.play().then(() => {
         gestureEvents.forEach(ev => document.removeEventListener(ev, tryLoop))
-      }).catch(showPoster)
+      }).catch(() => {
+        showPoster()
+        if (!loopRetried) {
+          loopRetried = true
+          setTimeout(() => { if (loopEl.paused) tryLoop() }, 400)
+        }
+      })
     }
     tryLoop()
     gestureEvents.forEach(ev => document.addEventListener(ev, tryLoop, { passive: true }))
