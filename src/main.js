@@ -74,24 +74,35 @@ if (video) {
   gestureEvents.forEach(ev => document.addEventListener(ev, resumeOnGesture, { passive: true }))
   video.addEventListener('playing', () => { if (!introDone) hidePoster() })
 
+  // The poster may ONLY come off once the intro is genuinely running.
+  // iOS paints the first frame (and its blocked-autoplay play glyph)
+  // while the element is still paused, and requestVideoFrameCallback
+  // fires for that paint — so "a frame rendered" is NOT proof of playback.
+  let playingFired = false
   function revealIntro() {
+    if (video.paused || video.ended || !playingFired) return
     introStarted = true
     posterEl.style.display = 'none'
     startLoopLoad()
     removeGestureRetries()
   }
-  // Swap poster → video on the exact frame the video first renders
-  // (requestVideoFrameCallback), not on the earlier 'playing' event —
-  // keeps the handoff invisible. 'playing' + timeout is the fallback for
-  // browsers without rVFC or where it stalls.
+  // Swap poster → video on the exact frame the video first renders while
+  // playing (requestVideoFrameCallback), not on the earlier 'playing'
+  // event — keeps the handoff invisible. 'playing' + timeout is the
+  // fallback for browsers without rVFC or where it stalls.
   if ('requestVideoFrameCallback' in HTMLVideoElement.prototype) {
-    video.requestVideoFrameCallback(revealIntro)
+    const onFrame = () => {
+      revealIntro()
+      if (!introStarted) video.requestVideoFrameCallback(onFrame)
+    }
+    video.requestVideoFrameCallback(onFrame)
     video.addEventListener('playing', () => {
+      playingFired = true
       startLoopLoad()
       setTimeout(() => { if (!introStarted) revealIntro() }, 250)
     })
   } else {
-    video.addEventListener('playing', revealIntro)
+    video.addEventListener('playing', () => { playingFired = true; revealIntro() })
   }
   // An early loop 'playing' must never hide the poster while the intro is
   // still on its way — only after the intro has ended or failed
@@ -123,6 +134,7 @@ if (video) {
   if (firstAttempt && firstAttempt.catch) {
     firstAttempt.catch(() => {
       if (!introStarted) {
+        showPoster()
         gestureEvents.forEach(ev => document.addEventListener(ev, tryPlayOnGesture, { passive: true }))
       }
     })
