@@ -363,23 +363,23 @@ const products = {
   // elite = the full package. (The ID is NOT the price tier order — it's just
   // a stable key wired to a fixed Stripe product, so never reassign a link.)
   // Stripe "Website Creation" — $749 one-off.
-  basic: { name: 'Basic — Professional Website Creation', desc: 'Custom-built, conversion-ready professional website', upfront: 749, monthly: 0, available: true, paymentLink: 'https://buy.stripe.com/4gMcN7du69As2km4c4bQY01' },
+  basic: { name: 'Basic — Professional Website Creation', desc: 'Custom-built, conversion-ready professional website', upfront: 500, monthly: 0, available: true, paymentLink: 'PENDING_website_500' }, // Sep 18 2026: $749 → $500. Stripe price price_1UHF4tRh0PeXBCHEvMU1LrVH exists; payment link still to be created in the dashboard (old $749 link 4gMcN7… must NOT be used)
   // Stripe "Meta Ad Management" — $999/mo recurring, no trial, so the first $999
   // is charged at signup and $999/mo after.
-  core: { name: 'Core — Meta Ad Creation & Management', desc: 'Meta ads strategy, creative, scripting & management', upfront: 0, monthly: 999, available: true, paymentLink: 'https://buy.stripe.com/6oU9AV75IcMEe34380bQY05' },
+  core: { name: 'Core — Meta Ad Creation & Management', desc: 'Meta ads strategy, creative, scripting & management', upfront: 500, monthly: 500, available: true, paymentLink: 'PENDING_core_500_500' }, // Sep 18 2026: $999/mo → $500 setup + $500/mo. Stripe prices: setup price_1UHF5… + monthly price_1UHF5… (see memory); link pending (old $999 link 6oU9AV… must NOT be used)
   // Elite BASE — Stripe "NEW ELITE FULL PACHAGE" (plink_1UEZs3..., Sam-made
   // 2026-09-11): ONE-TIME $1,499 today. The $1,000/mo that follows is NOT in
   // Stripe checkout — Sam bills it manually and tracks when it's due — so
   // `monthlyOffline` keeps it out of the due-today total while still showing
   // "then $1,000/mo" to the client. (Old link eVqf... charged $499 + $1,000/mo
   // subscription — retired 2026-09-11.)
-  elite: { name: 'Elite — The Full Package', desc: 'Website + social media guide + Meta ads set up & run, plus an optional full brand redesign', upfront: 1499, monthly: 1000, monthlyOffline: true, available: true, paymentLink: 'https://buy.stripe.com/eVq00l9dQ13WcZ00ZSbQY0c' },
+  elite: { name: 'Elite — The Full Package', desc: 'Website + social media guide + Meta ads set up & run, plus an optional full brand redesign', upfront: 750, monthly: 500, monthlyOffline: true, available: true, paymentLink: 'PENDING_elite_750' }, // Sep 18 2026: $1,499 → $750 to start, then $500/mo (still billed manually by Sam). Stripe $750 price exists; link pending (old $1,499 link eVq00l… must NOT be used)
   // Elite WITH Website Management — Stripe "ELITE - FULL PACKAGE + WEBSITE
   // MANAGEMENT" (link cNid...): $1,499 today, then $1,149/mo after 30 days free.
   // The "+ Website Management" button on the Elite card SWAPS between this and the
   // base above — they're two separate Stripe products, so only ONE is ever in the
   // cart at a time (never both, or checkout would charge the setup twice).
-  eliteManaged: { name: 'Elite — The Full Package + Website Management', desc: 'Everything in the full package, plus ongoing website management & domain management', upfront: 1499, monthly: 1149, monthlyTrialDays: 30, available: true, paymentLink: 'https://buy.stripe.com/cNidRbgGiaEw7EGfUMbQY0a' },
+  eliteManaged: { name: 'Elite — The Full Package + Website Management', desc: 'Everything in the full package, plus ongoing website management & domain management', upfront: 750, monthly: 649, monthlyTrialDays: 30, available: true, paymentLink: 'PENDING_eliteManaged_750_649' }, // Sep 18 2026: follows the new Elite ($750 then $500/mo + $149/mo management). Link pending (old $1,499/$1,149 link cNidRb… must NOT be used)
   // Stripe "CORE--Website management SEO RECURRING" — $249/mo recurring.
   // Now includes domain management — if the client wants a domain email, we buy
   // the domain and set it up for them. Standalone add-on for non-Elite clients;
@@ -601,7 +601,7 @@ document.addEventListener('click', (e) => {
 const serviceInfo = {
   basic: {
     title: 'BASIC — PROFESSIONAL WEBSITE CREATION',
-    price: '$749 one-time',
+    price: '$500 one-time (was $749)',
     sections: [
       { title: 'CUSTOM DESIGN & BUILD', text: 'No templates. No drag-and-drop builders. Your site is designed from scratch to match your business\'s brand, personality, and goals. Every element is intentional — from the layout to the color palette to the call-to-action placement.' },
       { title: 'CONVERSION ENGINEERING', text: 'Beautiful isn\'t enough. Every page is built to convert visitors into customers. Strategic placement of booking buttons, trust signals, testimonials, and contact forms. We study what makes customers click — and we build around that.' },
@@ -612,7 +612,7 @@ const serviceInfo = {
   },
   core: {
     title: 'CORE — META AD CREATION & MANAGEMENT',
-    price: '$999/mo — first month charged today',
+    price: '$500 to start, then $500/mo (was $999/mo)',
     sections: [
       { title: 'CAMPAIGN STRATEGY & MANAGEMENT', text: 'We plan, build, launch, and optimize Facebook and Instagram campaigns around your goals. Objectives, budgets, bidding, and placements are managed daily — engineered for return on ad spend, not vanity metrics.' },
       { title: 'CREATIVE SCRIPTING & EDITING', text: 'Every winning ad starts with a script that sells. We write, script, and edit the ads themselves — hooks, angles, copy, and cuts tailored to your brand and offer.' },
@@ -623,13 +623,13 @@ const serviceInfo = {
   },
   elite: {
     title: 'ELITE — THE FULL PACKAGE',
-    price: '$1,499 to start, then $1,000/mo — or $1,149/mo with Website Management',
+    price: '$750 to start, then $500/mo (was $1,499 then $1,000/mo) — or $649/mo with Website Management',
     sections: [
       { title: 'CUSTOM WEBSITE', text: 'A custom-built, conversion-ready website — designed from scratch to match your brand, engineered to turn visitors into booked customers. Your digital storefront, done right.' },
       { title: 'DETAIL PRO — ELITE TIER, FREE FOR OUR PARTNERSHIP', text: 'Detail Pro on the Elite tier — completely free for the duration of our partnership. The top plan of our detailing app: run your whole operation — customers, appointments, scheduling, and more — unlocked for as long as we work together.' },
       { title: 'META ADS — SET UP & RUN', text: 'We set up your Facebook and Instagram ads and run them for your entire first month — strategy, creative, targeting, and daily optimization. Your campaigns go live and start working while you focus on the work.' },
       { title: 'OPTIONAL FULL BRAND REDESIGN', text: 'Want a fresh look to match? We\'ll redesign your door hangers, logo, A-frame sign, flyers — everything. Print-ready and on-brand, so every touchpoint looks like an established business.' },
-      { title: 'ADD WEBSITE MANAGEMENT', text: 'Keep it all running for you — unlimited website edits and domain management. Add it onto Elite for $149/mo more (your Elite goes from $1,000/mo to $1,149/mo).' }
+      { title: 'ADD WEBSITE MANAGEMENT', text: 'Keep it all running for you — unlimited website edits and domain management. Add it onto Elite for $149/mo more (your Elite goes from $500/mo to $649/mo).' }
     ]
   },
   management: {
@@ -1124,7 +1124,7 @@ if (checkoutBtn) {
       // Guard against a not-yet-created Stripe link (e.g. the $149/mo Elite
       // bundle price) so we never open a broken tab or charge the wrong amount.
       if (p.paymentLink.startsWith('PENDING_')) {
-        alert('This add-on isn’t ready for online checkout yet — reach out via the contact form and we’ll set it up for you.')
+        alert('Online checkout for this package is being updated to the new price — reach out via the contact form or book a call and we’ll send you a payment link.')
       } else {
         window.open(p.paymentLink, '_blank')
       }
