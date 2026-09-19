@@ -81,9 +81,6 @@
       <a class="nav__link" href="#services">SERVICES</a>
       <a class="nav__link" href="#contact">CONTACT</a>
     </nav>
-    <nav class="nav nav--end" aria-label="Secondary">
-      <a class="nav__link nav__link--icon" href="#pricing"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></a>
-    </nav>
   </header>
 
   <!-- Scrollable content -->
@@ -245,10 +242,6 @@
             </svg>
           </div>
           <p class="service-detail__back panel__back">&larr; ALL SERVICES</p>
-          <div class="service-price">
-            <span class="service-price__amount">$749</span>
-            <span class="service-price__term">one-time</span>
-          </div>
         </div>
         <div class="service-detail__right">
           <h1 class="service-detail__title">BASIC<br>PROFESSIONAL WEBSITE CREATION</h1>
@@ -268,9 +261,9 @@
               <p class="service-feature__desc">Every site launches fast-loading, looks perfect on every phone, and is wired to your Google Business profile — so customers find you and book. Built in at launch.</p>
             </div>
           </div>
-          <div class="service-detail__actions"><button class="add-to-cart-btn" data-product="basic">+ ADD TO CART</button><button class="more-info-btn" data-info="basic">MORE INFO</button></div>
+          <div class="service-detail__actions"><a class="service-cta-btn" href="https://calendar.app.google/FrtMYrAiGPeG68m67" target="_blank" rel="noopener">SCHEDULE A CALL</a><button class="more-info-btn" data-info="basic">MORE INFO</button></div>
           <button class="bundle-mgmt-btn" data-service="management">
-            + BUNDLE MANAGEMENT — $249/mo
+            + BUNDLE MANAGEMENT
             <span class="bundle-mgmt-btn__sub">Unlimited edits &amp; domain management</span>
           </button>
         </div>
@@ -298,10 +291,6 @@
             </svg>
           </div>
           <p class="service-detail__back panel__back">&larr; ALL SERVICES</p>
-          <div class="service-price">
-            <span class="service-price__amount">$999<span class="service-price__slash">/mo</span></span>
-            <span class="service-price__term">first month billed today</span>
-          </div>
         </div>
         <div class="service-detail__right">
           <h1 class="service-detail__title">CORE<br>META AD<br>MANAGEMENT</h1>
@@ -321,7 +310,7 @@
               <p class="service-feature__desc">Custom and lookalike audiences, retargeting, and local geo-targeting — continuously optimized so every dollar of ad spend works harder over time.</p>
             </div>
           </div>
-          <div class="service-detail__actions"><button class="add-to-cart-btn" data-product="core">+ ADD TO CART</button><button class="more-info-btn" data-info="core">MORE INFO</button></div>
+          <div class="service-detail__actions"><a class="service-cta-btn" href="https://calendar.app.google/FrtMYrAiGPeG68m67" target="_blank" rel="noopener">SCHEDULE A CALL</a><button class="more-info-btn" data-info="core">MORE INFO</button></div>
         </div>
       </div>
     </div>
@@ -347,15 +336,6 @@
             </svg>
           </div>
           <p class="service-detail__back panel__back">&larr; ALL SERVICES</p>
-          <div class="service-price service-price--deal">
-            <span class="service-price__badge">SAVE $500 &middot; TODAY ONLY</span>
-            <div class="service-price__deal-row">
-              <s class="service-price__was">$1,999</s>
-              <span class="service-price__amount service-price__amount--now">$1,499</span>
-            </div>
-            <span class="service-price__term">to start, then $1,000/mo</span>
-            <span class="offer-note">LIMITED TIME ONLY</span>
-          </div>
         </div>
         <div class="service-detail__right">
           <h1 class="service-detail__title">ELITE<br>THE FULL<br>PACKAGE</h1>
@@ -375,10 +355,10 @@
               <p class="service-feature__desc">Want a fresh look to match? We'll redesign your door hangers, logo, A-frame sign, flyers — everything. Print-ready and on-brand, so every touchpoint looks like an established business from day one.</p>
             </div>
           </div>
-          <div class="service-detail__actions"><button class="add-to-cart-btn" data-product="elite">+ ADD TO CART</button><button class="more-info-btn" data-info="elite">MORE INFO</button></div>
-          <button class="bundle-mgmt-btn bundle-mgmt-btn--addon" data-base="elite" data-managed="eliteManaged">
-            <span class="bundle-mgmt-btn__label">+ WEBSITE MANAGEMENT — <s class="bundle-mgmt-btn__was">$249</s> $149/mo</span>
-            <span class="bundle-mgmt-btn__sub">Unlimited edits &amp; domain management — makes your Elite $1,149/mo</span>
+          <div class="service-detail__actions"><a class="service-cta-btn" href="https://calendar.app.google/FrtMYrAiGPeG68m67" target="_blank" rel="noopener">SCHEDULE A CALL</a><button class="more-info-btn" data-info="elite">MORE INFO</button></div>
+          <button class="bundle-mgmt-btn" data-service="management">
+            + WEBSITE MANAGEMENT
+            <span class="bundle-mgmt-btn__sub">Unlimited edits &amp; domain management — add it onto Elite</span>
           </button>
         </div>
       </div>
@@ -405,10 +385,6 @@
             </svg>
           </div>
           <p class="service-detail__back panel__back">&larr; ALL SERVICES</p>
-          <div class="service-price">
-            <span class="service-price__amount">$249<span class="service-price__slash">/mo</span></span>
-            <span class="service-price__term">$149/mo bundled with Elite</span>
-          </div>
         </div>
         <div class="service-detail__right">
           <h1 class="service-detail__title">BUNDLE<br>MANAGEMENT</h1>
@@ -425,40 +401,10 @@
             </div>
             <div class="service-feature">
               <h3 class="service-feature__title">ONE FLAT MONTHLY FEE</h3>
-              <p class="service-feature__desc">No per-edit invoices and no separate vendors to manage. One predictable monthly fee covers edits and your domain — and it's $100 off ($149/mo) when you add it onto the Elite package.</p>
+              <p class="service-feature__desc">No per-edit invoices and no separate vendors to manage. One predictable monthly fee covers edits and your domain — and you can add it right onto the Elite package.</p>
             </div>
           </div>
-          <div class="service-detail__actions"><button class="add-to-cart-btn" data-product="management">+ ADD TO CART</button><button class="more-info-btn" data-info="management">MORE INFO</button></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Cart panel -->
-  <section id="pricing-panel" class="panel">
-    <div class="panel__inner">
-      <div class="cart-wrap">
-        <p class="panel__back pricing-back">&larr; BACK</p>
-        <div class="cart-header">
-          <h2 class="cart-title">YOUR CART</h2>
-          <p class="cart-subtitle" id="cart-count">0 items</p>
-        </div>
-
-        <div class="cart-items" id="cart-items">
-          <div class="cart-empty" id="cart-empty">
-            <p class="cart-empty__text">Your cart is empty.</p>
-            <p class="cart-empty__sub">Browse our services and add what you need.</p>
-          </div>
-        </div>
-
-        <div class="cart-footer" id="cart-footer" style="display:none">
-          <div class="cart-divider"></div>
-          <div class="cart-total">
-            <span class="cart-total__label">TOTAL</span>
-            <span class="cart-total__amount" id="cart-total">$0/mo</span>
-          </div>
-          <p class="cart-note" id="cart-note">One-time payment.</p>
-          <button class="cart-checkout" id="cart-checkout">PROCEED TO CHECKOUT</button>
+          <div class="service-detail__actions"><a class="service-cta-btn" href="https://calendar.app.google/FrtMYrAiGPeG68m67" target="_blank" rel="noopener">SCHEDULE A CALL</a><button class="more-info-btn" data-info="management">MORE INFO</button></div>
         </div>
       </div>
     </div>
@@ -469,7 +415,6 @@
     <div class="info-overlay__inner">
       <p class="info-overlay__back" id="info-back">&larr; BACK</p>
       <h2 class="info-overlay__title" id="info-title"></h2>
-      <p class="info-overlay__price" id="info-price"></p>
       <div class="info-overlay__content" id="info-content"></div>
     </div>
   </div>
