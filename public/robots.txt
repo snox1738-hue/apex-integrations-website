@@ -1,5 +1,3 @@
-# Apex Integrations — https://apexintlaunch.com
+# This site moved to https://detailingscaled.com
 User-agent: *
 Allow: /
-
-Sitemap: https://apexintlaunch.com/sitemap.xml
